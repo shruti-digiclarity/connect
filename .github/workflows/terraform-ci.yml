@@ -93,9 +93,9 @@ jobs:
           AWS_SESSION_TOKEN=$(echo $CREDENTIALS | jq -r '.Credentials.SessionToken')
           
           # CRITICAL: Mask sensitive values in logs BEFORE using them
-          # echo "::add-mask::${AWS_ACCESS_KEY_ID}"
-          # echo "::add-mask::${AWS_SECRET_ACCESS_KEY}"
-          # echo "::add-mask::${AWS_SESSION_TOKEN}"
+          echo "::add-mask::${AWS_ACCESS_KEY_ID}"
+          echo "::add-mask::${AWS_SECRET_ACCESS_KEY}"
+          echo "::add-mask::${AWS_SESSION_TOKEN}"
           
           # Now set environment variables for subsequent steps
           echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" >> $GITHUB_ENV
@@ -266,9 +266,9 @@ jobs:
           AWS_SESSION_TOKEN=$(echo $CREDENTIALS | jq -r '.Credentials.SessionToken')
           
           # CRITICAL: Mask sensitive values in logs BEFORE using them
-          # echo "::add-mask::${AWS_ACCESS_KEY_ID}"
-          # echo "::add-mask::${AWS_SECRET_ACCESS_KEY}"
-          # echo "::add-mask::${AWS_SESSION_TOKEN}"
+          echo "::add-mask::${AWS_ACCESS_KEY_ID}"
+          echo "::add-mask::${AWS_SECRET_ACCESS_KEY}"
+          echo "::add-mask::${AWS_SESSION_TOKEN}"
           
           # Now set environment variables for subsequent steps
           echo "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" >> $GITHUB_ENV
