@@ -14,7 +14,7 @@ module "amazon_connect_admin_group" {
   lob             = var.lob
   company_prefix  = var.company_prefix
   env             = var.env
-  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=main"
+  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=master"
   create_instance = false
   instance_id     = module.amazon_connect.instance_id
 
@@ -31,7 +31,7 @@ module "amazon_connect_supervisor_group" {
   lob             = var.lob
   company_prefix  = var.company_prefix
   env             = var.env
-  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=main"
+  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=master"
   create_instance = false
   instance_id     = module.amazon_connect.instance_id
 
@@ -50,7 +50,7 @@ module "amazon_connect_qa_and_team_lead_groups" {
   lob             = var.lob
   company_prefix  = var.company_prefix
   env             = var.env
-  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=main"
+  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=master"
   create_instance = false
   instance_id     = module.amazon_connect.instance_id
 
@@ -73,7 +73,7 @@ module "amazon_connect_agent_under_team_lead" {
   lob             = var.lob
   company_prefix  = var.company_prefix
   env             = var.env
-  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=main"
+  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=master"
   create_instance = false
   instance_id     = module.amazon_connect.instance_id
 
@@ -94,7 +94,7 @@ module "amazon_connect_agent_under_qa" {
   lob             = var.lob
   company_prefix  = var.company_prefix
   env             = var.env
-  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=main"
+  source          = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=master"
   create_instance = false
   instance_id     = module.amazon_connect.instance_id
 
