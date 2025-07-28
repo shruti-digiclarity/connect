@@ -1,0 +1,722 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "Set customer journey",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -678.4,
+      "y": -58.4
+    },
+    "ActionMetadata": {
+      "cb3bd9f5-7645-4c2c-89b3-abbe7ee77419": {
+        "position": {
+          "x": 799.2,
+          "y": 509.6
+        }
+      },
+      "Set customer journey-1": {
+        "position": {
+          "x": 660,
+          "y": 294.4
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "5a5d9455-68d5-45fe-8a4a-4b898f55927a": {
+        "position": {
+          "x": 880,
+          "y": 294.4
+        },
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Start KVS from customer only": {
+        "position": {
+          "x": 1127.2,
+          "y": 49.6
+        },
+        "isFriendlyName": true,
+        "toCustomer": false,
+        "fromCustomer": true
+      },
+      "Play the start recording beep using SSML": {
+        "position": {
+          "x": 1694.4,
+          "y": 48.8
+        },
+        "isFriendlyName": true
+      },
+      "Set the vm_flag attribute for processing": {
+        "position": {
+          "x": 1438.4,
+          "y": 43.2
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "2af36644-065b-4c8d-93fb-f09963602e8b": {
+        "position": {
+          "x": 2250.4,
+          "y": 401.6
+        }
+      },
+      "Wait for caller to record.": {
+        "position": {
+          "x": 1978.4,
+          "y": 19.2
+        },
+        "isFriendlyName": true,
+        "conditionMetadata": []
+      },
+      "Clear vm_flag": {
+        "position": {
+          "x": 1557.6,
+          "y": 352
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Was the vm_flag already set?": {
+        "position": {
+          "x": 1286.4,
+          "y": 342.4
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "4735192c-8d23-40e3-8cac-1b48cf359d1f",
+            "operator": {
+              "name": "Is greater than",
+              "value": "GreaterThan",
+              "shortDisplay": ">"
+            },
+            "value": "0"
+          }
+        ]
+      },
+      "Error messaging.": {
+        "position": {
+          "x": 1991.2,
+          "y": 338.4
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Stop KVS if the customer is still on the call.": {
+        "position": {
+          "x": 2276,
+          "y": 19.2
+        },
+        "isFriendlyName": true
+      },
+      "***End Call***": {
+        "position": {
+          "x": 2861.6,
+          "y": 62.4
+        },
+        "isFriendlyName": true
+      },
+      "Voicemail complete messaging.": {
+        "position": {
+          "x": 2559.2,
+          "y": 24.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "aa167033-a5e6-4642-8587-11b98e747fd7": {
+        "position": {
+          "x": 459.2,
+          "y": 377.6
+        },
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "KVS startup and flag loop": {
+        "position": {
+          "x": 851.2,
+          "y": 52
+        },
+        "isFriendlyName": true
+      },
+      "89b3ebc9-126c-4d8e-be98-3ff17787449f": {
+        "position": {
+          "x": 549.6,
+          "y": 88.8
+        },
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "ed18b22e-5186-4664-9410-212cb01ae48f": {
+        "position": {
+          "x": 181.6,
+          "y": 380
+        }
+      },
+      "a2f2a60c-3e45-4cf6-b079-f4c3c8c69813": {
+        "position": {
+          "x": 237.6,
+          "y": 89.6
+        },
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "6a4e726d-063a-47ed-a7a3-075ffd0cbedf",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "true"
+          },
+          {
+            "id": "eb0963f0-ab20-4a64-8ed0-127a64db5870",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "false"
+          }
+        ]
+      },
+      "Set customer journey-copy-1": {
+        "position": {
+          "x": -86.4,
+          "y": 312
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set customer journey": {
+        "position": {
+          "x": -499.2,
+          "y": 54.4
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "5155d9b0-4083-40d0-b78a-e906a960319b": {
+        "position": {
+          "x": -37.6,
+          "y": 72.8
+        }
+      },
+      "01edb27c-49e5-4427-9ff7-cebebc3f8dd3": {
+        "position": {
+          "x": -265.6,
+          "y": 76
+        },
+        "parameters": {
+          "LambdaFunctionARN": {
+            "useDynamic": true
+          },
+          "LambdaInvocationAttributes": {
+            "languageCode": {
+              "useDynamic": true
+            },
+            "countryCode": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "languageCode": true,
+          "value": false,
+          "configType": false,
+          "countryCode": true
+        },
+        "useDynamic": true
+      }
+    },
+    "Annotations": [],
+    "name": "ch-voice-mail-module",
+    "description": "",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {},
+      "Identifier": "cb3bd9f5-7645-4c2c-89b3-abbe7ee77419",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to start kvs stearming"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set customer journey-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "5a5d9455-68d5-45fe-8a4a-4b898f55927a",
+        "Errors": [
+          {
+            "NextAction": "5a5d9455-68d5-45fe-8a4a-4b898f55927a",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.kvsInitializaationErrorPrompt"
+      },
+      "Identifier": "5a5d9455-68d5-45fe-8a4a-4b898f55927a",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "KVS startup and flag loop",
+        "Errors": [
+          {
+            "NextAction": "KVS startup and flag loop",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "MediaStreamingState": "Enabled",
+        "MediaStreamType": "Audio",
+        "Participants": [
+          {
+            "ParticipantType": "Customer",
+            "MediaDirections": [
+              "From"
+            ]
+          }
+        ]
+      },
+      "Identifier": "Start KVS from customer only",
+      "Type": "UpdateContactMediaStreamingBehavior",
+      "Transitions": {
+        "NextAction": "Set the vm_flag attribute for processing",
+        "Errors": [
+          {
+            "NextAction": "Set customer journey-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "<speak>\n  <say-as interpret-as=\"expletive\">beep</say-as>\n</speak>"
+      },
+      "Identifier": "Play the start recording beep using SSML",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "Wait for caller to record.",
+        "Errors": [
+          {
+            "NextAction": "Wait for caller to record.",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "vm_kvs_status": "1"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set the vm_flag attribute for processing",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Play the start recording beep using SSML",
+        "Errors": [
+          {
+            "NextAction": "Was the vm_flag already set?",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "2af36644-065b-4c8d-93fb-f09963602e8b",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "StoreInput": "False",
+        "InputTimeLimitSeconds": "180",
+        "SSML": "<speak>\n<break time=\"5s\"/>\n</speak>"
+      },
+      "Identifier": "Wait for caller to record.",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "Stop KVS if the customer is still on the call.",
+        "Errors": [
+          {
+            "NextAction": "Stop KVS if the customer is still on the call.",
+            "ErrorType": "InputTimeLimitExceeded"
+          },
+          {
+            "NextAction": "Stop KVS if the customer is still on the call.",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "Error messaging.",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "vm_kvs_status": "0"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Clear vm_flag",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Error messaging.",
+        "Errors": [
+          {
+            "NextAction": "Error messaging.",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.vm_kvs_status"
+      },
+      "Identifier": "Was the vm_flag already set?",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Error messaging.",
+        "Conditions": [
+          {
+            "NextAction": "Clear vm_flag",
+            "Condition": {
+              "Operator": "NumberGreaterThan",
+              "Operands": [
+                "0"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Error messaging.",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.voicemailErrorPrompt"
+      },
+      "Identifier": "Error messaging.",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "2af36644-065b-4c8d-93fb-f09963602e8b",
+        "Errors": [
+          {
+            "NextAction": "2af36644-065b-4c8d-93fb-f09963602e8b",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "MediaStreamingState": "Disabled",
+        "Participants": [
+          {
+            "ParticipantType": "Customer",
+            "MediaDirections": [
+              "To",
+              "From"
+            ]
+          }
+        ],
+        "MediaStreamType": "Audio"
+      },
+      "Identifier": "Stop KVS if the customer is still on the call.",
+      "Type": "UpdateContactMediaStreamingBehavior",
+      "Transitions": {
+        "NextAction": "Voicemail complete messaging.",
+        "Errors": [
+          {
+            "NextAction": "Voicemail complete messaging.",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "***End Call***",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.voicemailSuccessPrompt"
+      },
+      "Identifier": "Voicemail complete messaging.",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "***End Call***",
+        "Errors": [
+          {
+            "NextAction": "***End Call***",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.VoicemailNotEligiblePrompt"
+      },
+      "Identifier": "aa167033-a5e6-4642-8587-11b98e747fd7",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "cb3bd9f5-7645-4c2c-89b3-abbe7ee77419",
+        "Errors": [
+          {
+            "NextAction": "cb3bd9f5-7645-4c2c-89b3-abbe7ee77419",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LoopCount": "2"
+      },
+      "Identifier": "KVS startup and flag loop",
+      "Type": "Loop",
+      "Transitions": {
+        "NextAction": "Was the vm_flag already set?",
+        "Conditions": [
+          {
+            "NextAction": "Start KVS from customer only",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "ContinueLooping"
+              ]
+            }
+          },
+          {
+            "NextAction": "Was the vm_flag already set?",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "DoneLooping"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.voicemailEligiblePrompt"
+      },
+      "Identifier": "89b3ebc9-126c-4d8e-be98-3ff17787449f",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "KVS startup and flag loop",
+        "Errors": [
+          {
+            "NextAction": "KVS startup and flag loop",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "ed18b22e-5186-4664-9410-212cb01ae48f",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.isVMEligible"
+      },
+      "Identifier": "a2f2a60c-3e45-4cf6-b079-f4c3c8c69813",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "aa167033-a5e6-4642-8587-11b98e747fd7",
+        "Conditions": [
+          {
+            "NextAction": "89b3ebc9-126c-4d8e-be98-3ff17787449f",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "true"
+              ]
+            }
+          },
+          {
+            "NextAction": "aa167033-a5e6-4642-8587-11b98e747fd7",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "false"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "aa167033-a5e6-4642-8587-11b98e747fd7",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | get-contact-attribute lmda failed"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set customer journey-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "ed18b22e-5186-4664-9410-212cb01ae48f",
+        "Errors": [
+          {
+            "NextAction": "ed18b22e-5186-4664-9410-212cb01ae48f",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | ch-voice-mail-module"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set customer journey",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "01edb27c-49e5-4427-9ff7-cebebc3f8dd3",
+        "Errors": [
+          {
+            "NextAction": "01edb27c-49e5-4427-9ff7-cebebc3f8dd3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "kvsInitializaationErrorPrompt": {
+            "Value": "$.External.kvs-initializaation-error-prompt"
+          },
+          "voicemailErrorPrompt": {
+            "Value": "$.External.voicemail-error-prompt"
+          },
+          "VoicemailNotEligiblePrompt": {
+            "Value": "$.External.ch-voicemail-isNotEligible-prompt"
+          },
+          "voicemailSuccessPrompt": {
+            "Value": "$.External.voicemail-success-prompt"
+          },
+          "voicemailEligiblePrompt": {
+            "Value": "$.External.ch-voicemail-isEligible-prompt"
+          }
+        }
+      },
+      "Identifier": "5155d9b0-4083-40d0-b78a-e906a960319b",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "a2f2a60c-3e45-4cf6-b079-f4c3c8c69813",
+        "Errors": [
+          {
+            "NextAction": "a2f2a60c-3e45-4cf6-b079-f4c3c8c69813",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "$.Attributes.ch-lmda-ivr-get-connect-config-arn",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "languageCode": "$.Attributes.languageCode",
+          "value": "ch-demo-main-flow",
+          "configType": "contact-flows",
+          "countryCode": "$.Attributes.countryCode"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "01edb27c-49e5-4427-9ff7-cebebc3f8dd3",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "5155d9b0-4083-40d0-b78a-e906a960319b",
+        "Errors": [
+          {
+            "NextAction": "Set customer journey-copy-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ],
+  "Settings": {
+    "InputParameters": [],
+    "OutputParameters": [],
+    "Transitions": [
+      {
+        "DisplayName": "Success",
+        "ReferenceName": "Success",
+        "Description": ""
+      },
+      {
+        "DisplayName": "Error",
+        "ReferenceName": "Error",
+        "Description": ""
+      }
+    ]
+  }
+}

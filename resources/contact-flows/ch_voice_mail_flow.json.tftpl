@@ -1,0 +1,206 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "Set customer journey",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 484,
+      "y": -9.6
+    },
+    "ActionMetadata": {
+      "00372e6e-f074-440c-b495-d6ef106bcd99": {
+        "position": {
+          "x": 2118.4,
+          "y": 198.4
+        }
+      },
+      "Error message-copy-1": {
+        "position": {
+          "x": 1828.8,
+          "y": 272
+        },
+        "isFriendlyName": true
+      },
+      "Error message": {
+        "position": {
+          "x": 1818.4,
+          "y": 56
+        },
+        "isFriendlyName": true
+      },
+      "20e0d8fc-0d4f-4d4b-9a88-6402e27636e4": {
+        "position": {
+          "x": 1523.2,
+          "y": 24.8
+        },
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "d10113cf-6195-44e9-a29b-015fd5e203a6",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "es"
+          }
+        ]
+      },
+      "32ae293f-2d33-4f73-be81-d7364f1cfa50": {
+        "position": {
+          "x": 1215.2,
+          "y": 43.2
+        },
+        "parameters": {
+          "FlowModuleId": {
+            "displayName": "ch_voice_mail_module"
+          }
+        },
+        "contactFlowModuleName": "ch_voice_mail_module"
+      },
+      "Set customer journey": {
+        "position": {
+          "x": 631.2,
+          "y": -7.2
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set all of the test attributes": {
+        "position": {
+          "x": 932,
+          "y": 34.4
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      }
+    },
+    "Annotations": [],
+    "name": "ch-voice-mail-flow",
+    "description": "",
+    "type": "contactFlow",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {},
+      "Identifier": "00372e6e-f074-440c-b495-d6ef106bcd99",
+      "Type": "EndFlowExecution",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Text": "Hemos detectado un error del sistema. Por favor, revise los registros de flujo para determinar el problema."
+      },
+      "Identifier": "Error message-copy-1",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "00372e6e-f074-440c-b495-d6ef106bcd99",
+        "Errors": [
+          {
+            "NextAction": "00372e6e-f074-440c-b495-d6ef106bcd99",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "We have encountered a system error. Please check flow logs to determine the issue."
+      },
+      "Identifier": "Error message",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "00372e6e-f074-440c-b495-d6ef106bcd99",
+        "Errors": [
+          {
+            "NextAction": "00372e6e-f074-440c-b495-d6ef106bcd99",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.vm_lang"
+      },
+      "Identifier": "20e0d8fc-0d4f-4d4b-9a88-6402e27636e4",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Error message",
+        "Conditions": [
+          {
+            "NextAction": "Error message-copy-1",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "es"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Error message",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowModuleId": "${ch_voice_mail_module}"
+      },
+      "Identifier": "32ae293f-2d33-4f73-be81-d7364f1cfa50",
+      "Type": "InvokeFlowModule",
+      "Transitions": {
+        "NextAction": "20e0d8fc-0d4f-4d4b-9a88-6402e27636e4",
+        "Errors": [
+          {
+            "NextAction": "20e0d8fc-0d4f-4d4b-9a88-6402e27636e4",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | ch-voice-mail-flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set customer journey",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set all of the test attributes",
+        "Errors": [
+          {
+            "NextAction": "Set all of the test attributes",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "Vm_EmailAddress": "saveenprominent@gmail.com",
+          "isVMEligible": "true"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set all of the test attributes",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "32ae293f-2d33-4f73-be81-d7364f1cfa50",
+        "Errors": [
+          {
+            "NextAction": "32ae293f-2d33-4f73-be81-d7364f1cfa50",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}

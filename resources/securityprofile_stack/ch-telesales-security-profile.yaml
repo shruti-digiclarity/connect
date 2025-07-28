@@ -1,0 +1,415 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: AWS Connect Security Profiles
+
+Parameters:
+  pConnectInstanceArn:
+    Type: String
+    Description: The ARN of the Connect instance
+
+  pCompanyPrefix:
+    Type: String
+    Description: The company prefix value
+
+  pLOB:
+    Type: String
+    Description: The line of business value
+
+Resources:
+
+  CHtelesalesAdminProfile:
+    Type: AWS::Connect::SecurityProfile
+    DeletionPolicy: Delete
+    Properties:
+      InstanceArn: !Ref pConnectInstanceArn
+      SecurityProfileName: ch_telesales_admin_profile
+      Description: An administrator can perform all actions available.
+      AllowedAccessControlTags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      TagRestrictedResources:
+        - RoutingProfile
+        - OperatingHours
+        - User
+        - SecurityProfile
+        - Queue
+      Tags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      Permissions:
+        - QConnectAIAgents.Delete
+        - EmailAddresses.View
+        - EvaluationCalibrationSessions.View
+        - ReportSchedules.Edit
+        - ReportsAdmin.Schedule
+        - TaskTemplates.View
+        - RulesGenerativeAI.Delete
+        - MetricsReports.Delete
+        - Users.Edit
+        - ContactFlows.Publish
+        - Views.Create
+        - Queues.Create
+        - AgentStates.EnableAndDisable
+        - CaseFields.Edit
+        - Campaigns.View
+        - EvaluationCalibrationSessions.Create
+        - ReportsAdmin.Publish
+        - Cases.Create
+        - ContentManagement.Delete
+        - CustomerProfiles.ProfileExplorer.Delete
+        - CustomerProfiles.Segments.Create
+        - CustomViews.Access
+        - CaseFields.Create
+        - AccessMetrics.DashboardsWithMyData.View
+        - QConnectGuardrails.View
+        - Bots.View
+        - HoursOfOperation.View
+        - ChatTestMode
+        - ContactSearchWithCharacteristics.View
+        - Queues.Delete
+        - ScreenRecording.Download
+        - VideoContact.Access
+        - QConnectAIAgents.View
+        - Queues.Edit
+        - ContactFlows.Edit
+        - EvaluationForms.Edit
+        - EvaluationAssistant.Access
+        - ManagerBargeIn
+        - PredefinedAttributes.Create
+        - ListenCallRecordings
+        - AgentGrouping.View
+        - Rules.Delete
+        - RulesGenerativeAI.Create
+        - DeleteCallRecordings
+        - ScreenRecording.Access
+        - CustomerProfiles.ProfileExplorer.View
+        - PhoneNumbers.Claim
+        - ContentManagement.Create
+        - Users.EditPermission
+        - OutboundEmail.Create
+        - Evaluation.Edit
+        - Campaigns.Delete
+        - AudioDeviceSettings.Access
+        - TaskTemplates.Create
+        - Prompts.Delete
+        - AccessMetrics.Dashboards.Access
+        - Bots.Edit
+        - Evaluation.Create
+        - QConnectAIAgents.Edit
+        - PhoneNumbers.View
+        - SecurityProfiles.Create
+        - ContentManagement.MessageTemplates.Edit
+        - AgentStates.View
+        - ContactFlows.Delete
+        - EvaluationForms.View
+        - HoursOfOperation.Edit
+        - ContentManagement.MessageTemplates.Create
+        - CustomerProfiles.Segments.View
+        - StopContact.Enabled
+        - AgentGrouping.Edit
+        - EvaluationForms.Delete
+        - Evaluation.Delete
+        - MyContacts.View
+        - PhoneNumbers.Release
+        - Views.View
+        - ScreenRecording.Delete
+        - UpdateContactSchedule.Enabled
+        - VoiceIdAttributesAndSearch.View
+        - TransferContact.Enabled
+        - ReportSchedules.Create
+        - Rules.View
+        - CaseHistory.View
+        - ContactFlowModules.View
+        - Prompts.Create
+        - TransferDestinations.Edit
+        - ReportsAdmin.Delete
+        - EvaluationCalibrationSessions.Delete
+        - AccessMetrics.RealTimeMetrics.Access
+        - MetricsReports.Create
+        - MetricsReports.View
+        - Campaigns.Manage
+        - QConnectAIPrompts.Edit
+        - Queues.View
+        - EvaluationForms.Create
+        - AutomatedVoiceInteraction.Transcripts.Unredacted.Access
+        - ContactLensCustomVocabulary.View
+        - CustomerProfiles.CalculatedAttributes.View
+        - AutomatedVoiceInteraction.Recordings.Unredacted.DownloadButton
+        - ContactAttributes.View
+        - ContentManagement.View
+        - Cases.Edit
+        - ContentManagement.MessageTemplates.View
+        - ConfigureContactAttributes.View
+        - GraphTrends.View
+        - ContactLensPostContactSummary.View
+        - QConnectGuardrails.Delete
+        - ContactFlowModules.Create
+        - SecurityProfiles.Edit
+        - RoutingPolicies.Delete
+        - CaseTemplates.Create
+        - VoiceId.Access
+        - Views.Remove
+        - AgentGrouping.EnableAndDisable
+        - HistoricalChanges.View
+        - CustomerProfiles.ProfileExplorer.Edit
+        - CustomerProfiles.Segments.Export
+        - RoutingPolicies.View
+        - Campaigns.Edit
+        - ContactFlowModules.Publish
+        - ReportSchedules.Delete
+        - Views.Edit
+        - CaseTemplates.View
+        - AgentStates.Create
+        - CustomerProfiles.Edit
+        - SecurityProfiles.Delete
+        - Campaigns.Create
+        - DownloadCallRecordings
+        - CaseTemplates.Edit
+        - ContactFlowModules.Edit
+        - TransferDestinations.View
+        - Prompts.Edit
+        - RedactedData.View
+        - PredefinedAttributes.View
+        - Users.View
+        - RoutingPolicies.Create
+        - AutomatedVoiceInteraction.Recordings.Unredacted.Access
+        - ContentManagement.MessageTemplates.Delete
+        - PhoneNumbers.Edit
+        - Rules.Edit
+        - HoursOfOperation.Create
+        - Analytics.PerformanceMetrics.Access
+        - SelfAssignContacts.Access
+        - ReportsAdmin.Access
+        - RulesGenerativeAI.View
+        - TaskTemplates.Delete
+        - CustomerProfiles.ProfileExplorer.Create
+        - ContactFlows.Create
+        - QConnectGuardrails.Create
+        - ContactFlowModules.Delete
+        - RulesGenerativeAI.Edit
+        - ContactSearch.View
+        - RealtimeContactLens.View
+        - AccessMetrics.HistoricalMetrics.Access
+        - ContentManagement.Edit
+        - CaseFields.View
+        - TaskTemplates.Edit
+        - QConnectAIPrompts.Create
+        - EmailAddresses.Create
+        - ContactLensCustomVocabulary.Edit
+        - Users.Create
+        - AccessMetrics.AgentActivityAudit.Access
+        - CustomerProfiles.CalculatedAttributes.Delete
+        - Cases.View
+        - TransferDestinations.Create
+        - Wisdom.View
+        - EvaluationCalibrationSessions.Edit
+        - Rules.Create
+        - QConnectAIPrompts.View
+        - AgentTimeCard.View
+        - EmailAddresses.Edit
+        - ReportSchedules.View
+        - Bots.Create
+        - ContactSearchWithKeywords.View
+        - SecurityProfiles.View
+        - ManagerListenIn
+        - ReportsAdmin.View
+        - QConnectGuardrails.Edit
+        - AgentStates.Edit
+        - HoursOfOperation.Delete
+        - ContactFlows.View
+        - QConnectAIAgents.Create
+        - BasicAgentAccess
+        - Queues.EnableAndDisable
+        - RoutingPolicies.Edit
+        - QConnectAIPrompts.Delete
+        - OutboundCallAccess
+        - MetricsReports.Schedule
+        - PredefinedAttributes.Delete
+        - CustomerProfiles.View
+        - CustomerProfiles.Create
+        - AccessMetrics
+        - MetricsReports.Publish
+        - Users.Delete
+        - CustomerProfiles.CalculatedAttributes.Create
+        - CustomerProfiles.CalculatedAttributes.Edit
+        - TransferDestinations.Delete
+        - Evaluation.View
+        - CustomerProfiles.Segments.Delete
+        - MetricsReports.Edit
+        - PredefinedAttributes.Edit
+        - EmailAddresses.Remove
+        - AgentGrouping.Create
+        - Prompts.View
+  CHtelesalesAgentProfile:
+    Type: AWS::Connect::SecurityProfile
+    DeletionPolicy: Delete
+    Properties:
+      InstanceArn: !Ref pConnectInstanceArn
+      SecurityProfileName: ch_telesales_agent_profile
+      Description: An agent is a user of the system that is focused on customer care and/or sales. Their role is unlikely to be technical.
+      AllowedAccessControlTags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      TagRestrictedResources:
+        - RoutingProfile
+        - OperatingHours
+        - User
+        - SecurityProfile
+        - Queue
+      Tags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      Permissions:
+        - BasicAgentAccess
+        - OutboundCallAccess
+        - OutboundEmail.Create
+
+  CHtelesalesQAProfile:
+    Type: AWS::Connect::SecurityProfile
+    DeletionPolicy: Delete
+    Properties:
+      InstanceArn: !Ref pConnectInstanceArn
+      SecurityProfileName: ch_telesales_qa_profile
+      Description: A quality analyst works to improve the customer experience and keeps track of live service metrics.
+      AllowedAccessControlTags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      TagRestrictedResources:
+        - RoutingProfile
+        - OperatingHours
+        - User
+        - SecurityProfile
+        - Queue
+      Tags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      Permissions:
+        - AccessMetrics
+        - ContactSearch.View
+        - ContactAttributes.View
+        - AgentTimeCard.View
+
+  CHtelesalesSupervisorProfile:
+    Type: AWS::Connect::SecurityProfile
+    DeletionPolicy: Delete
+    Properties:
+      InstanceArn: !Ref pConnectInstanceArn
+      SecurityProfileName: ch_telesales_supervisor_profile
+      Description: A call center manager (or call center admin) manages the day-to-day aspects of the call center.
+      AllowedAccessControlTags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      TagRestrictedResources:
+        - RoutingProfile
+        - OperatingHours
+        - User
+        - SecurityProfile
+        - Queue
+      Tags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      Permissions:
+        - RoutingPolicies.View
+        - RoutingPolicies.Edit
+        - RoutingPolicies.Create
+        - TransferDestinations.View
+        - TransferDestinations.Edit
+        - TransferDestinations.Create
+        - HoursOfOperation.View
+        - HoursOfOperation.Edit
+        - HoursOfOperation.Create
+        - Queues.View
+        - Queues.Edit
+        - Queues.Create
+        - Queues.EnableAndDisable
+        - TaskTemplates.Create
+        - TaskTemplates.Edit
+        - TaskTemplates.View
+        - TaskTemplates.Delete
+        - Prompts.Create
+        - Prompts.Delete
+        - Prompts.Edit
+        - Prompts.View
+        - ContactFlows.Create
+        - ContactFlows.Delete
+        - ContactFlows.Edit 
+        - ContactFlows.Publish
+        - ContactFlows.View
+        - ContactFlowModules.Create
+        - ContactFlowModules.Delete
+        - ContactFlowModules.Edit
+        - ContactFlowModules.Publish
+        - ContactFlowModules.View
+        - PhoneNumbers.Claim
+        - PhoneNumbers.Edit
+        - PhoneNumbers.Release
+        - PhoneNumbers.View
+        - Users.View
+        - AgentStates.Create
+        - AgentStates.Edit
+        - AgentStates.EnableAndDisable
+        - AgentStates.View
+        - AccessMetrics
+        - ContactSearch.View
+        - ContactAttributes.View
+        - AgentTimeCard.View
+        - ManagerListenIn
+        - ListenCallRecordings
+        - DownloadCallRecordings
+        - DeleteCallRecordings
+        - MetricsReports.View
+        - MetricsReports.Create
+        - MetricsReports.Edit
+        - MetricsReports.Delete
+        - MetricsReports.Publish
+        - MetricsReports.Schedule
+        # - ReportsAdmin.View
+        # - ReportsAdmin.Delete
+        - CustomerProfiles.CalculatedAttributes.Create
+        - CustomerProfiles.CalculatedAttributes.Edit
+        - CustomerProfiles.CalculatedAttributes.Delete  
+        - CustomerProfiles.CalculatedAttributes.View
+
+  CHtelesalesTeamLeadProfile:
+    Type: AWS::Connect::SecurityProfile
+    DeletionPolicy: Delete
+    Properties:
+      InstanceArn: !Ref pConnectInstanceArn
+      SecurityProfileName: ch_telesales_teamlead_profile
+      Description: A team lead works to improve the customer experience and keeps track of live service metrics.
+      AllowedAccessControlTags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      TagRestrictedResources:
+        - RoutingProfile
+        - OperatingHours
+        - User
+        - SecurityProfile
+        - Queue
+      Tags:
+        - Key: company
+          Value: !Ref pCompanyPrefix
+        - Key: pLOB
+          Value: !Ref pLOB
+      Permissions:
+        - AccessMetrics
+        - ContactSearch.View
+        - ContactAttributes.View
+        - AgentTimeCard.View
