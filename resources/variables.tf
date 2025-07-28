@@ -33,7 +33,7 @@ variable "env" {
 variable "repo_url" {
   type        = string
   description = "Repository URL."
-  default     = "https://github.com/CloverHealth/ccaas-terraform-connect.git"
+  default     = "https://github.com/Clover-Health-1/ccaas-terraform-connect.git"
 }
 
 variable "account_number" {

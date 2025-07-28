@@ -8,7 +8,8 @@ module "voice_mail_packager_lambda" {
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
-  attach                  = { policy_jsons = false }
+  attach                  = { policy_jsons = true }
+  iam_configuration       = local.lambda_iam_configurations["voice_mail_packager_lambda_policy"]
   environment_variables = {
     default_vm_mode        = "email"
     presigner_function_arn = "${var.company_prefix}-lmda-voice-mail-presigner-${local.region_prefix}-${var.env}"
@@ -28,7 +29,8 @@ module "kvs_to_s3_lambda" {
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
-  attach                  = { policy_jsons = false }
+  attach                  = { policy_jsons = true }
+  iam_configuration       = local.lambda_iam_configurations["kvs_to_s3_lambda_policy"]
   environment_variables = {
     s3_recordings_bucket = "${var.company_prefix}-s3-voice-mail-recording-${local.region_prefix}-${var.env}"
   }
@@ -45,7 +47,8 @@ module "voice_mail_presigner_lambda" {
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
-  attach                  = { policy_jsons = false }
+  attach                  = { policy_jsons = true }
+  iam_configuration       = local.lambda_iam_configurations["voice_mail_presigner_lambda_policy"]
   tags                    = local.lambda_default_configurations.tags
 }
 
@@ -59,7 +62,8 @@ module "voice_mail_transcriber_lambda" {
   timeout                 = 3
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
-  attach                  = { policy_jsons = false }
+  attach                  = { policy_jsons = true }
+  iam_configuration       = local.lambda_iam_configurations["voice_mail_transcriber_lambda_policy"]
   environment_variables = {
     s3_transcripts_bucket = "${var.company_prefix}-s3-voice-mail-transcript-${local.region_prefix}-${var.env}"
   }
@@ -76,7 +80,8 @@ module "get_connect_config_lambda" {
   timeout                 = 3
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
-  attach                  = { policy_jsons = false }
+  attach                  = { policy_jsons = true }
+  iam_configuration       = local.lambda_iam_configurations["get_connect_config_lambda_policy"]
   environment_variables = {
     CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
   }
@@ -93,7 +98,8 @@ module "check_holiday_and_hoop_lambda" {
   timeout                 = 3
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
-  attach                  = { policy_jsons = false }
+  attach                  = { policy_jsons = true }
+  iam_configuration       = local.lambda_iam_configurations["check_holiday_and_hoop_lambda_policy"]
   environment_variables = {
     CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
   }

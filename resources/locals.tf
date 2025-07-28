@@ -141,5 +141,29 @@ locals {
       number_of_policy_jsons = 1
       policy_jsons           = [data.aws_iam_policy_document.match_extension_lambda_policy.json]
     }
+    voice_mail_packager_lambda_policy = {
+      number_of_policy_jsons = 1
+      policy_jsons           = [data.aws_iam_policy_document.voice_mail_packager_lambda_policy.json]
+    }
+    kvs_to_s3_lambda_policy = {
+      number_of_policy_jsons = 1
+      policy_jsons           = [data.aws_iam_policy_document.kvs_to_s3_lambda_policy.json]
+    }
+    voice_mail_presigner_lambda_policy = {
+      number_of_policy_jsons = 1
+      policy_jsons           = [data.aws_iam_policy_document.voice_mail_presigner_lambda_policy.json]
+    }
+    voice_mail_transcriber_lambda_policy = {
+      number_of_policy_jsons = 1
+      policy_jsons           = [data.aws_iam_policy_document.voice_mail_transcriber_lambda_policy.json]
+    }
+    get_connect_config_lambda_policy = {
+      number_of_policy_jsons = 1
+      policy_jsons           = [data.aws_iam_policy_document.get_connect_config_lambda_policy.json]
+    }
+    check_holiday_and_hoop_lambda_policy = {
+      number_of_policy_jsons = 1
+      policy_jsons           = [data.aws_iam_policy_document.check_holiday_and_hoop_lambda_policy.json]
+    }
   }
 }
