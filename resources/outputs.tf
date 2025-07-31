@@ -57,8 +57,3 @@ output "ch_telesales_outbound_queue_arn" {
   description = "ARN of the Outbound Queue for Telesales."
   value       = module.amazon_connect.queues["ch_telesales_outbound"].arn
 }
-
-output "collect_extention_number_id" {
-  description = "List of phone number IDs to associate."
-  value       = module.amazon_connect.phone_number_id["collect_extention_number"]
-}
