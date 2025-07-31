@@ -1,0 +1,3555 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "Customer Journey Unexpected Error",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -2751.2,
+      "y": 464
+    },
+    "ActionMetadata": {
+      "1f7bb8bf-106d-4f43-94eb-35dc70f2c19b": {
+        "position": {
+          "x": -863.2,
+          "y": 1370.4
+        }
+      },
+      "Customer Journey Unexpected Error-copy-1-copy-2": {
+        "position": {
+          "x": -1639.2,
+          "y": 744
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Customer Journey Unexpected Error-copy-1-copy-3": {
+        "position": {
+          "x": -1408,
+          "y": 748
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set agent hold flow": {
+        "position": {
+          "x": -1407.2,
+          "y": 530.4
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "EventHooks": {
+            "AgentHold": {
+              "useDynamic": true
+            }
+          }
+        },
+        "useDynamic": true,
+        "customerOrAgent": false
+      },
+      "Customer Journey Unexpected Error-copy-1-copy-4": {
+        "position": {
+          "x": -1167.2,
+          "y": 749.6
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set customer hold flow": {
+        "position": {
+          "x": -1174.4,
+          "y": 517.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "EventHooks": {
+            "CustomerHold": {
+              "useDynamic": true
+            }
+          }
+        },
+        "useDynamic": true,
+        "customerOrAgent": true
+      },
+      "4d3647d3-443b-4359-82e8-c27b0d8230e9": {
+        "position": {
+          "x": 7870.4,
+          "y": 989.6
+        }
+      },
+      "ac22fb7f-0c98-4332-9b18-b36521e6d6f3": {
+        "position": {
+          "x": -1640.8,
+          "y": 517.6
+        },
+        "parameters": {
+          "EventHooks": {
+            "CustomerQueue": {
+              "useDynamic": true
+            }
+          }
+        },
+        "useDynamic": true,
+        "customerOrAgent": true
+      },
+      "8d6f0b73-6c2b-4af6-8ca6-926c09798c90": {
+        "position": {
+          "x": 7381.6,
+          "y": -102.4
+        }
+      },
+      "Customer Journey Unexpected Error-copy-1-copy-1": {
+        "position": {
+          "x": -1433.6,
+          "y": 1140
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Check holiday status": {
+        "position": {
+          "x": 3920.8,
+          "y": 446.4
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "f8ff439f-bace-4132-952f-0759ee92904a",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "true"
+          }
+        ]
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-3": {
+        "position": {
+          "x": 4318.4,
+          "y": 1300.8
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Oct-to-Mar": {
+        "position": {
+          "x": 4750.4,
+          "y": 419.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "HoursOfOperationId": {
+            "displayName": "telesales_oct_to_mar"
+          }
+        },
+        "Hours": {
+          "id": "${telesales_oct_to_mar_hoo_arn}",
+          "text": "telesales_oct_to_mar"
+        }
+      },
+      "7th Dec": {
+        "position": {
+          "x": 4750.4,
+          "y": 679.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "HoursOfOperationId": {
+            "displayName": "telesales_7th_dec"
+          }
+        },
+        "Hours": {
+          "id": "${telesales_7th_dec_hoo_arn}",
+          "text": "telesales_7th_dec"
+        }
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-6": {
+        "position": {
+          "x": 5784.8,
+          "y": 1013.6
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Transfer to voicemail flow": {
+        "position": {
+          "x": 7394.4,
+          "y": 1340
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "ContactFlowId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Set insightly attributes-copy-1": {
+        "position": {
+          "x": 6846.4,
+          "y": 1372
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "FlowAttributes": {
+            "insightly_record_id": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "insightly_record_url": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "insightly_record_type": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "insightly_record_name": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "8261e0ef-b6c3-47c0-90f8-810ff6a187d0": {
+        "position": {
+          "x": 7818.4,
+          "y": 1516.8
+        }
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-4": {
+        "position": {
+          "x": 7483.2,
+          "y": 1656
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-14": {
+        "position": {
+          "x": 12692.8,
+          "y": 954.4
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "14714389-5e6a-418a-b1c3-a0d6e756ccfc": {
+        "position": {
+          "x": 12998.4,
+          "y": 1124
+        }
+      },
+      "Set queue for spanish": {
+        "position": {
+          "x": 12123.2,
+          "y": 1180
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "QueueId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-15": {
+        "position": {
+          "x": 11218.4,
+          "y": 333.6
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Unexpected Error Message": {
+        "position": {
+          "x": -1132,
+          "y": 1308
+        },
+        "isFriendlyName": true
+      },
+      "Set English lang attribute": {
+        "position": {
+          "x": 1200.8,
+          "y": 520
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set spanish lang attribute": {
+        "position": {
+          "x": 1200.8,
+          "y": 780
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set unavailability prompt": {
+        "position": {
+          "x": 5143.2,
+          "y": 1316.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "FlowAttributes": {
+            "unavailability-prompt": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "Set outage prompt": {
+        "position": {
+          "x": 6002.4,
+          "y": 1019.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "FlowAttributes": {
+            "unavailability-prompt": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "unavailability prompt": {
+        "position": {
+          "x": 7119.2,
+          "y": 1308.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Lead Lambda 2": {
+        "position": {
+          "x": 6588.8,
+          "y": 1371.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "useDynamic": true
+          }
+        },
+        "dynamicMetadata": {},
+        "useDynamic": true
+      },
+      "6dbcdc6c-846d-43d3-9e5e-d858332d0034": {
+        "position": {
+          "x": 6300.8,
+          "y": 1544
+        },
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true,
+        "conditionMetadata": [
+          {
+            "id": "0549294f-106e-45ec-9ab1-491cdbaabab1",
+            "value": "1"
+          }
+        ]
+      },
+      "Transfer to provider service": {
+        "position": {
+          "x": 7107.2,
+          "y": 167.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "ThirdPartyPhoneNumber": {
+            "countryCode": "",
+            "useDynamic": true
+          }
+        }
+      },
+      "Transfer to member service": {
+        "position": {
+          "x": 7100.8,
+          "y": -103.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "ThirdPartyPhoneNumber": {
+            "countryCode": "",
+            "useDynamic": true
+          }
+        }
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-11": {
+        "position": {
+          "x": 7420.8,
+          "y": 623.2
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "f540591d-ed04-4aa3-9f0b-8932e78ec9f9": {
+        "position": {
+          "x": -1680.8,
+          "y": 1133.6
+        }
+      },
+      "Customer Journey Unexpected Error-copy-1": {
+        "position": {
+          "x": -1428.8,
+          "y": 1380.8
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Check hours of operation": {
+        "position": {
+          "x": 4354.4,
+          "y": 410.4
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "5a67c6bd-6477-4252-bbcc-a15e654d997b",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "Dec7th"
+          },
+          {
+            "id": "cbc086b5-88c3-4eb6-b32e-925006c597ed",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "OctToMar"
+          },
+          {
+            "id": "c27a0bd3-6143-471a-9ed1-c9f41934d2ef",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "AprToSep"
+          }
+        ]
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-5": {
+        "position": {
+          "x": 5255.2,
+          "y": 435.2
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set unavailability prompt2": {
+        "position": {
+          "x": 5139.2,
+          "y": 1097.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "FlowAttributes": {
+            "unavailability-prompt": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "Apr-to-Sept": {
+        "position": {
+          "x": 4744,
+          "y": 155.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "HoursOfOperationId": {
+            "displayName": "telesales_apr_to_sep"
+          }
+        },
+        "Hours": {
+          "id": "${telesales_apr_to_sep_hoo_arn}",
+          "text": "telesales_apr_to_sep"
+        }
+      },
+      "Transfer to Agent": {
+        "position": {
+          "x": 10969.6,
+          "y": 330.4
+        },
+        "isFriendlyName": true
+      },
+      "Agent Unavailable Prompt": {
+        "position": {
+          "x": 11553.6,
+          "y": 646.4
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Check agent availability": {
+        "position": {
+          "x": 10680.8,
+          "y": 303.2
+        },
+        "isFriendlyName": true
+      },
+      "Set Campaign attributes": {
+        "position": {
+          "x": 2878.4,
+          "y": 557.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "Attributes": {
+            "campaign_id": {
+              "useDynamic": true
+            },
+            "campaign_name": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicParams": [
+          "campaign_id",
+          "campaign_name"
+        ]
+      },
+      "set holiday hoop Attributes": {
+        "position": {
+          "x": 3590.4,
+          "y": 445.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "FlowAttributes": {
+            "isHoliday": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "hoursOfOperationName": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-1": {
+        "position": {
+          "x": 2883.2,
+          "y": 816.8
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-2": {
+        "position": {
+          "x": 3593.6,
+          "y": 722.4
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Check Holiday Lambda": {
+        "position": {
+          "x": 3217.6,
+          "y": 555.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "useDynamic": true
+          }
+        },
+        "dynamicMetadata": {},
+        "useDynamic": true
+      },
+      "Set input prompt": {
+        "position": {
+          "x": -1948.8,
+          "y": 521.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "FlowAttributes": {
+            "ch-welcome-prompt-en": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-welcome-prompt-es": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-lmda-ivr-check-holiday-and-hoop-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-lmda-ivr-get-campaign-details-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-lmda-ivr-get-connect-config-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-lmda-ivr-lead-upload-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-lmda-ivr-match-extension-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-telesales-cms-en-queue-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-telesales-cms-es-queue-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-telesales-en-queue-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-telesales-es-queue-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-show-view-flow-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-voice-mail-flow-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "provider-service-phone-number": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "member-service-phone-number": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "isOutage": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-telesales-agent-hold-flow-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-telesales-agent-whisper-flow-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-telesales-customer-hold-flow-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-telesales-customer-queue-flow-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-telesales-customer-whisper-flow-arn": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "4938673c-0e3c-4505-85e6-3e10249ededd": {
+        "position": {
+          "x": -1965.6,
+          "y": 1131.2
+        },
+        "parameters": {
+          "QueueId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Set english language": {
+        "position": {
+          "x": 1480.8,
+          "y": 520
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "TextToSpeechVoice": {
+            "useDynamic": true,
+            "languageCode": "en-US"
+          }
+        },
+        "overrideConsoleVoice": false
+      },
+      "Set spanish language": {
+        "position": {
+          "x": 1480.8,
+          "y": 780
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "TextToSpeechVoice": {
+            "useDynamic": true,
+            "languageCode": "es-US"
+          }
+        },
+        "overrideConsoleVoice": false
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-9": {
+        "position": {
+          "x": 7601.6,
+          "y": 840
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "is Outage?": {
+        "position": {
+          "x": 5540,
+          "y": 436.8
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "b182f384-5ade-47c1-92f2-f99a960830e5",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "true"
+          }
+        ]
+      },
+      "Tele sales main menu": {
+        "position": {
+          "x": 6601.6,
+          "y": 290.4
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true,
+        "conditionMetadata": [
+          {
+            "id": "019a3f21-daf7-4e69-bb42-07728155c258",
+            "value": "1"
+          },
+          {
+            "id": "67107267-c641-429a-8fbf-351cf617dd41",
+            "value": "2"
+          },
+          {
+            "id": "ad9fb0fb-2287-4d1c-a1a2-1173a6ec2aad",
+            "value": "3"
+          }
+        ]
+      },
+      "Check for test call": {
+        "position": {
+          "x": 6031.2,
+          "y": 436
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "29c9bd87-ebdb-486d-bdce-234ab88b3dd7",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "true"
+          }
+        ]
+      },
+      "Set cms-es queue": {
+        "position": {
+          "x": 7004.8,
+          "y": 944.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "QueueId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-7": {
+        "position": {
+          "x": 6372,
+          "y": 672
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-8": {
+        "position": {
+          "x": 7603.2,
+          "y": 1046.4
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "5ff9d719-4f0d-42ec-b5d7-c16225c9dde9": {
+        "position": {
+          "x": 7360.8,
+          "y": 836.8
+        }
+      },
+      "Check language block": {
+        "position": {
+          "x": 6693.6,
+          "y": 790.4
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "c34b4c93-2572-4ee9-a07e-d95c471367b5",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "en"
+          }
+        ]
+      },
+      "Set cms-en queue": {
+        "position": {
+          "x": 7009.6,
+          "y": 668
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "QueueId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Select Language": {
+        "position": {
+          "x": 797.6,
+          "y": 899.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true,
+        "conditionMetadata": [
+          {
+            "id": "cee7bfd5-638c-4051-ba51-edbd1437872c",
+            "value": "1"
+          },
+          {
+            "id": "c0107648-3ec3-4e87-bdc7-63e40b862d6e",
+            "value": "2"
+          }
+        ]
+      },
+      "Set spanish voice model": {
+        "position": {
+          "x": 467.2,
+          "y": 892.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "TextToSpeechVoice": {
+            "useDynamic": true,
+            "languageCode": "es-US"
+          }
+        },
+        "overrideConsoleVoice": false
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-10": {
+        "position": {
+          "x": 8072.8,
+          "y": 409.6
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "store Extension Number": {
+        "position": {
+          "x": 8344.8,
+          "y": 411.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true,
+        "conditionMetadata": [],
+        "countryCodePrefix": "+1"
+      },
+      "Lead Lambda 1": {
+        "position": {
+          "x": 7118.4,
+          "y": 436.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "useDynamic": true
+          }
+        },
+        "dynamicMetadata": {},
+        "useDynamic": true
+      },
+      "check collect extension": {
+        "position": {
+          "x": 7800,
+          "y": 396
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "e6779868-762f-452b-b5cf-0bb2e93a0cc7",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "true"
+          }
+        ]
+      },
+      "Set insightly attributes": {
+        "position": {
+          "x": 7439.2,
+          "y": 380.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "FlowAttributes": {
+            "insightly_record_id": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "insightly_record_url": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "insightly_record_type": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "insightly_record_name": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "fetchCampaignDetails": {
+        "position": {
+          "x": 2572.8,
+          "y": 664.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "useDynamic": true
+          }
+        },
+        "dynamicMetadata": {},
+        "useDynamic": true
+      },
+      "Customer Journey Unexpected Error-copy-2": {
+        "position": {
+          "x": 2013.6,
+          "y": 856
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "getConnectConfig-2": {
+        "position": {
+          "x": 1768.8,
+          "y": 652
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "useDynamic": true
+          },
+          "LambdaInvocationAttributes": {
+            "languageCode": {
+              "useDynamic": true
+            },
+            "countryCode": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "configType": false,
+          "value": false,
+          "languageCode": true,
+          "countryCode": true
+        },
+        "useDynamic": true
+      },
+      "Set prompt messages": {
+        "position": {
+          "x": 2299.2,
+          "y": 664.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "FlowAttributes": {
+            "ch-prompt-holiday-message": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-out-of-hours-message": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-outage-message": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-extension-menu": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-main-menu": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-telesales-menu": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-ext-unavailable-message": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-extension-unmatched-message": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-extension-not-provided-message": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "Set agent queue": {
+        "position": {
+          "x": 10355.2,
+          "y": 333.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "AgentId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Unmatched extenntion prompt": {
+        "position": {
+          "x": 10216,
+          "y": 869.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Check for extention validity": {
+        "position": {
+          "x": 9982.4,
+          "y": 412
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "d45dacd4-4f85-4330-8f2e-83edfc79372e",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "success"
+          },
+          {
+            "id": "80a56057-ce58-425d-9191-958f27327de9",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "failure"
+          },
+          {
+            "id": "88ac61ee-9ce4-471a-8ce9-823192c6c30d",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "not_provided"
+          }
+        ]
+      },
+      "extenntion not provided prompt": {
+        "position": {
+          "x": 10297.6,
+          "y": 652.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Set Extension Number": {
+        "position": {
+          "x": 8603.2,
+          "y": 404
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "Attributes": {
+            "extensionNumber": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicParams": [
+          "extensionNumber"
+        ]
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-12": {
+        "position": {
+          "x": 9308.8,
+          "y": 559.2
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set extention attribute": {
+        "position": {
+          "x": 9650.4,
+          "y": 409.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "FlowAttributes": {
+            "extentionMatched": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "agentARN": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "agentEmail": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "agentExtension": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "agentUsername": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "Match Extension Lambda": {
+        "position": {
+          "x": 8945.6,
+          "y": 395.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "useDynamic": true
+          },
+          "LambdaInvocationAttributes": {
+            "extension_number": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "extension_number": true
+        },
+        "useDynamic": true
+      },
+      "getConnectConfig": {
+        "position": {
+          "x": -2202.4,
+          "y": 517.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "useDynamic": true
+          },
+          "LambdaInvocationAttributes": {
+            "languageCode": {
+              "useDynamic": true
+            },
+            "countryCode": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "configType": false,
+          "value": false,
+          "languageCode": true,
+          "countryCode": true
+        },
+        "useDynamic": true
+      },
+      "Customer Journey Unexpected Error": {
+        "position": {
+          "x": -2467.2,
+          "y": 524.8
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "1f363c3c-2d34-4d44-943d-3f9c1aa50490": {
+        "position": {
+          "x": 232.8,
+          "y": 594.4
+        },
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true,
+        "conditionMetadata": [
+          {
+            "id": "dfc137e5-cb86-425b-adeb-931c62b2b685",
+            "value": "1"
+          },
+          {
+            "id": "ef94016f-b351-41fe-9735-cc7f2bd7c7a3",
+            "value": "2"
+          }
+        ]
+      },
+      "8fabcb3a-b207-4164-a9d3-157a489ece27": {
+        "position": {
+          "x": 12424.8,
+          "y": 948
+        }
+      },
+      "Customer Journey Unexpected Error-copy-2-copy-13": {
+        "position": {
+          "x": 12703.2,
+          "y": 1172.8
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Check language": {
+        "position": {
+          "x": 11850.4,
+          "y": 1026.4
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "8a0f6ae1-7916-42eb-b263-70e91c5f8a46",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "en"
+          }
+        ]
+      },
+      "Set queue for english": {
+        "position": {
+          "x": 12124,
+          "y": 949.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "QueueId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Customer Journey Unexpected Error-copy-1-copy-5": {
+        "position": {
+          "x": -919.2,
+          "y": 745.6
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set agent whisper flow": {
+        "position": {
+          "x": -926.4,
+          "y": 522.4
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "EventHooks": {
+            "AgentWhisper": {
+              "useDynamic": true
+            }
+          }
+        },
+        "useDynamic": true,
+        "customerOrAgent": false
+      },
+      "Customer Journey Unexpected Error-copy-1-copy-6": {
+        "position": {
+          "x": -651.2,
+          "y": 746.4
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set english voice model": {
+        "position": {
+          "x": -231.2,
+          "y": 616.8
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "TextToSpeechVoice": {
+            "useDynamic": true,
+            "languageCode": "en-US"
+          }
+        },
+        "overrideConsoleVoice": false
+      },
+      "Set customer whisper flow": {
+        "position": {
+          "x": -585.6,
+          "y": 535.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "EventHooks": {
+            "CustomerWhisper": {
+              "useDynamic": true
+            }
+          }
+        },
+        "useDynamic": true,
+        "customerOrAgent": true
+      }
+    },
+    "Annotations": [],
+    "name": "ch-demo-main-flow",
+    "description": "",
+    "type": "contactFlow",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {},
+      "Identifier": "1f7bb8bf-106d-4f43-94eb-35dc70f2c19b",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to set customer queue flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1-copy-2",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set agent hold flow",
+        "Errors": [
+          {
+            "NextAction": "Set agent hold flow",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to set agent hold flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1-copy-3",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set customer hold flow",
+        "Errors": [
+          {
+            "NextAction": "Set customer hold flow",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "AgentHold": "$.FlowAttributes.ch-telesales-agent-hold-flow-arn"
+        }
+      },
+      "Identifier": "Set agent hold flow",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "Set customer hold flow",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1-copy-3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to set customer hold flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1-copy-4",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set agent whisper flow",
+        "Errors": [
+          {
+            "NextAction": "Set agent whisper flow",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "CustomerHold": "$.FlowAttributes.ch-telesales-customer-hold-flow-arn"
+        }
+      },
+      "Identifier": "Set customer hold flow",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "Set agent whisper flow",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1-copy-4",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "4d3647d3-443b-4359-82e8-c27b0d8230e9",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "CustomerQueue": "$.FlowAttributes.ch-telesales-customer-queue-flow-arn"
+        }
+      },
+      "Identifier": "ac22fb7f-0c98-4332-9b18-b36521e6d6f3",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "Set agent hold flow",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1-copy-2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "8d6f0b73-6c2b-4af6-8ca6-926c09798c90",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Queue capacity reached"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Unexpected Error Message",
+        "Errors": [
+          {
+            "NextAction": "Unexpected Error Message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.FlowAttributes.isHoliday"
+      },
+      "Identifier": "Check holiday status",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Check hours of operation",
+        "Conditions": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-3",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "true"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Check hours of operation",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Holiday true"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-3",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set unavailability prompt",
+        "Errors": [
+          {
+            "NextAction": "Set unavailability prompt",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "HoursOfOperationId": "${telesales_oct_to_mar_hoo_arn}"
+      },
+      "Identifier": "Oct-to-Mar",
+      "Type": "CheckHoursOfOperation",
+      "Transitions": {
+        "NextAction": "Set unavailability prompt2",
+        "Conditions": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-5",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "True"
+              ]
+            }
+          },
+          {
+            "NextAction": "Set unavailability prompt2",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "False"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set unavailability prompt2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "HoursOfOperationId": "${telesales_7th_dec_hoo_arn}"
+      },
+      "Identifier": "7th Dec",
+      "Type": "CheckHoursOfOperation",
+      "Transitions": {
+        "NextAction": "Set unavailability prompt2",
+        "Conditions": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-5",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "True"
+              ]
+            }
+          },
+          {
+            "NextAction": "Set unavailability prompt2",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "False"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set unavailability prompt2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Outage true"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-6",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set outage prompt",
+        "Errors": [
+          {
+            "NextAction": "Set outage prompt",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ContactFlowId": "$.FlowAttributes.ch-voice-mail-flow-arn"
+      },
+      "Identifier": "Transfer to voicemail flow",
+      "Type": "TransferToFlow",
+      "Transitions": {
+        "NextAction": "8261e0ef-b6c3-47c0-90f8-810ff6a187d0",
+        "Errors": [
+          {
+            "NextAction": "8261e0ef-b6c3-47c0-90f8-810ff6a187d0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "insightly_record_id": {
+            "Value": "$.External.insightly_record_id"
+          },
+          "insightly_record_url": {
+            "Value": "$.External.insightly_record_url"
+          },
+          "insightly_record_type": {
+            "Value": "$.External.insightly_record_type"
+          },
+          "insightly_record_name": {
+            "Value": "$.External.insightly_record_url"
+          }
+        }
+      },
+      "Identifier": "Set insightly attributes-copy-1",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "unavailability prompt",
+        "Errors": [
+          {
+            "NextAction": "unavailability prompt",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "8261e0ef-b6c3-47c0-90f8-810ff6a187d0",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | insighly lead lmda failed"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-4",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "8261e0ef-b6c3-47c0-90f8-810ff6a187d0",
+        "Errors": [
+          {
+            "NextAction": "8261e0ef-b6c3-47c0-90f8-810ff6a187d0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Queue reached at capacity"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-14",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "14714389-5e6a-418a-b1c3-a0d6e756ccfc",
+        "Errors": [
+          {
+            "NextAction": "14714389-5e6a-418a-b1c3-a0d6e756ccfc",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "14714389-5e6a-418a-b1c3-a0d6e756ccfc",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "QueueId": "$.FlowAttributes.ch-telesales-es-queue-arn"
+      },
+      "Identifier": "Set queue for spanish",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "8fabcb3a-b207-4164-a9d3-157a489ece27",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-13",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to transfer to agent"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-15",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Agent Unavailable Prompt",
+        "Errors": [
+          {
+            "NextAction": "Agent Unavailable Prompt",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "I'm sorry, but an unexpected error occurred.  Please call back again."
+      },
+      "Identifier": "Unexpected Error Message",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "1f7bb8bf-106d-4f43-94eb-35dc70f2c19b",
+        "Errors": [
+          {
+            "NextAction": "1f7bb8bf-106d-4f43-94eb-35dc70f2c19b",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "languageCode": "en",
+          "countryCode": "US"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set English lang attribute",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set english language",
+        "Errors": [
+          {
+            "NextAction": "Set english language",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "languageCode": "es",
+          "countryCode": "US"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set spanish lang attribute",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set spanish language",
+        "Errors": [
+          {
+            "NextAction": "Set spanish language",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "unavailability-prompt": {
+            "Value": "$.FlowAttributes.ch-prompt-holiday-message"
+          }
+        }
+      },
+      "Identifier": "Set unavailability prompt",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "6dbcdc6c-846d-43d3-9e5e-d858332d0034",
+        "Errors": [
+          {
+            "NextAction": "6dbcdc6c-846d-43d3-9e5e-d858332d0034",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "unavailability-prompt": {
+            "Value": "$.FlowAttributes.ch-prompt-outage-message"
+          }
+        }
+      },
+      "Identifier": "Set outage prompt",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "6dbcdc6c-846d-43d3-9e5e-d858332d0034",
+        "Errors": [
+          {
+            "NextAction": "6dbcdc6c-846d-43d3-9e5e-d858332d0034",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.unavailability-prompt"
+      },
+      "Identifier": "unavailability prompt",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "Transfer to voicemail flow",
+        "Errors": [
+          {
+            "NextAction": "Transfer to voicemail flow",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "$.FlowAttributes.ch-lmda-ivr-lead-upload-arn",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "Lead Lambda 2",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "Set insightly attributes-copy-1",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-4",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "False",
+        "InputTimeLimitSeconds": "5",
+        "SSML": "$.FlowAttributes.ch-prompt-telesales-menu"
+      },
+      "Identifier": "6dbcdc6c-846d-43d3-9e5e-d858332d0034",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "unavailability prompt",
+        "Conditions": [
+          {
+            "NextAction": "Lead Lambda 2",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "1"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "unavailability prompt",
+            "ErrorType": "InputTimeLimitExceeded"
+          },
+          {
+            "NextAction": "unavailability prompt",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "unavailability prompt",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ThirdPartyPhoneNumber": "$.FlowAttributes.provider-service-phone-number",
+        "ThirdPartyConnectionTimeLimitSeconds": "30",
+        "ContinueFlowExecution": "True"
+      },
+      "Identifier": "Transfer to provider service",
+      "Type": "TransferParticipantToThirdParty",
+      "Transitions": {
+        "NextAction": "8d6f0b73-6c2b-4af6-8ca6-926c09798c90",
+        "Errors": [
+          {
+            "NextAction": "8d6f0b73-6c2b-4af6-8ca6-926c09798c90",
+            "ErrorType": "CallFailed"
+          },
+          {
+            "NextAction": "8d6f0b73-6c2b-4af6-8ca6-926c09798c90",
+            "ErrorType": "ConnectionTimeLimitExceeded"
+          },
+          {
+            "NextAction": "8d6f0b73-6c2b-4af6-8ca6-926c09798c90",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ThirdPartyPhoneNumber": "$.FlowAttributes.member-service-phone-number",
+        "ThirdPartyConnectionTimeLimitSeconds": "30",
+        "ContinueFlowExecution": "True"
+      },
+      "Identifier": "Transfer to member service",
+      "Type": "TransferParticipantToThirdParty",
+      "Transitions": {
+        "NextAction": "8d6f0b73-6c2b-4af6-8ca6-926c09798c90",
+        "Errors": [
+          {
+            "NextAction": "8d6f0b73-6c2b-4af6-8ca6-926c09798c90",
+            "ErrorType": "CallFailed"
+          },
+          {
+            "NextAction": "8d6f0b73-6c2b-4af6-8ca6-926c09798c90",
+            "ErrorType": "ConnectionTimeLimitExceeded"
+          },
+          {
+            "NextAction": "8d6f0b73-6c2b-4af6-8ca6-926c09798c90",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | insighly lead lmda failed"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-11",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "check collect extension",
+        "Errors": [
+          {
+            "NextAction": "check collect extension",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "f540591d-ed04-4aa3-9f0b-8932e78ec9f9",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "Customer Journey Unexpected Error-copy-1",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1-copy-1",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to fetch flow prompts"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Unexpected Error Message",
+        "Errors": [
+          {
+            "NextAction": "Unexpected Error Message",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.FlowAttributes.hoursOfOperationName"
+      },
+      "Identifier": "Check hours of operation",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "7th Dec",
+        "Conditions": [
+          {
+            "NextAction": "7th Dec",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "Dec7th"
+              ]
+            }
+          },
+          {
+            "NextAction": "Oct-to-Mar",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "OctToMar"
+              ]
+            }
+          },
+          {
+            "NextAction": "Apr-to-Sept",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "AprToSep"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "7th Dec",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | In hours-of-operation"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-5",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "is Outage?",
+        "Errors": [
+          {
+            "NextAction": "is Outage?",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "unavailability-prompt": {
+            "Value": "$.FlowAttributes.ch-prompt-out-of-hours-message"
+          }
+        }
+      },
+      "Identifier": "Set unavailability prompt2",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "6dbcdc6c-846d-43d3-9e5e-d858332d0034",
+        "Errors": [
+          {
+            "NextAction": "6dbcdc6c-846d-43d3-9e5e-d858332d0034",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "HoursOfOperationId": "${telesales_apr_to_sep_hoo_arn}"
+      },
+      "Identifier": "Apr-to-Sept",
+      "Type": "CheckHoursOfOperation",
+      "Transitions": {
+        "NextAction": "Set unavailability prompt2",
+        "Conditions": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-5",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "True"
+              ]
+            }
+          },
+          {
+            "NextAction": "Set unavailability prompt2",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "False"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set unavailability prompt2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "Transfer to Agent",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "Customer Journey Unexpected Error-copy-2-copy-15",
+        "Errors": [
+          {
+            "NextAction": "Agent Unavailable Prompt",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-15",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.ch-prompt-ext-unavailable-message"
+      },
+      "Identifier": "Agent Unavailable Prompt",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "Check language",
+        "Errors": [
+          {
+            "NextAction": "Check language",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "MetricType": "NumberOfAgentsAvailable"
+      },
+      "Identifier": "Check agent availability",
+      "Type": "CheckMetricData",
+      "Transitions": {
+        "NextAction": "Agent Unavailable Prompt",
+        "Conditions": [
+          {
+            "NextAction": "Transfer to Agent",
+            "Condition": {
+              "Operator": "NumberGreaterThan",
+              "Operands": [
+                "0"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Agent Unavailable Prompt",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "Agent Unavailable Prompt",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "campaign_id": "$.External.campaignId",
+          "campaign_name": "$.External.campaignName"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set Campaign attributes",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Check Holiday Lambda",
+        "Errors": [
+          {
+            "NextAction": "Check Holiday Lambda",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "isHoliday": {
+            "Value": "$.External.isHoliday"
+          },
+          "hoursOfOperationName": {
+            "Value": "$.External.hoursOfOperationName"
+          }
+        }
+      },
+      "Identifier": "set holiday hoop Attributes",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "Check holiday status",
+        "Errors": [
+          {
+            "NextAction": "Check holiday status",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to fetch campaign details"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Check Holiday Lambda",
+        "Errors": [
+          {
+            "NextAction": "Check Holiday Lambda",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | ivr-check-holiday lmda failed"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-2",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "is Outage?",
+        "Errors": [
+          {
+            "NextAction": "is Outage?",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "$.FlowAttributes.ch-lmda-ivr-check-holiday-and-hoop-arn",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "Check Holiday Lambda",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "set holiday hoop Attributes",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "ch-welcome-prompt-en": {
+            "Value": "$.External.ch-welcome-prompt-en"
+          },
+          "ch-welcome-prompt-es": {
+            "Value": "$.External.ch-welcome-prompt-es"
+          },
+          "ch-lmda-ivr-check-holiday-and-hoop-arn": {
+            "Value": "$.External.ch-lmda-ivr-check-holiday-and-hoop-arn"
+          },
+          "ch-lmda-ivr-get-campaign-details-arn": {
+            "Value": "$.External.ch-lmda-ivr-get-campaign-details-arn"
+          },
+          "ch-lmda-ivr-get-connect-config-arn": {
+            "Value": "$.External.ch-lmda-ivr-get-connect-config-arn"
+          },
+          "ch-lmda-ivr-lead-upload-arn": {
+            "Value": "$.External.ch-lmda-ivr-lead-upload-arn"
+          },
+          "ch-lmda-ivr-match-extension-arn": {
+            "Value": "$.External.ch-lmda-ivr-match-extension-arn"
+          },
+          "ch-telesales-cms-en-queue-arn": {
+            "Value": "$.External.ch-telesales-cms-en-queue-arn"
+          },
+          "ch-telesales-cms-es-queue-arn": {
+            "Value": "$.External.ch-telesales-cms-es-queue-arn"
+          },
+          "ch-telesales-en-queue-arn": {
+            "Value": "$.External.ch-telesales-en-queue-arn"
+          },
+          "ch-telesales-es-queue-arn": {
+            "Value": "$.External.ch-telesales-es-queue-arn"
+          },
+          "ch-show-view-flow-arn": {
+            "Value": "$.External.ch-show-view-flow-arn"
+          },
+          "ch-voice-mail-flow-arn": {
+            "Value": "$.External.ch-voice-mail-flow-arn"
+          },
+          "provider-service-phone-number": {
+            "Value": "$.External.provider-service-phone-number"
+          },
+          "member-service-phone-number": {
+            "Value": "$.External.member-service-phone-number"
+          },
+          "isOutage": {
+            "Value": "$.External.isOutage"
+          },
+          "ch-telesales-agent-hold-flow-arn": {
+            "Value": "$.External.ch-telesales-agent-hold-flow-arn"
+          },
+          "ch-telesales-agent-whisper-flow-arn": {
+            "Value": "$.External.ch-telesales-agent-whisper-flow-arn"
+          },
+          "ch-telesales-customer-hold-flow-arn": {
+            "Value": "$.External.ch-telesales-customer-hold-flow-arn"
+          },
+          "ch-telesales-customer-queue-flow-arn": {
+            "Value": "$.External.ch-telesales-customer-queue-flow-arn"
+          },
+          "ch-telesales-customer-whisper-flow-arn": {
+            "Value": "$.External.ch-telesales-customer-whisper-flow-arn"
+          }
+        }
+      },
+      "Identifier": "Set input prompt",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "ac22fb7f-0c98-4332-9b18-b36521e6d6f3",
+        "Errors": [
+          {
+            "NextAction": "ac22fb7f-0c98-4332-9b18-b36521e6d6f3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "$.Attributes.ch-telesales-error-queue-arn"
+      },
+      "Identifier": "4938673c-0e3c-4505-85e6-3e10249ededd",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "f540591d-ed04-4aa3-9f0b-8932e78ec9f9",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "TextToSpeechVoice": "$.Attributes.ttsVoice_en"
+      },
+      "Identifier": "Set english language",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "getConnectConfig-2",
+        "Errors": [
+          {
+            "NextAction": "getConnectConfig-2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "TextToSpeechVoice": "$.Attributes.ttsVoice_es"
+      },
+      "Identifier": "Set spanish language",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "getConnectConfig-2",
+        "Errors": [
+          {
+            "NextAction": "getConnectConfig-2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Queue capacity reached"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-9",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "4d3647d3-443b-4359-82e8-c27b0d8230e9",
+        "Errors": [
+          {
+            "NextAction": "4d3647d3-443b-4359-82e8-c27b0d8230e9",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.FlowAttributes.isOutage"
+      },
+      "Identifier": "is Outage?",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Check for test call",
+        "Conditions": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-6",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "true"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Check for test call",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "False",
+        "InputTimeLimitSeconds": "5",
+        "SSML": "$.FlowAttributes.ch-prompt-main-menu"
+      },
+      "Identifier": "Tele sales main menu",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "Lead Lambda 1",
+        "Conditions": [
+          {
+            "NextAction": "Transfer to member service",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "1"
+              ]
+            }
+          },
+          {
+            "NextAction": "Lead Lambda 1",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "2"
+              ]
+            }
+          },
+          {
+            "NextAction": "Transfer to provider service",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "3"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Lead Lambda 1",
+            "ErrorType": "InputTimeLimitExceeded"
+          },
+          {
+            "NextAction": "Lead Lambda 1",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "Lead Lambda 1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.isTestCall"
+      },
+      "Identifier": "Check for test call",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Tele sales main menu",
+        "Conditions": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-7",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "true"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Tele sales main menu",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "$.FlowAttributes.ch-telesales-cms-es-queue-arn"
+      },
+      "Identifier": "Set cms-es queue",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "5ff9d719-4f0d-42ec-b5d7-c16225c9dde9",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-8",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Test Call true"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-7",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Check language block",
+        "Errors": [
+          {
+            "NextAction": "Check language block",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to setting the queue"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-8",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "4d3647d3-443b-4359-82e8-c27b0d8230e9",
+        "Errors": [
+          {
+            "NextAction": "4d3647d3-443b-4359-82e8-c27b0d8230e9",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "5ff9d719-4f0d-42ec-b5d7-c16225c9dde9",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "Customer Journey Unexpected Error-copy-2-copy-8",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-9",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-8",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.languageCode"
+      },
+      "Identifier": "Check language block",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Set cms-es queue",
+        "Conditions": [
+          {
+            "NextAction": "Set cms-en queue",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "en"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set cms-es queue",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "$.FlowAttributes.ch-telesales-cms-en-queue-arn"
+      },
+      "Identifier": "Set cms-en queue",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "5ff9d719-4f0d-42ec-b5d7-c16225c9dde9",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-8",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "False",
+        "InputTimeLimitSeconds": "6",
+        "SSML": "$.FlowAttributes.ch-welcome-prompt-es"
+      },
+      "Identifier": "Select Language",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "Set English lang attribute",
+        "Conditions": [
+          {
+            "NextAction": "Set English lang attribute",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "1"
+              ]
+            }
+          },
+          {
+            "NextAction": "Set spanish lang attribute",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "2"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set English lang attribute",
+            "ErrorType": "InputTimeLimitExceeded"
+          },
+          {
+            "NextAction": "Set English lang attribute",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "Set English lang attribute",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "TextToSpeechVoice": "$.Attributes.ttsVoice_es"
+      },
+      "Identifier": "Set spanish voice model",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "Select Language",
+        "Errors": [
+          {
+            "NextAction": "Select Language",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | collect Extention"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-10",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "store Extension Number",
+        "Errors": [
+          {
+            "NextAction": "store Extension Number",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "True",
+        "InputTimeLimitSeconds": "5",
+        "SSML": "$.FlowAttributes.ch-prompt-extension-menu",
+        "DTMFConfiguration": {
+          "DisableCancelKey": "False",
+          "InterdigitTimeLimitSeconds": "5"
+        },
+        "InputValidation": {
+          "CustomValidation": {
+            "MaximumLength": "6"
+          }
+        }
+      },
+      "Identifier": "store Extension Number",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "Set Extension Number",
+        "Errors": [
+          {
+            "NextAction": "Check language",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "$.FlowAttributes.ch-lmda-ivr-lead-upload-arn",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "Lead Lambda 1",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "Set insightly attributes",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-11",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.collectExtention"
+      },
+      "Identifier": "check collect extension",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Check language",
+        "Conditions": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-10",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "true"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Check language",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "insightly_record_id": {
+            "Value": "$.External.insightly_record_id"
+          },
+          "insightly_record_url": {
+            "Value": "$.External.insightly_record_url"
+          },
+          "insightly_record_type": {
+            "Value": "$.External.insightly_record_type"
+          },
+          "insightly_record_name": {
+            "Value": "$.External.insightly_record_url"
+          }
+        }
+      },
+      "Identifier": "Set insightly attributes",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "check collect extension",
+        "Errors": [
+          {
+            "NextAction": "check collect extension",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "$.FlowAttributes.ch-lmda-ivr-get-campaign-details-arn",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "fetchCampaignDetails",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "Set Campaign attributes",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | get-contact-attribute lmda failed"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set prompt messages",
+        "Errors": [
+          {
+            "NextAction": "Set prompt messages",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "$.Attributes.ch-lmda-ivr-get-connect-config-arn",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "configType": "contact-flows",
+          "value": "ch-demo-main-flow",
+          "languageCode": "$.Attributes.languageCode",
+          "countryCode": "$.Attributes.countryCode"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "getConnectConfig-2",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "Set prompt messages",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "ch-prompt-holiday-message": {
+            "Value": "$.External.ch-prompt-holiday-message"
+          },
+          "ch-prompt-out-of-hours-message": {
+            "Value": "$.External.ch-prompt-out-of-hours-message"
+          },
+          "ch-prompt-outage-message": {
+            "Value": "$.External.ch-prompt-outage-message"
+          },
+          "ch-prompt-extension-menu": {
+            "Value": "$.External.ch-prompt-extension-menu"
+          },
+          "ch-prompt-main-menu": {
+            "Value": "$.External.ch-prompt-main-menu"
+          },
+          "ch-prompt-telesales-menu": {
+            "Value": "$.External.ch-prompt-telesales-menu"
+          },
+          "ch-prompt-ext-unavailable-message": {
+            "Value": "$.External.ch-prompt-ext-unavailable-message"
+          },
+          "ch-prompt-extension-unmatched-message": {
+            "Value": "$.External.ch-prompt-extension-unmatched-message"
+          },
+          "ch-prompt-extension-not-provided-message": {
+            "Value": "$.External.ch-prompt-extension-not-provided-message"
+          }
+        }
+      },
+      "Identifier": "Set prompt messages",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "fetchCampaignDetails",
+        "Errors": [
+          {
+            "NextAction": "fetchCampaignDetails",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "AgentId": "$.FlowAttributes.agentARN"
+      },
+      "Identifier": "Set agent queue",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "Check agent availability",
+        "Errors": [
+          {
+            "NextAction": "Check agent availability",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.ch-prompt-extension-unmatched-message"
+      },
+      "Identifier": "Unmatched extenntion prompt",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "Check language",
+        "Errors": [
+          {
+            "NextAction": "Check language",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.FlowAttributes.extentionMatched"
+      },
+      "Identifier": "Check for extention validity",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Unmatched extenntion prompt",
+        "Conditions": [
+          {
+            "NextAction": "Set agent queue",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "success"
+              ]
+            }
+          },
+          {
+            "NextAction": "Unmatched extenntion prompt",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "failure"
+              ]
+            }
+          },
+          {
+            "NextAction": "extenntion not provided prompt",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "not_provided"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Unmatched extenntion prompt",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.ch-prompt-extension-not-provided-message"
+      },
+      "Identifier": "extenntion not provided prompt",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "Check language",
+        "Errors": [
+          {
+            "NextAction": "Check language",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "extensionNumber": "$.StoredCustomerInput"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set Extension Number",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Match Extension Lambda",
+        "Errors": [
+          {
+            "NextAction": "Match Extension Lambda",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | ivr-match-extention lmda failed"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-12",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set extention attribute",
+        "Errors": [
+          {
+            "NextAction": "Set extention attribute",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "extentionMatched": {
+            "Value": "$.External.extentionMatched"
+          },
+          "agentARN": {
+            "Value": "$.External.agentARN"
+          },
+          "agentEmail": {
+            "Value": "$.External.agentEmail"
+          },
+          "agentExtension": {
+            "Value": "$.External.agentExtension"
+          },
+          "agentUsername": {
+            "Value": "$.External.agentUsername"
+          }
+        }
+      },
+      "Identifier": "Set extention attribute",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "Check for extention validity",
+        "Errors": [
+          {
+            "NextAction": "Check for extention validity",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "$.FlowAttributes.ch-lmda-ivr-match-extension-arn",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "extension_number": "$.Attributes.extensionNumber"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "Match Extension Lambda",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "Set extention attribute",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-12",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "$.Attributes.ch-lmda-ivr-get-connect-config-arn",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "configType": "contact-flows",
+          "value": "ch-demo-main-flow",
+          "languageCode": "$.Attributes.languageCode",
+          "countryCode": "$.Attributes.countryCode"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "getConnectConfig",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "Set input prompt",
+        "Errors": [
+          {
+            "NextAction": "4938673c-0e3c-4505-85e6-3e10249ededd",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | ch-demo-main-flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "getConnectConfig",
+        "Errors": [
+          {
+            "NextAction": "getConnectConfig",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "StoreInput": "False",
+        "InputTimeLimitSeconds": "1",
+        "SSML": "$.FlowAttributes.ch-welcome-prompt-en  "
+      },
+      "Identifier": "1f363c3c-2d34-4d44-943d-3f9c1aa50490",
+      "Type": "GetParticipantInput",
+      "Transitions": {
+        "NextAction": "Set spanish voice model",
+        "Conditions": [
+          {
+            "NextAction": "Set English lang attribute",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "1"
+              ]
+            }
+          },
+          {
+            "NextAction": "Set spanish lang attribute",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "2"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set spanish voice model",
+            "ErrorType": "InputTimeLimitExceeded"
+          },
+          {
+            "NextAction": "Set spanish voice model",
+            "ErrorType": "NoMatchingCondition"
+          },
+          {
+            "NextAction": "Set spanish voice model",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "8fabcb3a-b207-4164-a9d3-157a489ece27",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "Customer Journey Unexpected Error-copy-2-copy-13",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-14",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-13",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to set telesales queue"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-2-copy-13",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "14714389-5e6a-418a-b1c3-a0d6e756ccfc",
+        "Errors": [
+          {
+            "NextAction": "14714389-5e6a-418a-b1c3-a0d6e756ccfc",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.languageCode"
+      },
+      "Identifier": "Check language",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Set queue for spanish",
+        "Conditions": [
+          {
+            "NextAction": "Set queue for english",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "en"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set queue for spanish",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "$.FlowAttributes.ch-telesales-en-queue-arn"
+      },
+      "Identifier": "Set queue for english",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "8fabcb3a-b207-4164-a9d3-157a489ece27",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-2-copy-13",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to set agent whisper flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1-copy-5",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set customer whisper flow",
+        "Errors": [
+          {
+            "NextAction": "Set customer whisper flow",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "AgentWhisper": "$.FlowAttributes.ch-telesales-agent-whisper-flow-arn"
+        },
+        "EventHooksConfiguration": {
+          "AgentWhisper": {
+            "DisableExecution": "false"
+          }
+        }
+      },
+      "Identifier": "Set agent whisper flow",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "Set customer whisper flow",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1-copy-5",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Failed to set cusstomer whisper flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1-copy-6",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Set english voice model",
+        "Errors": [
+          {
+            "NextAction": "Set english voice model",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "TextToSpeechVoice": "$.Attributes.ttsVoice_en"
+      },
+      "Identifier": "Set english voice model",
+      "Type": "UpdateContactTextToSpeechVoice",
+      "Transitions": {
+        "NextAction": "1f363c3c-2d34-4d44-943d-3f9c1aa50490",
+        "Errors": [
+          {
+            "NextAction": "1f363c3c-2d34-4d44-943d-3f9c1aa50490",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "CustomerWhisper": "$.FlowAttributes.ch-telesales-customer-whisper-flow-arn"
+        },
+        "EventHooksConfiguration": {
+          "CustomerWhisper": {
+            "DisableExecution": "false"
+          }
+        }
+      },
+      "Identifier": "Set customer whisper flow",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "Set english voice model",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1-copy-6",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}

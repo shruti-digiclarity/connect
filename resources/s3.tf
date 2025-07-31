@@ -4,7 +4,18 @@ module "s3_call_recording" {
   acl                      = null
   public_acl_configuration = null
   versioning_configuration = { status = true, mfa_delete = false }
-  tags                     = local.tags
+  encryption_configuration = {
+    rule = [
+      {
+        apply_server_side_encryption_by_default = {
+          sse_algorithm     = "aws:kms"
+          kms_master_key_id = module.common_aws_kms_key.key_arn
+        }
+        bucket_key_enabled = true # Optional: improves performance and reduces costs
+      }
+    ]
+  }
+  tags = local.tags
 }
 
 module "s3_schedueled_report" {
@@ -13,7 +24,18 @@ module "s3_schedueled_report" {
   acl                      = null
   public_acl_configuration = null
   versioning_configuration = { status = true, mfa_delete = false }
-  tags                     = local.tags
+  encryption_configuration = {
+    rule = [
+      {
+        apply_server_side_encryption_by_default = {
+          sse_algorithm     = "aws:kms"
+          kms_master_key_id = module.common_aws_kms_key.key_arn
+        }
+        bucket_key_enabled = true # Optional: improves performance and reduces costs
+      }
+    ]
+  }
+  tags = local.tags
 }
 
 module "s3_cfn_bucket" {
@@ -22,7 +44,18 @@ module "s3_cfn_bucket" {
   acl                      = null
   public_acl_configuration = null
   versioning_configuration = { status = true, mfa_delete = false }
-  tags                     = local.tags
+  encryption_configuration = {
+    rule = [
+      {
+        apply_server_side_encryption_by_default = {
+          sse_algorithm     = "aws:kms"
+          kms_master_key_id = module.common_aws_kms_key.key_arn
+        }
+        bucket_key_enabled = true # Optional: improves performance and reduces costs
+      }
+    ]
+  }
+  tags = local.tags
 }
 
 module "s3_cfn_objects" {
@@ -41,7 +74,18 @@ module "s3_voice_mail_recording" {
   bucket_name              = format("%s-s3-voice-mail-recording-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
-  lambda_trigger           = true
+  encryption_configuration = {
+    rule = [
+      {
+        apply_server_side_encryption_by_default = {
+          sse_algorithm     = "aws:kms"
+          kms_master_key_id = module.common_aws_kms_key.key_arn
+        }
+        bucket_key_enabled = true # Optional: improves performance and reduces costs
+      }
+    ]
+  }
+  lambda_trigger = true
   notification_configuration = {
     lambda = {
       voice_mail_transcriber = {
@@ -62,7 +106,18 @@ module "s3_voice_mail_transcript" {
   public_acl_configuration = null
   versioning_configuration = { status = true, mfa_delete = false }
   tags                     = local.tags
-  lambda_trigger           = true
+  encryption_configuration = {
+    rule = [
+      {
+        apply_server_side_encryption_by_default = {
+          sse_algorithm     = "aws:kms"
+          kms_master_key_id = module.common_aws_kms_key.key_arn
+        }
+        bucket_key_enabled = true # Optional: improves performance and reduces costs
+      }
+    ]
+  }
+  lambda_trigger = true
   notification_configuration = {
     lambda = {
       voice_mail_transcriber = {

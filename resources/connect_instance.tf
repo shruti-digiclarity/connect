@@ -15,10 +15,6 @@ module "amazon_connect" {
   user_hierarchy_structure          = local.user_hierarchy_structure
   user_hierarchy_groups             = local.user_hierarchy_groups
   contact_flow_modules              = local.contact_flow_modules
-  #contact_flows                     = local.contact_flows
-  tags = local.tags
-  #lambda_function_associations = {
-  #  get-contactflow-attributes         = mpdule.contactflow_attributes_lambda.lambda_function_arn
-  #}
+  contact_flows                     = local.contact_flows
+  tags                              = local.tags
 }
-
