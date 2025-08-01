@@ -16,7 +16,6 @@ module "amazon_connect" {
   user_hierarchy_groups             = local.user_hierarchy_groups
   contact_flow_modules              = local.contact_flow_modules
   contact_flows                     = local.contact_flows
-  create_phone_numbers              = true
   lambda_function_associations = {
     voice-mail-packager    = module.voice_mail_packager_lambda.lambda_function_arn
     kvs-to-s3              = module.kvs_to_s3_lambda.lambda_function_arn
