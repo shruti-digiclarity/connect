@@ -24,7 +24,7 @@ permissions:
 jobs:
   deployment-pipeline:
     name: Deploy to ${{ github.event.inputs.environment }}
-    uses: Clover-Health-1/ccaas-shared-pipelines/.github/workflows/aws_infrastructure_deploy.yml@master
+    uses: CloverHealth/ccaas-shared-pipelines/.github/workflows/aws_infrastructure_deploy.yml@master
     with:
       WORKING_DIRECTORY: resources
       ENVIRONMENTS_CONFIG_DIR: environments
