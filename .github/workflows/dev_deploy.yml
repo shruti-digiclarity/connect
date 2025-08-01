@@ -23,12 +23,12 @@ permissions:
 
 jobs:
   deployment-pipeline:
-    name: Deploy to ${{ github.event.inputs.environment }}
+    name: Deploy to ${{ github.event.inputs.environment || 'dev' }}
     uses: CloverHealth/ccaas-shared-pipelines/.github/workflows/aws_infrastructure_deploy.yml@master
     with:
       WORKING_DIRECTORY: resources
       ENVIRONMENTS_CONFIG_DIR: environments
-      AWS_REGION: ${{ github.event.inputs.aws_region }}
-      CI_ENVIRONMENT_NAME: ${{ github.event.inputs.environment }}
+      AWS_REGION: ${{ github.event.inputs.aws_region || 'us-east-1' }}
+      CI_ENVIRONMENT_NAME: ${{ github.event.inputs.environment || 'dev' }}
     secrets:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
