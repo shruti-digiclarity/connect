@@ -11,6 +11,7 @@ locals {
       description = "ch_voice_mail_flow"
       tags        = local.tags
     }
+
     "ch_telesales_main_flow" = {
       content = templatefile(
         "${path.module}/contact-flows/ch_telesales_main_flow.json.tftpl",
@@ -24,6 +25,7 @@ locals {
       description = "ch_telesales_main_flow"
       tags        = local.tags
     }
+
     "ch_dnis_entry_preactions_flow" = {
       content = templatefile(
         "${path.module}/contact-flows/ch_dnis_entry_preactions_flow.json.tftpl",
