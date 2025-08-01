@@ -54,7 +54,7 @@
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "af3e9d2d-4fdf-4196-b730-80e01507cc0f",
+            "id": "eb0a5d00-50f9-4385-a503-4869ed0b00a7",
             "operator": {
               "name": "Equals",
               "value": "Equals",
@@ -80,7 +80,7 @@
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "97186634-b24e-4fc7-a268-e1482f9fd599",
+            "id": "15d6859f-04f0-4e81-8609-2e785ce1c27a",
             "operator": {
               "name": "Equals",
               "value": "Equals",
@@ -89,13 +89,6 @@
             "value": "false"
           }
         ]
-      },
-      "Set Default Recording used in case of DNIS error": {
-        "position": {
-          "x": 570.4,
-          "y": 476
-        },
-        "isFriendlyName": true
       },
       "86d773ca-45d3-4ad0-891b-d244dfde3cf0": {
         "position": {
@@ -118,13 +111,31 @@
         },
         "isFriendlyName": true
       },
-      "set customerJourney flowname": {
+      "Logging enabled?": {
         "position": {
-          "x": 792.8,
-          "y": 479.2
+          "x": 1503.2,
+          "y": 459.2
         },
         "isFriendlyName": true,
-        "dynamicParams": []
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "624733ed-7727-42be-825b-b6ff54b618a9",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "false"
+          }
+        ]
+      },
+      "Set Default Recording used in case of DNIS error": {
+        "position": {
+          "x": 570.4,
+          "y": 476
+        },
+        "isFriendlyName": true
       },
       "11817d26-875d-43cd-9141-3b389f8d1ba9": {
         "position": {
@@ -139,59 +150,6 @@
         },
         "isFriendlyName": true,
         "dynamicParams": []
-      },
-      "cb57c541-18e1-4936-93f4-d7be0fc259cb": {
-        "position": {
-          "x": 1254.4,
-          "y": 894.4
-        },
-        "parameters": {
-          "QueueId": {
-            "displayName": "ch_telesales_cms_en"
-          }
-        },
-        "queue": {
-          "text": "ch_telesales_cms_en"
-        }
-      },
-      "Logging enabled?": {
-        "position": {
-          "x": 1503.2,
-          "y": 459.2
-        },
-        "isFriendlyName": true,
-        "conditions": [],
-        "conditionMetadata": [
-          {
-            "id": "2aa4befd-8dc6-4b3d-bebb-4464153b3ba2",
-            "operator": {
-              "name": "Equals",
-              "value": "Equals",
-              "shortDisplay": "="
-            },
-            "value": "false"
-          }
-        ]
-      },
-      "86ef81da-461d-4f87-aa21-db7652d85477": {
-        "position": {
-          "x": 1023.2,
-          "y": 454.4
-        },
-        "parameters": {
-          "LambdaFunctionARN": {
-            "displayName": "ch-lmda-ivr-get-contactflow-attributes-use1-sbx"
-          },
-          "LambdaInvocationAttributes": {
-            "value": {
-              "useDynamic": true
-            }
-          }
-        },
-        "dynamicMetadata": {
-          "configType": false,
-          "value": true
-        }
       },
       "Primary DID settings-copy-1": {
         "position": {
@@ -240,7 +198,13 @@
             "ch-lmda-ivr-get-connect-config-arn": {
               "useDynamic": true
             },
-            "ch-telesales-error-queue-arn": {
+            "ch-error-queue-arn": {
+              "useDynamic": true
+            },
+            "voice-engine-en": {
+              "useDynamic": true
+            },
+            "voice-style-en": {
               "useDynamic": true
             }
           }
@@ -259,15 +223,59 @@
           "isTestCall",
           "collectExtention",
           "ch-lmda-ivr-get-connect-config-arn",
-          "ch-telesales-error-queue-arn"
+          "ch-error-queue-arn",
+          "voice-engine-en",
+          "voice-style-en"
         ]
+      },
+      "set customerJourney flowname": {
+        "position": {
+          "x": 792.8,
+          "y": 479.2
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "cb57c541-18e1-4936-93f4-d7be0fc259cb": {
+        "position": {
+          "x": 1254.4,
+          "y": 894.4
+        },
+        "parameters": {
+          "QueueId": {
+            "displayName": "ch_dnis_error"
+          }
+        },
+        "queue": {
+          "text": "ch_dnis_error"
+        }
+      },
+      "86ef81da-461d-4f87-aa21-db7652d85477": {
+        "position": {
+          "x": 1023.2,
+          "y": 454.4
+        },
+        "parameters": {
+          "LambdaFunctionARN": {
+            "displayName": "ch-lmda-ivr-get-connect-config-use1-sbx"
+          },
+          "LambdaInvocationAttributes": {
+            "value": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "configType": false,
+          "value": true
+        }
       }
     },
     "Annotations": [],
     "name": "ch-dnis-entry-preactions-flow",
     "description": "",
     "type": "contactFlow",
-    "status": "PUBLISHED",
+    "status": "published",
     "hash": {}
   },
   "Actions": [
@@ -421,22 +429,6 @@
       }
     },
     {
-      "Parameters": {
-        "RecordingBehavior": {
-          "RecordedParticipants": [
-            "Agent",
-            "Customer"
-          ],
-          "IVRRecordingBehavior": "Disabled"
-        }
-      },
-      "Identifier": "Set Default Recording used in case of DNIS error",
-      "Type": "UpdateContactRecordingBehavior",
-      "Transitions": {
-        "NextAction": "set customerJourney flowname"
-      }
-    },
-    {
       "Parameters": {},
       "Identifier": "86d773ca-45d3-4ad0-891b-d244dfde3cf0",
       "Type": "EndFlowExecution",
@@ -479,21 +471,45 @@
     },
     {
       "Parameters": {
-        "Attributes": {
-          "customerJourney": "CH Entry Pre Action Flow"
-        },
-        "TargetContact": "Current"
+        "ComparisonValue": "$.Attributes.loggingEnabled"
       },
-      "Identifier": "set customerJourney flowname",
-      "Type": "UpdateContactAttributes",
+      "Identifier": "Logging enabled?",
+      "Type": "Compare",
       "Transitions": {
-        "NextAction": "86ef81da-461d-4f87-aa21-db7652d85477",
+        "NextAction": "Check callRecordingEnabled",
+        "Conditions": [
+          {
+            "NextAction": "Disable logging",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "false"
+              ]
+            }
+          }
+        ],
         "Errors": [
           {
-            "NextAction": "86ef81da-461d-4f87-aa21-db7652d85477",
-            "ErrorType": "NoMatchingError"
+            "NextAction": "Check callRecordingEnabled",
+            "ErrorType": "NoMatchingCondition"
           }
         ]
+      }
+    },
+    {
+      "Parameters": {
+        "RecordingBehavior": {
+          "RecordedParticipants": [
+            "Agent",
+            "Customer"
+          ],
+          "IVRRecordingBehavior": "Disabled"
+        }
+      },
+      "Identifier": "Set Default Recording used in case of DNIS error",
+      "Type": "UpdateContactRecordingBehavior",
+      "Transitions": {
+        "NextAction": "set customerJourney flowname"
       }
     },
     {
@@ -535,7 +551,60 @@
     },
     {
       "Parameters": {
-        "QueueId": "arn:aws:connect:us-east-1:069062667280:instance/0134762c-aab8-41b4-be69-f8d01ab154d0/queue/3e81bc3f-dd7f-4fff-9aa8-c072a107d219"
+        "Attributes": {
+          "lobName": "$.External.lobName",
+          "languageCode": "$.External.languageCode",
+          "countryCode": "$.External.countryCode",
+          "callRecordingEnabled": "$.External.callRecordingEnabled",
+          "loggingEnabled": "$.External.loggingEnabled",
+          "contactLensEnabled": "$.External.contactLensEnabled",
+          "ttsVoice_en": "$.External.ttsVoice_en",
+          "ttsVoice_es": "$.External.ttsVoice_es",
+          "startContactFlowName": "$.External.startContactFlowName",
+          "startContactFlowARN": "$.External.startContactFlowARN",
+          "isTestCall": "$.External.isTestCall",
+          "collectExtention": "$.External.collectExtention",
+          "ch-lmda-ivr-get-connect-config-arn": "$.External.ch-lmda-ivr-get-connect-config-arn",
+          "ch-error-queue-arn": "$.External.ch-error-queue-arn",
+          "voice-engine-en": "$.External.voice-engine-en",
+          "voice-style-en": "$.External.voice-style-en"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Primary DID settings-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Logging enabled?",
+        "Errors": [
+          {
+            "NextAction": "Logging enabled?",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "CH Entry Pre Action Flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "set customerJourney flowname",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "86ef81da-461d-4f87-aa21-db7652d85477",
+        "Errors": [
+          {
+            "NextAction": "86ef81da-461d-4f87-aa21-db7652d85477",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:069062667280:instance/0134762c-aab8-41b4-be69-f8d01ab154d0/queue/015ce55c-8395-48cb-85d9-f0522ee67a66"
       },
       "Identifier": "cb57c541-18e1-4936-93f4-d7be0fc259cb",
       "Type": "UpdateContactTargetQueue",
@@ -551,34 +620,7 @@
     },
     {
       "Parameters": {
-        "ComparisonValue": "$.Attributes.loggingEnabled"
-      },
-      "Identifier": "Logging enabled?",
-      "Type": "Compare",
-      "Transitions": {
-        "NextAction": "Check callRecordingEnabled",
-        "Conditions": [
-          {
-            "NextAction": "Disable logging",
-            "Condition": {
-              "Operator": "Equals",
-              "Operands": [
-                "false"
-              ]
-            }
-          }
-        ],
-        "Errors": [
-          {
-            "NextAction": "Check callRecordingEnabled",
-            "ErrorType": "NoMatchingCondition"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "LambdaFunctionARN": "arn:aws:lambda:us-east-1:069062667280:function:ch-lmda-ivr-get-contactflow-attributes-use1-sbx",
+        "LambdaFunctionARN": "arn:aws:lambda:us-east-1:069062667280:function:ch-lmda-ivr-get-connect-config-use1-sbx",
         "InvocationTimeLimitSeconds": "8",
         "InvocationType": "SYNCHRONOUS",
         "LambdaInvocationAttributes": {
@@ -596,38 +638,6 @@
         "Errors": [
           {
             "NextAction": "cb57c541-18e1-4936-93f4-d7be0fc259cb",
-            "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "Attributes": {
-          "lobName": "$.External.lobName",
-          "languageCode": "$.External.languageCode",
-          "countryCode": "$.External.countryCode",
-          "callRecordingEnabled": "$.External.callRecordingEnabled",
-          "loggingEnabled": "$.External.loggingEnabled",
-          "contactLensEnabled": "$.External.contactLensEnabled",
-          "ttsVoice_en": "$.External.ttsVoice_en",
-          "ttsVoice_es": "$.External.ttsVoice_es",
-          "startContactFlowName": "$.External.startContactFlowName",
-          "startContactFlowARN": "$.External.startContactFlowARN",
-          "isTestCall": "$.External.isTestCall",
-          "collectExtention": "$.External.collectExtention",
-          "ch-lmda-ivr-get-connect-config-arn": "$.External.ch-lmda-ivr-get-connect-config-arn",
-          "ch-telesales-error-queue-arn": "$.External.ch-telesales-error-queue-arn"
-        },
-        "TargetContact": "Current"
-      },
-      "Identifier": "Primary DID settings-copy-1",
-      "Type": "UpdateContactAttributes",
-      "Transitions": {
-        "NextAction": "Logging enabled?",
-        "Errors": [
-          {
-            "NextAction": "Logging enabled?",
             "ErrorType": "NoMatchingError"
           }
         ]
