@@ -26,12 +26,5 @@ module "amazon_connect" {
     check-holiday-and-hoop = module.check_holiday_and_hoop_lambda.lambda_function_arn
     match-extension        = module.match_extension_lambda.lambda_function_arn
   }
-  phone_numbers = {
-    collect_extention_number = {
-      country_code = "US"
-      type         = "DID"
-      description  = "Collect Extention Number - ${var.env}"
-    }
-  }
   tags = local.tags
 }
