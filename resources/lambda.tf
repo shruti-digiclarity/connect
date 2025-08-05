@@ -3,7 +3,7 @@ module "voice_mail_packager_lambda" {
   name                    = format("%s-lmda-voice-mail-packager-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_packager.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = local.lambda_default_configurations.package
+  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager.zip"
   layers                  = [module.lambda_layer_backend.lambda_layer_arn]
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
@@ -24,7 +24,7 @@ module "kvs_to_s3_lambda" {
   name                    = format("%s-lmda-kvs-to-s3-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_kvs_to_s3.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = local.lambda_default_configurations.package
+  local_existing_package  = "../lambda_function/ch-lmda-kvs-to-s3.zip"
   layers                  = [module.lambda_layer_backend.lambda_layer_arn]
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
@@ -42,7 +42,7 @@ module "voice_mail_presigner_lambda" {
   name                    = format("%s-lmda-voice-mail-presigner-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_presigner.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = local.lambda_default_configurations.package
+  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-presigner.zip"
   layers                  = [module.lambda_layer_backend.lambda_layer_arn]
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
@@ -57,7 +57,7 @@ module "voice_mail_transcriber_lambda" {
   name                    = format("%s-lmda-voice-mail-transcriber-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_transcriber.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = local.lambda_default_configurations.package
+  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-transcriber.zip"
   layers                  = []
   timeout                 = 3
   memory_size             = local.lambda_default_configurations.memory_size
@@ -126,4 +126,18 @@ module "match_extension_lambda" {
     REGION_PREFIX     = local.region_prefix
   }
   tags = local.lambda_default_configurations.tags
+}
+
+module "load_config_data_lambda" {
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=main"
+  name                    = format("%s-lmda-load-config-data-%s-%s", var.company_prefix, local.region_prefix, var.env)
+  handler                 = local.lambda_default_configurations.handler
+  runtime                 = local.lambda_default_configurations.runtime
+  local_existing_package  = local.lambda_default_configurations.package
+  layers                  = []
+  timeout                 = 3
+  memory_size             = local.lambda_default_configurations.memory_size
+  ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
+  attach                  = { policy_jsons = false }
+  tags                    = local.lambda_default_configurations.tags
 }
