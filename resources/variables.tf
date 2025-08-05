@@ -14,12 +14,6 @@ variable "project" {
   default     = "CCaaS"
 }
 
-variable "lob" {
-  type        = string
-  description = "lob name."
-  default     = "telesales"
-}
-
 variable "region" {
   type        = string
   description = "AWS region."

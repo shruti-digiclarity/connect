@@ -52,7 +52,6 @@ locals {
   }
 
   tags = {
-    lob        = var.lob
     company    = var.company
     env        = var.env
     repository = var.repo_url
