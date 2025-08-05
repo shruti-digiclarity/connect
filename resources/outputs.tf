@@ -17,8 +17,3 @@ output "kinesis_stream_arn" {
   description = "ARN of the Kinesis stream for media streams."
   value       = module.kinesis.kinesis_stream_arn
 }
-
-output "collect_extention_number_id" {
-  description = "List of phone number IDs to associate."
-  value       = module.amazon_connect.phone_number_id["collect_extention_number"]
-}
