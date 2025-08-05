@@ -89,7 +89,7 @@ module "get_connect_config_lambda" {
 }
 
 module "check_holiday_and_hoop_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=main"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=master"
   name                    = format("%s-lmda-check-holiday-and-hoop-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = local.lambda_default_configurations.handler
   runtime                 = local.lambda_default_configurations.runtime
