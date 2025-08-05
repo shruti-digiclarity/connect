@@ -4,7 +4,7 @@ module "voice_mail_packager_lambda" {
   handler                 = "ch_voice_mail_packager.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
   local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager.zip"
-  layers                  = [module.lambda_layer_backend.lambda_layer_arn]
+  layers                  = []
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
@@ -25,7 +25,7 @@ module "kvs_to_s3_lambda" {
   handler                 = "ch_voice_mail_kvs_to_s3.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
   local_existing_package  = "../lambda_function/ch-lmda-kvs-to-s3.zip"
-  layers                  = [module.lambda_layer_backend.lambda_layer_arn]
+  layers                  = []
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
@@ -43,7 +43,7 @@ module "voice_mail_presigner_lambda" {
   handler                 = "ch_voice_mail_presigner.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
   local_existing_package  = "../lambda_function/ch-lmda-voice-mail-presigner.zip"
-  layers                  = [module.lambda_layer_backend.lambda_layer_arn]
+  layers                  = []
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
