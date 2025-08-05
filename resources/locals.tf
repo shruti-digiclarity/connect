@@ -1,13 +1,4 @@
 locals {
-  file_hash_map = {
-    "ch-telesales-security-profile.yaml" = filesha256("securityprofile_stack/ch-telesales-security-profile.yaml")
-  }
-  s3_cfn_objects_map = {
-    "object1" = {
-      key         = "${var.lob}/${local.region_prefix}/security-profile/ch-telesales-security-profile-${local.file_hash_map["ch-telesales-security-profile.yaml"]}.yaml"
-      file_source = "securityprofile_stack/ch-telesales-security-profile.yaml"
-    }
-  }
   region_prefix_map = {
     "af-south-1"     = "afs1"
     "ap-east-1"      = "ape1"

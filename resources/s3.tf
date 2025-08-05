@@ -38,37 +38,6 @@ module "s3_schedueled_report" {
   tags = local.tags
 }
 
-module "s3_cfn_bucket" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=master"
-  bucket_name              = format("%s-s3-cfn-stack-templates-%s-%s", var.company_prefix, local.region_prefix, var.env)
-  acl                      = null
-  public_acl_configuration = null
-  versioning_configuration = { status = true, mfa_delete = false }
-  encryption_configuration = {
-    rule = [
-      {
-        apply_server_side_encryption_by_default = {
-          sse_algorithm     = "aws:kms"
-          kms_master_key_id = module.common_aws_kms_key.key_arn
-        }
-        bucket_key_enabled = true # Optional: improves performance and reduces costs
-      }
-    ]
-  }
-  tags = local.tags
-}
-
-module "s3_cfn_objects" {
-  source        = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper/s3_object?ref=master"
-  for_each      = local.s3_cfn_objects_map
-  create_object = true
-  bucket        = "${var.company_prefix}-s3-cfn-stack-templates-${local.region_prefix}-${var.env}"
-  key           = each.value.key
-  file_source   = each.value.file_source
-  source_hash   = filesha256(each.value.file_source)
-  depends_on    = [module.s3_cfn_bucket]
-}
-
 module "s3_voice_mail_recording" {
   source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=master"
   bucket_name              = format("%s-s3-voice-mail-recording-%s-%s", var.company_prefix, local.region_prefix, var.env)

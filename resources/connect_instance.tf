@@ -11,9 +11,6 @@ module "amazon_connect" {
   multi_party_conference_enabled    = false
   hours_of_operations               = local.hours_of_operations
   queues                            = local.queues
-  routing_profiles                  = local.routing_profiles
-  user_hierarchy_structure          = local.user_hierarchy_structure
-  user_hierarchy_groups             = local.user_hierarchy_groups
   contact_flow_modules              = local.contact_flow_modules
   contact_flows                     = local.contact_flows
   lambda_function_associations = {
