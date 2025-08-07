@@ -10,7 +10,6 @@ module "amazon_connect" {
   multi_party_conference_enabled    = false
   hours_of_operations               = local.hours_of_operations
   queues                            = local.queues
-  contact_flow_modules              = local.contact_flow_modules
   contact_flows                     = local.contact_flows
   quick_connects                    = local.quick_connects
   lambda_function_associations = {
