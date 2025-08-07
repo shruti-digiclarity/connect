@@ -3,28 +3,53 @@
   "StartAction": "Set customer journey",
   "Metadata": {
     "entryPointPosition": {
-      "x": -678.4,
-      "y": -58.4
+      "x": -680,
+      "y": -60
     },
     "ActionMetadata": {
-      "cb3bd9f5-7645-4c2c-89b3-abbe7ee77419": {
+      "ed18b22e-5186-4664-9410-212cb01ae48f": {
         "position": {
-          "x": 799.2,
-          "y": 509.6
+          "x": 280,
+          "y": 260
         }
+      },
+      "Start KVS from customer only": {
+        "position": {
+          "x": 1120,
+          "y": 0
+        },
+        "isFriendlyName": true,
+        "toCustomer": false,
+        "fromCustomer": true
+      },
+      "Set customer journey-copy-1": {
+        "position": {
+          "x": 0,
+          "y": 260
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set customer journey": {
+        "position": {
+          "x": -560,
+          "y": 0
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
       },
       "Set customer journey-1": {
         "position": {
-          "x": 660,
-          "y": 294.4
+          "x": 560,
+          "y": 260
         },
         "isFriendlyName": true,
         "dynamicParams": []
       },
       "5a5d9455-68d5-45fe-8a4a-4b898f55927a": {
         "position": {
-          "x": 880,
-          "y": 294.4
+          "x": 840,
+          "y": 260
         },
         "parameters": {
           "SSML": {
@@ -33,62 +58,31 @@
         },
         "useDynamic": true
       },
-      "Start KVS from customer only": {
+      "Set the vm_kvs_status attribute for processing": {
         "position": {
-          "x": 1127.2,
-          "y": 49.6
+          "x": 1400,
+          "y": 0
         },
         "isFriendlyName": true,
-        "toCustomer": false,
-        "fromCustomer": true
+        "dynamicParams": []
       },
       "Play the start recording beep using SSML": {
         "position": {
-          "x": 1694.4,
-          "y": 48.8
+          "x": 1680,
+          "y": 0
         },
         "isFriendlyName": true
       },
-      "Set the vm_flag attribute for processing": {
+      "Was the vm_kvs_status already set?": {
         "position": {
-          "x": 1438.4,
-          "y": 43.2
-        },
-        "isFriendlyName": true,
-        "dynamicParams": []
-      },
-      "2af36644-065b-4c8d-93fb-f09963602e8b": {
-        "position": {
-          "x": 2250.4,
-          "y": 401.6
-        }
-      },
-      "Wait for caller to record.": {
-        "position": {
-          "x": 1978.4,
-          "y": 19.2
-        },
-        "isFriendlyName": true,
-        "conditionMetadata": []
-      },
-      "Clear vm_flag": {
-        "position": {
-          "x": 1557.6,
-          "y": 352
-        },
-        "isFriendlyName": true,
-        "dynamicParams": []
-      },
-      "Was the vm_flag already set?": {
-        "position": {
-          "x": 1286.4,
-          "y": 342.4
+          "x": 1400,
+          "y": 260
         },
         "isFriendlyName": true,
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "4735192c-8d23-40e3-8cac-1b48cf359d1f",
+            "id": "dba2504f-f48e-4ded-938b-a102fcda74d6",
             "operator": {
               "name": "Is greater than",
               "value": "GreaterThan",
@@ -98,10 +92,32 @@
           }
         ]
       },
+      "Clear vm_kvs_status": {
+        "position": {
+          "x": 1680,
+          "y": 260
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "2af36644-065b-4c8d-93fb-f09963602e8b": {
+        "position": {
+          "x": 2240,
+          "y": 520
+        }
+      },
+      "Wait for caller to record.": {
+        "position": {
+          "x": 1960,
+          "y": 0
+        },
+        "isFriendlyName": true,
+        "conditionMetadata": []
+      },
       "Error messaging.": {
         "position": {
-          "x": 1991.2,
-          "y": 338.4
+          "x": 1960,
+          "y": 260
         },
         "isFriendlyName": true,
         "parameters": {
@@ -113,22 +129,22 @@
       },
       "Stop KVS if the customer is still on the call.": {
         "position": {
-          "x": 2276,
-          "y": 19.2
+          "x": 2240,
+          "y": 0
         },
         "isFriendlyName": true
       },
       "***End Call***": {
         "position": {
-          "x": 2861.6,
-          "y": 62.4
+          "x": 2800,
+          "y": 0
         },
         "isFriendlyName": true
       },
       "Voicemail complete messaging.": {
         "position": {
-          "x": 2559.2,
-          "y": 24.8
+          "x": 2520,
+          "y": 0
         },
         "isFriendlyName": true,
         "parameters": {
@@ -137,97 +153,11 @@
           }
         },
         "useDynamic": true
-      },
-      "aa167033-a5e6-4642-8587-11b98e747fd7": {
-        "position": {
-          "x": 459.2,
-          "y": 377.6
-        },
-        "parameters": {
-          "SSML": {
-            "useDynamic": true
-          }
-        },
-        "useDynamic": true
-      },
-      "KVS startup and flag loop": {
-        "position": {
-          "x": 851.2,
-          "y": 52
-        },
-        "isFriendlyName": true
-      },
-      "89b3ebc9-126c-4d8e-be98-3ff17787449f": {
-        "position": {
-          "x": 549.6,
-          "y": 88.8
-        },
-        "parameters": {
-          "SSML": {
-            "useDynamic": true
-          }
-        },
-        "useDynamic": true
-      },
-      "ed18b22e-5186-4664-9410-212cb01ae48f": {
-        "position": {
-          "x": 181.6,
-          "y": 380
-        }
-      },
-      "a2f2a60c-3e45-4cf6-b079-f4c3c8c69813": {
-        "position": {
-          "x": 237.6,
-          "y": 89.6
-        },
-        "conditions": [],
-        "conditionMetadata": [
-          {
-            "id": "6a4e726d-063a-47ed-a7a3-075ffd0cbedf",
-            "operator": {
-              "name": "Equals",
-              "value": "Equals",
-              "shortDisplay": "="
-            },
-            "value": "true"
-          },
-          {
-            "id": "eb0963f0-ab20-4a64-8ed0-127a64db5870",
-            "operator": {
-              "name": "Equals",
-              "value": "Equals",
-              "shortDisplay": "="
-            },
-            "value": "false"
-          }
-        ]
-      },
-      "Set customer journey-copy-1": {
-        "position": {
-          "x": -86.4,
-          "y": 312
-        },
-        "isFriendlyName": true,
-        "dynamicParams": []
-      },
-      "Set customer journey": {
-        "position": {
-          "x": -499.2,
-          "y": 54.4
-        },
-        "isFriendlyName": true,
-        "dynamicParams": []
-      },
-      "5155d9b0-4083-40d0-b78a-e906a960319b": {
-        "position": {
-          "x": -37.6,
-          "y": 72.8
-        }
       },
       "01edb27c-49e5-4427-9ff7-cebebc3f8dd3": {
         "position": {
-          "x": -265.6,
-          "y": 76
+          "x": -280,
+          "y": 0
         },
         "parameters": {
           "LambdaFunctionARN": {
@@ -249,6 +179,19 @@
           "countryCode": true
         },
         "useDynamic": true
+      },
+      "KVS startup and flag loop": {
+        "position": {
+          "x": 840,
+          "y": 0
+        },
+        "isFriendlyName": true
+      },
+      "5155d9b0-4083-40d0-b78a-e906a960319b": {
+        "position": {
+          "x": 0,
+          "y": 0
+        }
       }
     },
     "Annotations": [],
@@ -260,9 +203,72 @@
   "Actions": [
     {
       "Parameters": {},
-      "Identifier": "cb3bd9f5-7645-4c2c-89b3-abbe7ee77419",
+      "Identifier": "ed18b22e-5186-4664-9410-212cb01ae48f",
       "Type": "DisconnectParticipant",
       "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "MediaStreamingState": "Enabled",
+        "MediaStreamType": "Audio",
+        "Participants": [
+          {
+            "ParticipantType": "Customer",
+            "MediaDirections": [
+              "From"
+            ]
+          }
+        ]
+      },
+      "Identifier": "Start KVS from customer only",
+      "Type": "UpdateContactMediaStreamingBehavior",
+      "Transitions": {
+        "NextAction": "Set the vm_kvs_status attribute for processing",
+        "Errors": [
+          {
+            "NextAction": "Set customer journey-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | get-contact-attribute lmda failed"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set customer journey-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "ed18b22e-5186-4664-9410-212cb01ae48f",
+        "Errors": [
+          {
+            "NextAction": "ed18b22e-5186-4664-9410-212cb01ae48f",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | ch-voice-mail-module"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set customer journey",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "01edb27c-49e5-4427-9ff7-cebebc3f8dd3",
+        "Errors": [
+          {
+            "NextAction": "01edb27c-49e5-4427-9ff7-cebebc3f8dd3",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
     },
     {
       "Parameters": {
@@ -301,24 +307,18 @@
     },
     {
       "Parameters": {
-        "MediaStreamingState": "Enabled",
-        "MediaStreamType": "Audio",
-        "Participants": [
-          {
-            "ParticipantType": "Customer",
-            "MediaDirections": [
-              "From"
-            ]
-          }
-        ]
+        "Attributes": {
+          "vm_kvs_status": "1"
+        },
+        "TargetContact": "Current"
       },
-      "Identifier": "Start KVS from customer only",
-      "Type": "UpdateContactMediaStreamingBehavior",
+      "Identifier": "Set the vm_kvs_status attribute for processing",
+      "Type": "UpdateContactAttributes",
       "Transitions": {
-        "NextAction": "Set the vm_flag attribute for processing",
+        "NextAction": "Play the start recording beep using SSML",
         "Errors": [
           {
-            "NextAction": "Set customer journey-1",
+            "NextAction": "Was the vm_kvs_status already set?",
             "ErrorType": "NoMatchingError"
           }
         ]
@@ -342,18 +342,45 @@
     },
     {
       "Parameters": {
+        "ComparisonValue": "$.Attributes.vm_kvs_status"
+      },
+      "Identifier": "Was the vm_kvs_status already set?",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Error messaging.",
+        "Conditions": [
+          {
+            "NextAction": "Clear vm_kvs_status",
+            "Condition": {
+              "Operator": "NumberGreaterThan",
+              "Operands": [
+                "0"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Error messaging.",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
         "Attributes": {
-          "vm_kvs_status": "1"
+          "vm_kvs_status": "0"
         },
         "TargetContact": "Current"
       },
-      "Identifier": "Set the vm_flag attribute for processing",
+      "Identifier": "Clear vm_kvs_status",
       "Type": "UpdateContactAttributes",
       "Transitions": {
-        "NextAction": "Play the start recording beep using SSML",
+        "NextAction": "Error messaging.",
         "Errors": [
           {
-            "NextAction": "Was the vm_flag already set?",
+            "NextAction": "Error messaging.",
             "ErrorType": "NoMatchingError"
           }
         ]
@@ -387,52 +414,6 @@
           {
             "NextAction": "Error messaging.",
             "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "Attributes": {
-          "vm_kvs_status": "0"
-        },
-        "TargetContact": "Current"
-      },
-      "Identifier": "Clear vm_flag",
-      "Type": "UpdateContactAttributes",
-      "Transitions": {
-        "NextAction": "Error messaging.",
-        "Errors": [
-          {
-            "NextAction": "Error messaging.",
-            "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "ComparisonValue": "$.Attributes.vm_kvs_status"
-      },
-      "Identifier": "Was the vm_flag already set?",
-      "Type": "Compare",
-      "Transitions": {
-        "NextAction": "Error messaging.",
-        "Conditions": [
-          {
-            "NextAction": "Clear vm_flag",
-            "Condition": {
-              "Operator": "NumberGreaterThan",
-              "Operands": [
-                "0"
-              ]
-            }
-          }
-        ],
-        "Errors": [
-          {
-            "NextAction": "Error messaging.",
-            "ErrorType": "NoMatchingCondition"
           }
         ]
       }
@@ -503,186 +484,12 @@
     },
     {
       "Parameters": {
-        "SSML": "$.FlowAttributes.VoicemailNotEligiblePrompt"
-      },
-      "Identifier": "aa167033-a5e6-4642-8587-11b98e747fd7",
-      "Type": "MessageParticipant",
-      "Transitions": {
-        "NextAction": "cb3bd9f5-7645-4c2c-89b3-abbe7ee77419",
-        "Errors": [
-          {
-            "NextAction": "cb3bd9f5-7645-4c2c-89b3-abbe7ee77419",
-            "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "LoopCount": "2"
-      },
-      "Identifier": "KVS startup and flag loop",
-      "Type": "Loop",
-      "Transitions": {
-        "NextAction": "Was the vm_flag already set?",
-        "Conditions": [
-          {
-            "NextAction": "Start KVS from customer only",
-            "Condition": {
-              "Operator": "Equals",
-              "Operands": [
-                "ContinueLooping"
-              ]
-            }
-          },
-          {
-            "NextAction": "Was the vm_flag already set?",
-            "Condition": {
-              "Operator": "Equals",
-              "Operands": [
-                "DoneLooping"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "SSML": "$.FlowAttributes.voicemailEligiblePrompt"
-      },
-      "Identifier": "89b3ebc9-126c-4d8e-be98-3ff17787449f",
-      "Type": "MessageParticipant",
-      "Transitions": {
-        "NextAction": "KVS startup and flag loop",
-        "Errors": [
-          {
-            "NextAction": "KVS startup and flag loop",
-            "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {},
-      "Identifier": "ed18b22e-5186-4664-9410-212cb01ae48f",
-      "Type": "DisconnectParticipant",
-      "Transitions": {}
-    },
-    {
-      "Parameters": {
-        "ComparisonValue": "$.Attributes.isVMEligible"
-      },
-      "Identifier": "a2f2a60c-3e45-4cf6-b079-f4c3c8c69813",
-      "Type": "Compare",
-      "Transitions": {
-        "NextAction": "aa167033-a5e6-4642-8587-11b98e747fd7",
-        "Conditions": [
-          {
-            "NextAction": "89b3ebc9-126c-4d8e-be98-3ff17787449f",
-            "Condition": {
-              "Operator": "Equals",
-              "Operands": [
-                "true"
-              ]
-            }
-          },
-          {
-            "NextAction": "aa167033-a5e6-4642-8587-11b98e747fd7",
-            "Condition": {
-              "Operator": "Equals",
-              "Operands": [
-                "false"
-              ]
-            }
-          }
-        ],
-        "Errors": [
-          {
-            "NextAction": "aa167033-a5e6-4642-8587-11b98e747fd7",
-            "ErrorType": "NoMatchingCondition"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "Attributes": {
-          "customerJourney": "$.Attributes.customerJourney | get-contact-attribute lmda failed"
-        },
-        "TargetContact": "Current"
-      },
-      "Identifier": "Set customer journey-copy-1",
-      "Type": "UpdateContactAttributes",
-      "Transitions": {
-        "NextAction": "ed18b22e-5186-4664-9410-212cb01ae48f",
-        "Errors": [
-          {
-            "NextAction": "ed18b22e-5186-4664-9410-212cb01ae48f",
-            "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "Attributes": {
-          "customerJourney": "$.Attributes.customerJourney | ch-voice-mail-module"
-        },
-        "TargetContact": "Current"
-      },
-      "Identifier": "Set customer journey",
-      "Type": "UpdateContactAttributes",
-      "Transitions": {
-        "NextAction": "01edb27c-49e5-4427-9ff7-cebebc3f8dd3",
-        "Errors": [
-          {
-            "NextAction": "01edb27c-49e5-4427-9ff7-cebebc3f8dd3",
-            "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "FlowAttributes": {
-          "kvsInitializaationErrorPrompt": {
-            "Value": "$.External.kvs-initializaation-error-prompt"
-          },
-          "voicemailErrorPrompt": {
-            "Value": "$.External.voicemail-error-prompt"
-          },
-          "VoicemailNotEligiblePrompt": {
-            "Value": "$.External.ch-voicemail-isNotEligible-prompt"
-          },
-          "voicemailSuccessPrompt": {
-            "Value": "$.External.voicemail-success-prompt"
-          },
-          "voicemailEligiblePrompt": {
-            "Value": "$.External.ch-voicemail-isEligible-prompt"
-          }
-        }
-      },
-      "Identifier": "5155d9b0-4083-40d0-b78a-e906a960319b",
-      "Type": "UpdateFlowAttributes",
-      "Transitions": {
-        "NextAction": "a2f2a60c-3e45-4cf6-b079-f4c3c8c69813",
-        "Errors": [
-          {
-            "NextAction": "a2f2a60c-3e45-4cf6-b079-f4c3c8c69813",
-            "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
         "LambdaFunctionARN": "$.Attributes.ch-lmda-ivr-get-connect-config-arn",
         "InvocationTimeLimitSeconds": "8",
         "InvocationType": "SYNCHRONOUS",
         "LambdaInvocationAttributes": {
           "languageCode": "$.Attributes.languageCode",
-          "value": "ch-demo-main-flow",
+          "value": "ch-voice-mail-module",
           "configType": "contact-flows",
           "countryCode": "$.Attributes.countryCode"
         },
@@ -697,6 +504,62 @@
         "Errors": [
           {
             "NextAction": "Set customer journey-copy-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LoopCount": "2"
+      },
+      "Identifier": "KVS startup and flag loop",
+      "Type": "Loop",
+      "Transitions": {
+        "NextAction": "Was the vm_kvs_status already set?",
+        "Conditions": [
+          {
+            "NextAction": "Start KVS from customer only",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "ContinueLooping"
+              ]
+            }
+          },
+          {
+            "NextAction": "Was the vm_kvs_status already set?",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "DoneLooping"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "kvsInitializaationErrorPrompt": {
+            "Value": "$.External.kvs-initialization-error-prompt"
+          },
+          "voicemailErrorPrompt": {
+            "Value": "$.External.voicemail-error-prompt"
+          },
+          "voicemailSuccessPrompt": {
+            "Value": "$.External.voicemail-success-prompt"
+          }
+        }
+      },
+      "Identifier": "5155d9b0-4083-40d0-b78a-e906a960319b",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "KVS startup and flag loop",
+        "Errors": [
+          {
+            "NextAction": "KVS startup and flag loop",
             "ErrorType": "NoMatchingError"
           }
         ]

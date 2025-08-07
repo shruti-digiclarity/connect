@@ -12,6 +12,7 @@ module "amazon_connect" {
   queues                            = local.queues
   contact_flow_modules              = local.contact_flow_modules
   contact_flows                     = local.contact_flows
+  quick_connects                    = local.quick_connects
   lambda_function_associations = {
     voice-mail-packager    = module.voice_mail_packager_lambda.lambda_function_arn
     kvs-to-s3              = module.kvs_to_s3_lambda.lambda_function_arn

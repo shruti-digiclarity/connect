@@ -138,6 +138,11 @@ module "load_config_data_lambda" {
   timeout                 = 3
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
-  attach                  = { policy_jsons = false }
-  tags                    = local.lambda_default_configurations.tags
+  attach                  = { policy_jsons = true }
+  iam_configuration       = local.lambda_iam_configurations["load_config_data_lambda_policy"]
+  environment_variables = {
+    CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
+    ENV               = var.env
+  }
+  tags = local.lambda_default_configurations.tags
 }
