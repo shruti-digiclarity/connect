@@ -1,8 +1,8 @@
-name: Pull Request (Dev) workflow
+name: Deploy to Production Environment
 
 on:
-  pull_request:
-    branches: [ develop ]
+  release:
+    types: [published]
 
 permissions:
   contents: read
@@ -11,12 +11,12 @@ permissions:
 
 jobs:
   deployment-pipeline:
-    name: Deploy to dev
+    name: Deploy to prd
     uses: CloverHealth/ccaas-shared-pipelines/.github/workflows/aws_infrastructure_deploy.yml@master
     with:
       WORKING_DIRECTORY: resources
       ENVIRONMENTS_CONFIG_DIR: environments
       AWS_REGION: us-east-1
-      CI_ENVIRONMENT_NAME: dev
+      CI_ENVIRONMENT_NAME: prd
     secrets:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
