@@ -34,6 +34,18 @@ module "kvs_to_s3_lambda" {
   environment_variables = {
     s3_recordings_bucket = "${var.company_prefix}-s3-voice-mail-recording-${local.region_prefix}-${var.env}"
   }
+  event_source_mapping = {
+    kinesis = {
+      event_source_arn                   = module.kinesis.kinesis_stream_arn
+      starting_position                  = "LATEST"
+      batch_size                         = 100
+      maximum_batching_window_in_seconds = null
+      maximum_retry_attempts             = -1
+      maximum_record_age_in_seconds      = -1
+      bisect_batch_on_function_error     = false
+    }
+  }
+
   tags = local.lambda_default_configurations.tags
 }
 

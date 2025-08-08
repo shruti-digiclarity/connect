@@ -1,3 +1,4 @@
+# Existing S3 bucket configurations (unchanged)
 module "s3_call_recording" {
   source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=master"
   bucket_name              = format("%s-s3-call-recording-%s-%s", var.company_prefix, local.region_prefix, var.env)
@@ -96,4 +97,40 @@ module "s3_voice_mail_transcript" {
       }
     }
   }
+}
+
+# New S3 bucket for connect
+module "s3_connect" {
+  source                   = "git@github.com:Clover-Health-1/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=main"
+  bucket_name              = format("%s-s3-connect-%s-%s", var.company_prefix, local.region_prefix, var.env)
+  acl                      = null
+  public_acl_configuration = null
+  versioning_configuration = { status = true, mfa_delete = false }
+  encryption_configuration = {
+    rule = [
+      {
+        apply_server_side_encryption_by_default = {
+          sse_algorithm     = "aws:kms"
+          kms_master_key_id = module.common_aws_kms_key.key_arn
+        }
+        bucket_key_enabled = true
+      }
+    ]
+  }
+  lifecycle_rules = [
+    {
+      id     = "connect-lifecycle"
+      status = "Enabled"
+      transition = [
+        {
+          days          = 30
+          storage_class = "GLACIER"
+        }
+      ]
+      expiration = {
+        days = 365
+      }
+    }
+  ]
+  tags = local.tags
 }
