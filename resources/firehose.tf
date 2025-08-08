@@ -17,7 +17,6 @@ module "firehose_connect" {
   application_role_service_principal = "connect.amazonaws.com"
   prefix_company                     = var.company_prefix
   prefix_region                      = local.region_prefix
-  lob                                = var.lob
   env                                = var.env
   application                        = var.project
   append_delimiter_to_record         = true
