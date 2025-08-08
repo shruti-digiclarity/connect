@@ -53,7 +53,7 @@ locals {
 
   lambda_node_default_configurations = {
     handler                 = "index.handler"
-    runtime                 = "node22.x"
+    runtime                 = "nodejs22.x"
     package                 = "../lambda_function/lambda_node_function.zip"
     timeout                 = 900
     memory_size             = 128
