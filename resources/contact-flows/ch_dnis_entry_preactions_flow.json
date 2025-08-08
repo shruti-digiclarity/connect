@@ -1,0 +1,699 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "7aa4c7ff-7a08-4450-b896-90e4bb46ab5a",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 40,
+      "y": 473.6
+    },
+    "ActionMetadata": {
+      "7aa4c7ff-7a08-4450-b896-90e4bb46ab5a": {
+        "position": {
+          "x": 332,
+          "y": 475.2
+        }
+      },
+      "Disable logging": {
+        "position": {
+          "x": 1772,
+          "y": 260.8
+        },
+        "isFriendlyName": true
+      },
+      "86d773ca-45d3-4ad0-891b-d244dfde3cf0": {
+        "position": {
+          "x": 2243.2,
+          "y": 1018.4
+        }
+      },
+      "Customer Journey Unexpected Error-copy-1": {
+        "position": {
+          "x": 1757.6,
+          "y": 825.6
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Unexpected Error Message-copy-1": {
+        "position": {
+          "x": 2001.6,
+          "y": 983.2
+        },
+        "isFriendlyName": true
+      },
+      "Set Default Recording used in case of DNIS error": {
+        "position": {
+          "x": 570.4,
+          "y": 476
+        },
+        "isFriendlyName": true
+      },
+      "11817d26-875d-43cd-9141-3b389f8d1ba9": {
+        "position": {
+          "x": 1525.6,
+          "y": 896.8
+        }
+      },
+      "Customer Journey Unexpected Error": {
+        "position": {
+          "x": 1757.6,
+          "y": 1045.6
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "set customerJourney flowname": {
+        "position": {
+          "x": 792.8,
+          "y": 479.2
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "cb57c541-18e1-4936-93f4-d7be0fc259cb": {
+        "position": {
+          "x": 1254.4,
+          "y": 894.4
+        },
+        "parameters": {
+          "QueueId": {
+            "displayName": "ch_dnis_error"
+          }
+        },
+        "queue": {
+          "text": "ch_dnis_error"
+        }
+      },
+      "8161bab0-7f93-439f-b0ee-49f91cb65296": {
+        "position": {
+          "x": 3540.8,
+          "y": 475.2
+        }
+      },
+      "Check callRecordingEnabled": {
+        "position": {
+          "x": 2092,
+          "y": 442.4
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "7c7b38ab-4ae0-4fb8-8252-49d0dc55724c",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "false"
+          }
+        ]
+      },
+      "58d985c8-8c4b-4ad8-9c5b-34935109704a": {
+        "position": {
+          "x": 3264,
+          "y": 473.6
+        },
+        "parameters": {
+          "ContactFlowId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Set Default Recording used in case of DN-copy-1": {
+        "position": {
+          "x": 2378.4,
+          "y": 380
+        },
+        "isFriendlyName": true
+      },
+      "Set Default Recording used in case of DN-copy-2": {
+        "position": {
+          "x": 2627.2,
+          "y": 542.4
+        },
+        "isFriendlyName": true
+      },
+      "Check contactLensEnabled": {
+        "position": {
+          "x": 2384.8,
+          "y": 553.6
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "957f1e4a-2658-496f-8b72-87ada5c7b2e9",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "true"
+          }
+        ]
+      },
+      "Set tag": {
+        "position": {
+          "x": 2999.2,
+          "y": 487.2
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "Tags": {
+            "lobName": {
+              "useDynamic": true
+            }
+          }
+        }
+      },
+      "Logging enabled?": {
+        "position": {
+          "x": 1503.2,
+          "y": 459.2
+        },
+        "isFriendlyName": true,
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "6128d7b7-4e25-4ecc-a6da-8c8df31cf6c4",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "false"
+          }
+        ]
+      },
+      "86ef81da-461d-4f87-aa21-db7652d85477": {
+        "position": {
+          "x": 1023.2,
+          "y": 454.4
+        },
+        "parameters": {
+          "LambdaFunctionARN": {
+            "displayName": "ch-lmda-ivr-get-connect-config-use1-sbx"
+          },
+          "LambdaInvocationAttributes": {
+            "value": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "configType": false,
+          "value": true
+        }
+      },
+      "Primary DID settings-copy-1": {
+        "position": {
+          "x": 1257.6,
+          "y": 460
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "Attributes": {
+            "lobName": {
+              "useDynamic": true
+            },
+            "languageCode": {
+              "useDynamic": true
+            },
+            "countryCode": {
+              "useDynamic": true
+            },
+            "callRecordingEnabled": {
+              "useDynamic": true
+            },
+            "loggingEnabled": {
+              "useDynamic": true
+            },
+            "contactLensEnabled": {
+              "useDynamic": true
+            },
+            "ttsVoice_en": {
+              "useDynamic": true
+            },
+            "ttsVoice_es": {
+              "useDynamic": true
+            },
+            "startContactFlowName": {
+              "useDynamic": true
+            },
+            "startContactFlowARN": {
+              "useDynamic": true
+            },
+            "isTestCall": {
+              "useDynamic": true
+            },
+            "collectExtention": {
+              "useDynamic": true
+            },
+            "ch-lmda-ivr-get-connect-config-arn": {
+              "useDynamic": true
+            },
+            "ch-error-queue-arn": {
+              "useDynamic": true
+            },
+            "voice-engine-en": {
+              "useDynamic": true
+            },
+            "voice-style-en": {
+              "useDynamic": true
+            },
+            "ch-default-en-queue-arn": {
+              "useDynamic": true
+            },
+            "ch-default-en-queue-name": {
+              "useDynamic": true
+            },
+            "ch-default-es-queue-arn": {
+              "useDynamic": true
+            },
+            "ch-default-es-queue-name": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicParams": [
+          "lobName",
+          "languageCode",
+          "countryCode",
+          "callRecordingEnabled",
+          "loggingEnabled",
+          "contactLensEnabled",
+          "ttsVoice_en",
+          "ttsVoice_es",
+          "startContactFlowName",
+          "startContactFlowARN",
+          "isTestCall",
+          "collectExtention",
+          "ch-lmda-ivr-get-connect-config-arn",
+          "ch-error-queue-arn",
+          "voice-engine-en",
+          "voice-style-en",
+          "ch-default-en-queue-arn",
+          "ch-default-en-queue-name",
+          "ch-default-es-queue-arn",
+          "ch-default-es-queue-name"
+        ]
+      }
+    },
+    "Annotations": [],
+    "name": "ch-dnis-entry-preactions-flow",
+    "description": "",
+    "type": "contactFlow",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Enabled"
+      },
+      "Identifier": "7aa4c7ff-7a08-4450-b896-90e4bb46ab5a",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "Set Default Recording used in case of DNIS error"
+      }
+    },
+    {
+      "Parameters": {
+        "FlowLoggingBehavior": "Disabled"
+      },
+      "Identifier": "Disable logging",
+      "Type": "UpdateFlowLoggingBehavior",
+      "Transitions": {
+        "NextAction": "Check callRecordingEnabled"
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "86d773ca-45d3-4ad0-891b-d244dfde3cf0",
+      "Type": "EndFlowExecution",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Queue capacity reached"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Unexpected Error Message-copy-1",
+        "Errors": [
+          {
+            "NextAction": "Unexpected Error Message-copy-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "I'm sorry, but an unexpected error occurred.  Please call back again."
+      },
+      "Identifier": "Unexpected Error Message-copy-1",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "86d773ca-45d3-4ad0-891b-d244dfde3cf0",
+        "Errors": [
+          {
+            "NextAction": "86d773ca-45d3-4ad0-891b-d244dfde3cf0",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "RecordingBehavior": {
+          "RecordedParticipants": [
+            "Agent",
+            "Customer"
+          ],
+          "IVRRecordingBehavior": "Disabled"
+        }
+      },
+      "Identifier": "Set Default Recording used in case of DNIS error",
+      "Type": "UpdateContactRecordingBehavior",
+      "Transitions": {
+        "NextAction": "set customerJourney flowname"
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "11817d26-875d-43cd-9141-3b389f8d1ba9",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "Customer Journey Unexpected Error",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "Customer Journey Unexpected Error",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Play unexpected error and disconnect"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Unexpected Error Message-copy-1",
+        "Errors": [
+          {
+            "NextAction": "Unexpected Error Message-copy-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "CH Entry Pre Action Flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "set customerJourney flowname",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "86ef81da-461d-4f87-aa21-db7652d85477",
+        "Errors": [
+          {
+            "NextAction": "86ef81da-461d-4f87-aa21-db7652d85477",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:069062667280:instance/0134762c-aab8-41b4-be69-f8d01ab154d0/queue/015ce55c-8395-48cb-85d9-f0522ee67a66"
+      },
+      "Identifier": "cb57c541-18e1-4936-93f4-d7be0fc259cb",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "11817d26-875d-43cd-9141-3b389f8d1ba9",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "8161bab0-7f93-439f-b0ee-49f91cb65296",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.callRecordingEnabled"
+      },
+      "Identifier": "Check callRecordingEnabled",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Check contactLensEnabled",
+        "Conditions": [
+          {
+            "NextAction": "Set Default Recording used in case of DN-copy-1",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "false"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Check contactLensEnabled",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ContactFlowId": "$.Attributes.startContactFlowARN"
+      },
+      "Identifier": "58d985c8-8c4b-4ad8-9c5b-34935109704a",
+      "Type": "TransferToFlow",
+      "Transitions": {
+        "NextAction": "8161bab0-7f93-439f-b0ee-49f91cb65296",
+        "Errors": [
+          {
+            "NextAction": "8161bab0-7f93-439f-b0ee-49f91cb65296",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "RecordingBehavior": {
+          "RecordedParticipants": [],
+          "IVRRecordingBehavior": "Disabled"
+        }
+      },
+      "Identifier": "Set Default Recording used in case of DN-copy-1",
+      "Type": "UpdateContactRecordingBehavior",
+      "Transitions": {
+        "NextAction": "Set tag"
+      }
+    },
+    {
+      "Parameters": {
+        "RecordingBehavior": {
+          "RecordedParticipants": [
+            "Agent",
+            "Customer"
+          ],
+          "IVRRecordingBehavior": "Disabled"
+        },
+        "AnalyticsBehavior": {
+          "Enabled": "True",
+          "AnalyticsLanguage": "en-US",
+          "AnalyticsRedactionBehavior": "Disabled",
+          "AnalyticsRedactionResults": "RedactedAndOriginal",
+          "ChannelConfiguration": {
+            "Chat": {
+              "AnalyticsModes": []
+            },
+            "Voice": {
+              "AnalyticsModes": [
+                "PostContact"
+              ]
+            }
+          },
+          "SummaryConfiguration": {
+            "SummaryModes": [
+              "PostContact"
+            ]
+          },
+          "SentimentConfiguration": {
+            "Enabled": "True"
+          }
+        }
+      },
+      "Identifier": "Set Default Recording used in case of DN-copy-2",
+      "Type": "UpdateContactRecordingBehavior",
+      "Transitions": {
+        "NextAction": "Set tag"
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.contactLensEnabled"
+      },
+      "Identifier": "Check contactLensEnabled",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Set tag",
+        "Conditions": [
+          {
+            "NextAction": "Set Default Recording used in case of DN-copy-2",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "true"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set tag",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Tags": {
+          "lobName": "$.Attributes.lobName"
+        }
+      },
+      "Identifier": "Set tag",
+      "Type": "TagContact",
+      "Transitions": {
+        "NextAction": "58d985c8-8c4b-4ad8-9c5b-34935109704a",
+        "Errors": [
+          {
+            "NextAction": "58d985c8-8c4b-4ad8-9c5b-34935109704a",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.loggingEnabled"
+      },
+      "Identifier": "Logging enabled?",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Check callRecordingEnabled",
+        "Conditions": [
+          {
+            "NextAction": "Disable logging",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "false"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Check callRecordingEnabled",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "arn:aws:lambda:us-east-1:069062667280:function:ch-lmda-ivr-get-connect-config-use1-sbx",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "configType": "dids",
+          "value": "$.SystemEndpoint.Address"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "86ef81da-461d-4f87-aa21-db7652d85477",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "Primary DID settings-copy-1",
+        "Errors": [
+          {
+            "NextAction": "cb57c541-18e1-4936-93f4-d7be0fc259cb",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "lobName": "$.External.lobName",
+          "languageCode": "$.External.languageCode",
+          "countryCode": "$.External.countryCode",
+          "callRecordingEnabled": "$.External.callRecordingEnabled",
+          "loggingEnabled": "$.External.loggingEnabled",
+          "contactLensEnabled": "$.External.contactLensEnabled",
+          "ttsVoice_en": "$.External.ttsVoice_en",
+          "ttsVoice_es": "$.External.ttsVoice_es",
+          "startContactFlowName": "$.External.startContactFlowName",
+          "startContactFlowARN": "$.External.startContactFlowARN",
+          "isTestCall": "$.External.isTestCall",
+          "collectExtention": "$.External.collectExtention",
+          "ch-lmda-ivr-get-connect-config-arn": "$.External.ch-lmda-ivr-get-connect-config-arn",
+          "ch-error-queue-arn": "$.External.ch-error-queue-arn",
+          "voice-engine-en": "$.External.voice-engine-en",
+          "voice-style-en": "$.External.voice-style-en",
+          "ch-default-en-queue-arn": "$.External.ch-default-en-queue-arn",
+          "ch-default-en-queue-name": "$.External.ch-default-en-queue-name",
+          "ch-default-es-queue-arn": "$.External.ch-default-es-queue-arn",
+          "ch-default-es-queue-name": "$.External.ch-default-es-queue-name"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Primary DID settings-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Logging enabled?",
+        "Errors": [
+          {
+            "NextAction": "Logging enabled?",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
