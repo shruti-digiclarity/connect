@@ -101,7 +101,7 @@ module "s3_voice_mail_transcript" {
 
 # New S3 bucket for connect
 module "s3_connect" {
-  source                   = "git@github.com:Clover-Health-1/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=main"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=master"
   bucket_name              = format("%s-s3-connect-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
