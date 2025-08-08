@@ -99,13 +99,6 @@ locals {
         }
       }
     }
-    AGENT_EVENTS = {
-      storage_type = "KINESIS_STREAM"
-
-      kinesis_stream_config = {
-        stream_arn = module.kinesis.kinesis_stream_arn
-      }
-    }
     CONTACT_TRACE_RECORDS = {
       storage_type = "KINESIS_STREAM"
       kinesis_stream_config = {
