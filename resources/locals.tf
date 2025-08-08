@@ -51,6 +51,16 @@ locals {
     tags                    = local.tags
   }
 
+  lambda_node_default_configurations = {
+    handler                 = "index.handler"
+    runtime                 = "node22.x"
+    package                 = "../lambda_function/lambda_node_function.zip"
+    timeout                 = 900
+    memory_size             = 128
+    ignore_source_code_hash = true
+    tags                    = local.tags
+  }
+
   tags = {
     company    = var.company
     env        = var.env
@@ -152,6 +162,14 @@ locals {
     load_config_data_lambda_policy = {
       number_of_policy_jsons = 1
       policy_jsons           = [data.aws_iam_policy_document.load_config_data_lambda_policy.json]
+    }
+    lead_generation_lambda_policy = {
+      number_of_policy_jsons = 1
+      policy_jsons           = [data.aws_iam_policy_document.lead_generation_lambda_policy.json]
+    }
+    campaign_attribution_lambda_policy = {
+      number_of_policy_jsons = 1
+      policy_jsons           = [data.aws_iam_policy_document.campaign_attribution_lambda_policy.json]
     }
   }
 }

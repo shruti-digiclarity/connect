@@ -158,3 +158,39 @@ module "load_config_data_lambda" {
   }
   tags = local.lambda_default_configurations.tags
 }
+
+module "lead_generation_lambda" {
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=master"
+  name                    = format("%s-lmda-lead-generation-%s-%s", var.company_prefix, local.region_prefix, var.env)
+  handler                 = local.lambda_node_default_configurations.handler
+  runtime                 = local.lambda_node_default_configurations.runtime
+  local_existing_package  = local.lambda_node_default_configurations.package
+  layers                  = []
+  timeout                 = 3
+  memory_size             = local.lambda_node_default_configurations.memory_size
+  ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
+  attach                  = { policy_jsons = true }
+  iam_configuration       = local.lambda_iam_configurations["lead_generation_lambda_policy"]
+  environment_variables = {
+    ENV               = var.env
+  }
+  tags = local.lambda_node_default_configurations.tags
+}
+
+module "campaign_attribution_lambda" {
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=master"
+  name                    = format("%s-lmda-campaign-attribution-%s-%s", var.company_prefix, local.region_prefix, var.env)
+  handler                 = local.lambda_node_default_configurations.handler
+  runtime                 = local.lambda_node_default_configurations.runtime
+  local_existing_package  = local.lambda_node_default_configurations.package
+  layers                  = []
+  timeout                 = 3
+  memory_size             = local.lambda_node_default_configurations.memory_size
+  ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
+  attach                  = { policy_jsons = true }
+  iam_configuration       = local.lambda_iam_configurations["campaign_attribution_lambda_policy"]
+  environment_variables = {
+    ENV               = var.env
+  }
+  tags = local.lambda_node_default_configurations.tags
+}
