@@ -96,9 +96,13 @@ data "aws_iam_policy_document" "kvs_to_s3_lambda_policy" {
     ]
   }
   statement {
-    sid     = "AllowKMS"
-    effect  = "Allow"
-    actions = ["kms:GenerateDataKey"]
+    sid    = "AllowKMS"
+    effect = "Allow"
+    actions = [
+      "kms:Decrypt",
+      "kms:DescribeKey",
+      "kms:GenerateDataKey"
+    ]
     resources = [
       "arn:aws:kms:${var.region}:${var.account_number}:key/*"
     ]
