@@ -95,6 +95,14 @@ data "aws_iam_policy_document" "kvs_to_s3_lambda_policy" {
       "${module.s3_voice_mail_recording.bucket_arn}/*"
     ]
   }
+  statement {
+    sid     = "AllowKMS"
+    effect  = "Allow"
+    actions = ["kms:GenerateDataKey"]
+    resources = [
+      "arn:aws:kms:${var.region}:${var.account_number}:key/*"
+    ]
+  }
 }
 
 
