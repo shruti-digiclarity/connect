@@ -123,12 +123,12 @@ module "s3_connect" {
       status = "Enabled"
       transition = [
         {
-          days          = 30
+          days          = 365 # 1 year
           storage_class = "GLACIER"
         }
       ]
       expiration = {
-        days = 365
+        days = 4020 # 11 years
       }
     }
   ]
