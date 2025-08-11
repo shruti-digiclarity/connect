@@ -194,3 +194,4 @@ module "campaign_attribution_lambda" {
   }
   tags = local.lambda_node_default_configurations.tags
 }
+
