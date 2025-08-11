@@ -95,6 +95,18 @@ data "aws_iam_policy_document" "kvs_to_s3_lambda_policy" {
       "${module.s3_voice_mail_recording.bucket_arn}/*"
     ]
   }
+  statement {
+    sid    = "AllowKMS"
+    effect = "Allow"
+    actions = [
+      "kms:Decrypt",
+      "kms:DescribeKey",
+      "kms:GenerateDataKey"
+    ]
+    resources = [
+      "arn:aws:kms:${var.region}:${var.account_number}:key/*"
+    ]
+  }
 }
 
 
@@ -222,7 +234,7 @@ data "aws_iam_policy_document" "lead_generation_lambda_policy" {
     effect  = "Allow"
     actions = ["secretsmanager:GetSecretValue"]
     resources = [
-      "arn:aws:secretsmanager:${var.region}:${var.account_number}:secret:/*"
+      module.connect_lead_generation_secret.secret_arn[0]
     ]
   }
 
@@ -235,7 +247,7 @@ data "aws_iam_policy_document" "campaign_attribution_lambda_policy" {
     effect  = "Allow"
     actions = ["secretsmanager:GetSecretValue"]
     resources = [
-      "arn:aws:secretsmanager:${var.region}:${var.account_number}:secret:/*"
+      module.connect_campaign_attribution_secret.secret_arn[0]
     ]
   }
 }

@@ -83,6 +83,25 @@ locals {
           identifiers = ["connect.amazonaws.com"]
         }
       ]
+    },
+    {
+      sid = "Enable Kinesis Video Streams"
+      actions = [
+        "kms:Decrypt",
+        "kms:DescribeKey",
+        "kms:Encrypt",
+        "kms:GenerateDataKey",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo"
+      ]
+      resources = ["*"]
+      principals = [
+        {
+          type        = "Service"
+          identifiers = ["kinesisvideo.amazonaws.com"]
+        }
+      ]
     }
   ]
 

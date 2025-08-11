@@ -13,13 +13,15 @@ module "amazon_connect" {
   contact_flows                     = local.contact_flows
   quick_connects                    = local.quick_connects
   lambda_function_associations = {
-    voice-mail-packager    = module.voice_mail_packager_lambda.lambda_function_arn
-    kvs-to-s3              = module.kvs_to_s3_lambda.lambda_function_arn
-    voice-mail-presigner   = module.voice_mail_presigner_lambda.lambda_function_arn
-    voice-mail-transcriber = module.voice_mail_transcriber_lambda.lambda_function_arn
-    get-connect-config     = module.get_connect_config_lambda.lambda_function_arn
-    check-holiday-and-hoop = module.check_holiday_and_hoop_lambda.lambda_function_arn
-    match-extension        = module.match_extension_lambda.lambda_function_arn
+    voice-mail-packager         = module.voice_mail_packager_lambda.lambda_function_arn
+    kvs-to-s3                   = module.kvs_to_s3_lambda.lambda_function_arn
+    voice-mail-presigner        = module.voice_mail_presigner_lambda.lambda_function_arn
+    voice-mail-transcriber      = module.voice_mail_transcriber_lambda.lambda_function_arn
+    get-connect-config          = module.get_connect_config_lambda.lambda_function_arn
+    check-holiday-and-hoop      = module.check_holiday_and_hoop_lambda.lambda_function_arn
+    match-extension             = module.match_extension_lambda.lambda_function_arn
+    lead-generation-lambda      = module.lead_generation_lambda.lambda_function_arn
+    campaign-attribution-lambda = module.campaign_attribution_lambda.lambda_function_arn
   }
   tags = local.tags
 }
