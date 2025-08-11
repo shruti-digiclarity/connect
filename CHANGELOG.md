@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/CloverHealth/ccaas-terraform-connect/compare/release-v1.0.0...release-v1.1.0) (2025-08-11)
+
+
+### Features
+
+* lambda configurations ([642c053](https://github.com/CloverHealth/ccaas-terraform-connect/commit/642c053dc586ae1f1881b0e2b8f93b0ed7934e91))
+
 # 1.0.0 (2025-08-11)
 
 
