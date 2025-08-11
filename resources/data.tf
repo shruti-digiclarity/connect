@@ -234,8 +234,7 @@ data "aws_iam_policy_document" "lead_generation_lambda_policy" {
     effect  = "Allow"
     actions = ["secretsmanager:GetSecretValue"]
     resources = [
-      #module.connect_lead_generation_secret.secret_arn,
-      "arn:aws:secretsmanager:${var.region}:${var.account_number}:secret:/*"
+      module.connect_lead_generation_secret.secret_arn
     ]
   }
 
@@ -248,8 +247,7 @@ data "aws_iam_policy_document" "campaign_attribution_lambda_policy" {
     effect  = "Allow"
     actions = ["secretsmanager:GetSecretValue"]
     resources = [
-      #module.connect_campaign_attribution_secret.secret_arn,
-      "arn:aws:secretsmanager:${var.region}:${var.account_number}:secret:/*"
+      module.connect_campaign_attribution_secret.secret_arn
     ]
   }
 }
