@@ -1,0 +1,87 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "Set the target queue",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 20.8,
+      "y": 20
+    },
+    "ActionMetadata": {
+      "End flow": {
+        "position": {
+          "x": 620,
+          "y": 78.4
+        },
+        "isFriendlyName": true
+      },
+      "Route voicemail": {
+        "position": {
+          "x": 382.4,
+          "y": 18.4
+        },
+        "isFriendlyName": true
+      },
+      "Set the target queue": {
+        "position": {
+          "x": 140,
+          "y": 17.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "QueueId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      }
+    },
+    "Annotations": [],
+    "name": "ch-voice-mail-task-flow",
+    "description": "",
+    "type": "contactFlow",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {},
+      "Identifier": "End flow",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {},
+      "Identifier": "Route voicemail",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "End flow",
+        "Errors": [
+          {
+            "NextAction": "End flow",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "End flow",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "$.Attributes.VM_Task_Queue"
+      },
+      "Identifier": "Set the target queue",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "Route voicemail",
+        "Errors": [
+          {
+            "NextAction": "Route voicemail",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -12,5 +12,13 @@ locals {
       description = "ch_dnis_entry_preactions_flow"
       tags        = local.tags
     }
+    "ch_voice_mail_task_flow" = {
+      content = templatefile(
+        "${path.module}/contact-flows/ch_voice_mail_task_flow.json.tftpl", {}
+      )
+      type        = "CONTACT_FLOW"
+      description = "ch_voice_mail_task_flow"
+      tags        = local.tags
+    }
   }
 }
