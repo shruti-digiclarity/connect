@@ -60,6 +60,26 @@ data "aws_iam_policy_document" "voice_mail_packager_lambda_policy" {
       "arn:aws:lambda:${var.region}:${data.aws_caller_identity.current.account_id}:function:${var.company_prefix}-lmda-voice-mail-presigner-${local.region_prefix}-${var.env}"
     ]
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "dynamodb:GetItem"
+    ]
+    resources = [
+      module.connect_config_dynamodb.dynamodb_table_arn,
+      "${module.connect_config_dynamodb.dynamodb_table_arn}/*"
+    ]
+  }
+  statement {
+    effect = "Allow"
+    actions = [
+      "ses:SendEmail"
+    ]
+    resources = [
+      "arn:aws:ses:${var.region}:${data.aws_caller_identity.current.account_id}:identity/*",
+      "arn:aws:ses:${var.region}:${data.aws_caller_identity.current.account_id}:configuration-set/*"
+    ]
+  }
 }
 
 
