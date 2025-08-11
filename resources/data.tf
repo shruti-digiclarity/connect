@@ -214,3 +214,28 @@ data "aws_iam_policy_document" "load_config_data_lambda_policy" {
     ]
   }
 }
+
+data "aws_iam_policy_document" "lead_generation_lambda_policy" {
+  version = "2012-10-17"
+  statement {
+    sid     = "AllowSecretsManager"
+    effect  = "Allow"
+    actions = ["secretsmanager:GetSecretValue"]
+    resources = [
+      "arn:aws:secretsmanager:${var.region}:${var.account_number}:secret:/*"
+    ]
+  }
+
+}
+
+data "aws_iam_policy_document" "campaign_attribution_lambda_policy" {
+  version = "2012-10-17"
+  statement {
+    sid     = "AllowSecretsManager"
+    effect  = "Allow"
+    actions = ["secretsmanager:GetSecretValue"]
+    resources = [
+      "arn:aws:secretsmanager:${var.region}:${var.account_number}:secret:/*"
+    ]
+  }
+}
