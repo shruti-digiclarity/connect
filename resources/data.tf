@@ -80,6 +80,14 @@ data "aws_iam_policy_document" "voice_mail_packager_lambda_policy" {
       "arn:aws:ses:${var.region}:${data.aws_caller_identity.current.account_id}:configuration-set/*"
     ]
   }
+  statement {
+    sid     = "AllowKMS"
+    effect  = "Allow"
+    actions = ["kms:Decrypt"]
+    resources = [
+      "arn:aws:kms:${var.region}:${var.account_number}:key/*"
+    ]
+  }
 }
 
 
