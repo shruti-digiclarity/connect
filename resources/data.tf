@@ -151,6 +151,14 @@ data "aws_iam_policy_document" "voice_mail_presigner_lambda_policy" {
       "${module.s3_voice_mail_recording.bucket_arn}/*"
     ]
   }
+  statement {
+    sid     = "AllowKMS"
+    effect  = "Allow"
+    actions = ["kms:Decrypt"]
+    resources = [
+      "arn:aws:kms:${var.region}:${var.account_number}:key/*"
+    ]
+  }
 }
 
 
