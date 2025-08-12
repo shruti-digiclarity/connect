@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/CloverHealth/ccaas-terraform-connect/compare/release-v1.1.0...release-v1.2.0) (2025-08-12)
+
+
+### Features
+
+* added resources for prod ([#9](https://github.com/CloverHealth/ccaas-terraform-connect/issues/9)) ([ffc5c21](https://github.com/CloverHealth/ccaas-terraform-connect/commit/ffc5c21d08f56ea0867ad0783709355974d0bf19))
+
 # [1.1.0](https://github.com/CloverHealth/ccaas-terraform-connect/compare/release-v1.0.0...release-v1.1.0) (2025-08-11)
 
 
