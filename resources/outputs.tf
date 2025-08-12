@@ -14,8 +14,3 @@ output "kinesis_stream_arn" {
   value       = module.kinesis.kinesis_stream_arn
 }
 
-output "ch_voice_mail_packager" {
-  description = "ARN of the Lambda function for voice mail packaging."
-  value       = module.amazon_connect.contact_flows["ch_voice_mail_task_flow"]
-}
-
