@@ -12,7 +12,7 @@ module "voice_mail_packager_lambda" {
   iam_configuration       = local.lambda_iam_configurations["voice_mail_packager_lambda_policy"]
   environment_variables = {
     CONFIG_TABLE_NAME      = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
-    TASK_FLOW_ID           = module.amazon_connect.contact_flows["ch_voice_mail_task_flow"].id
+    TASK_FLOW_ID           = module.amazon_connect.contact_flows["ch_voice_mail_task_flow"].contact_flow_id
     default_vm_mode        = "email"
     presigner_function_arn = "${var.company_prefix}-lmda-voice-mail-presigner-${local.region_prefix}-${var.env}"
     s3_recordings_bucket   = "${var.company_prefix}-s3-voice-mail-recording-${local.region_prefix}-${var.env}"

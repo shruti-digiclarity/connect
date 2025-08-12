@@ -13,3 +13,4 @@ output "kinesis_stream_arn" {
   description = "ARN of the Kinesis stream for media streams."
   value       = module.kinesis.kinesis_stream_arn
 }
+
