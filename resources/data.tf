@@ -179,6 +179,14 @@ data "aws_iam_policy_document" "voice_mail_transcriber_lambda_policy" {
       "arn:aws:transcribe:${var.region}:${data.aws_caller_identity.current.account_id}:transcription-job/*"
     ]
   }
+  statement {
+    sid     = "AllowKMS"
+    effect  = "Allow"
+    actions = ["kms:Decrypt"]
+    resources = [
+      "arn:aws:kms:${var.region}:${var.account_number}:key/*"
+    ]
+  }
 }
 
 data "aws_iam_policy_document" "get_connect_config_lambda_policy" {

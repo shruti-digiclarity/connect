@@ -3,7 +3,7 @@ module "voice_mail_packager_lambda" {
   name                    = format("%s-lmda-voice-mail-packager-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_packager.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager.zip"
+  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager-v2.zip"
   layers                  = []
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
@@ -11,6 +11,8 @@ module "voice_mail_packager_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["voice_mail_packager_lambda_policy"]
   environment_variables = {
+    CONFIG_TABLE_NAME      = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
+    TASK_FLOW_ID           = module.amazon_connect.contact_flows["ch_voice_mail_task_flow"].id
     default_vm_mode        = "email"
     presigner_function_arn = "${var.company_prefix}-lmda-voice-mail-presigner-${local.region_prefix}-${var.env}"
     s3_recordings_bucket   = "${var.company_prefix}-s3-voice-mail-recording-${local.region_prefix}-${var.env}"
@@ -172,7 +174,7 @@ module "lead_generation_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["lead_generation_lambda_policy"]
   environment_variables = {
-    ENV               = var.env
+    ENV = var.env
   }
   tags = local.lambda_node_default_configurations.tags
 }
@@ -190,7 +192,7 @@ module "campaign_attribution_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["campaign_attribution_lambda_policy"]
   environment_variables = {
-    ENV               = var.env
+    ENV = var.env
   }
   tags = local.lambda_node_default_configurations.tags
 }
