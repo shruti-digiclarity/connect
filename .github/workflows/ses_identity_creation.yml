@@ -7,10 +7,6 @@ on:
         type: string
         description: "Environment"
         default: "dev"
-      aws_region:
-        type: string
-        description: "AWS region to run SES commands in"
-        default: "us-east-1"
       email_identity:
         description: "Email address or domain to verify in AWS SES"
         required: true
@@ -51,7 +47,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::${{ steps.account-mapping.outputs.aws_account }}:role/ch-iam-shared-deployment-role-${{ inputs.environment }}
-          aws-region: ${{ inputs.aws_region }}
+          aws-region: us-east-1
 
       - name: Create SES Email Identity
         run: |
