@@ -4,7 +4,6 @@ module "firehose_connect" {
   destination                        = "extended_s3"
   s3_bucket_arn                      = module.s3_connect.bucket_arn
   s3_prefix                          = "CTR/"
-  input_source                       = "direct-put"
   buffering_size                     = var.buffering_size
   buffering_interval                 = var.buffering_interval
   enable_s3_encryption               = true
@@ -20,6 +19,10 @@ module "firehose_connect" {
   env                                = var.env
   application                        = var.project
   append_delimiter_to_record         = true
+  input_source                       = "kinesis"
+  kinesis_source_stream_arn          = module.kinesis.kinesis_stream_arn
+  kinesis_source_is_encrypted        = true
+  kinesis_source_kms_arn             = module.common_aws_kms_key.key_arn
   tags = merge(local.tags, {
     Name = format("%s-firehose-connect-%s-%s", var.company_prefix, local.region_prefix, var.env)
   })
