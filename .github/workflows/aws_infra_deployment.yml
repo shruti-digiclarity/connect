@@ -20,7 +20,6 @@ permissions:
 
 jobs:
   prepare-and-validate:
-    name: Deploy to ${{ github.event.inputs.environment }}
     name: Prepare and Validate Branch
     runs-on: ubuntu-22.04
     steps:
