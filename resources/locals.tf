@@ -68,6 +68,7 @@ locals {
     created_by = "Terraform"
     project    = var.project
     region     = var.region
+    tag        = "extra"
   }
 
   key_statements = [
