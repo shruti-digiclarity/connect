@@ -21,7 +21,7 @@ permissions:
 jobs:
   prepare-and-validate:
     name: Prepare and Validate Branch
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Validate Branch and Environment
         run: |
