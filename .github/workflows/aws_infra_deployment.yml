@@ -1,0 +1,77 @@
+name: AWS Infrastructure Deployment Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+        - dev
+        - uat
+        - prd
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+jobs:
+  prepare-and-validate:
+    name: Prepare and Validate Branch
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Validate Branch and Environment
+        run: |
+          BRANCH="${{ github.ref_name }}"
+          ENVIRONMENT="${{ github.event.inputs.environment }}"
+          
+          echo "Branch: $BRANCH"
+          echo "Environment: $ENVIRONMENT"
+          
+          # Validate branch-environment combinations
+          case "$ENVIRONMENT" in
+            "dev")
+              # Any branch can deploy to dev
+              echo "Any branch can deploy to dev environment"
+              ;;
+            "uat")
+              # Only develop branch can deploy to UAT
+              if [[ "$BRANCH" != "develop" ]]; then
+                echo "Error: Only 'develop' branch can deploy to UAT environment. Current branch: '$BRANCH'"
+                exit 1
+              fi
+              echo "Develop branch can deploy to UAT environment"
+              ;;
+            "prd")
+              # Only master branch can deploy to production
+              if [[ "$BRANCH" != "master" ]]; then
+                echo "Error: Only 'master' branch can deploy to production environment. Current branch: '$BRANCH'"
+                exit 1
+              fi
+              echo "master branch can deploy to production environment"
+              ;;
+            *)
+              echo "Error: Unknown environment '$ENVIRONMENT'"
+              exit 1
+              ;;
+          esac
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+  deploy:
+    name: Deploy to ${{ github.event.inputs.environment }}
+    needs: prepare-and-validate
+    uses: CloverHealth/ccaas-shared-pipelines/.github/workflows/aws_infrastructure_deploy.yml@master
+    with:
+      WORKING_DIRECTORY: resources
+      ENVIRONMENTS_CONFIG_DIR: environments
+      AWS_REGION: us-east-1
+      CI_ENVIRONMENT_NAME: ${{ github.event.inputs.environment }}
+    secrets:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
