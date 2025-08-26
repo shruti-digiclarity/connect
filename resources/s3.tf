@@ -1,6 +1,6 @@
 # Existing S3 bucket configurations (unchanged)
 module "s3_call_recording" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=master"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.1"
   bucket_name              = format("%s-s3-call-recording-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
@@ -20,7 +20,7 @@ module "s3_call_recording" {
 }
 
 module "s3_schedueled_report" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=master"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.1"
   bucket_name              = format("%s-s3-schedule-reports-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
@@ -40,7 +40,7 @@ module "s3_schedueled_report" {
 }
 
 module "s3_voice_mail_recording" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=master"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.1"
   bucket_name              = format("%s-s3-voice-mail-recording-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
@@ -70,7 +70,7 @@ module "s3_voice_mail_recording" {
 }
 
 module "s3_voice_mail_transcript" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=master"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.1"
   bucket_name              = format("%s-s3-voice-mail-transcript-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
@@ -101,7 +101,7 @@ module "s3_voice_mail_transcript" {
 
 # New S3 bucket for connect
 module "s3_connect" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=master"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.1"
   bucket_name              = format("%s-s3-connect-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
