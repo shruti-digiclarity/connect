@@ -1,5 +1,5 @@
 module "kinesis" {
-  source              = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-kinesis-stream-wrapper?ref=v1.0.0"
+  source              = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-kinesis-stream-wrapper?ref=v1.0.1"
   kinesis_stream_name = format("%s-customer-stream-%s-%s", var.company_prefix, local.region_prefix, var.env)
   #shard_count               = 1
   retention_period          = 24
