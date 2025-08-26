@@ -1,4 +1,4 @@
-name: Create Amazon Connect Agent Statuses
+name: Create Amazon Connect Agent Status
 
 on:
   workflow_dispatch:
