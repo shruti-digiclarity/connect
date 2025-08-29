@@ -1,5 +1,5 @@
 module "voice_mail_packager_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-voice-mail-packager-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_packager.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
@@ -22,7 +22,7 @@ module "voice_mail_packager_lambda" {
 }
 
 module "kvs_to_s3_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-kvs-to-s3-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_kvs_to_s3.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
@@ -52,7 +52,7 @@ module "kvs_to_s3_lambda" {
 }
 
 module "voice_mail_presigner_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-voice-mail-presigner-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_presigner.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
@@ -67,7 +67,7 @@ module "voice_mail_presigner_lambda" {
 }
 
 module "voice_mail_transcriber_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-voice-mail-transcriber-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_transcriber.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
@@ -85,7 +85,7 @@ module "voice_mail_transcriber_lambda" {
 }
 
 module "get_connect_config_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-get-connect-config-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = local.lambda_default_configurations.handler
   runtime                 = local.lambda_default_configurations.runtime
@@ -103,7 +103,7 @@ module "get_connect_config_lambda" {
 }
 
 module "check_holiday_and_hoop_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-check-holiday-and-hoop-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = local.lambda_default_configurations.handler
   runtime                 = local.lambda_default_configurations.runtime
@@ -121,7 +121,7 @@ module "check_holiday_and_hoop_lambda" {
 }
 
 module "match_extension_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-match-extension-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = local.lambda_default_configurations.handler
   runtime                 = local.lambda_default_configurations.runtime
@@ -143,7 +143,7 @@ module "match_extension_lambda" {
 }
 
 module "load_config_data_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-load-config-data-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = local.lambda_default_configurations.handler
   runtime                 = local.lambda_default_configurations.runtime
@@ -162,7 +162,7 @@ module "load_config_data_lambda" {
 }
 
 module "lead_generation_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-lead-generation-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = local.lambda_node_default_configurations.handler
   runtime                 = local.lambda_node_default_configurations.runtime
@@ -180,7 +180,7 @@ module "lead_generation_lambda" {
 }
 
 module "campaign_attribution_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.1"
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
   name                    = format("%s-lmda-campaign-attribution-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = local.lambda_node_default_configurations.handler
   runtime                 = local.lambda_node_default_configurations.runtime

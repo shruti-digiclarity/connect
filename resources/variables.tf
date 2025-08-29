@@ -73,3 +73,21 @@ variable "is_primary" {
   type    = bool
   default = false
 }
+
+variable "s3_destination_bucket_name" {
+  description = "The ARN of the destination S3 bucket for replication."
+  type        = string
+}
+variable "s3_destination_account_id" {
+  description = "The account ID of the destination S3 bucket for replication."
+  type        = string
+}
+variable "s3_destination_region" {
+  description = "The region of the destination S3 bucket for replication."
+  type        = string
+}
+
+variable "destination_kms_key_id" {
+  description = "The KMS key ARN for the destination bucket."
+  type        = string
+}

@@ -1,5 +1,5 @@
 module "firehose_connect" {
-  source                      = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-kinesis-firehose-wrapper?ref=v1.0.1"
+  source                      = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-kinesis-firehose-wrapper?ref=v1.0.2"
   name                        = format("%s-firehose-connect-%s-%s", var.company_prefix, local.region_prefix, var.env)
   destination                 = "s3"
   s3_prefix                   = "CTR/"
