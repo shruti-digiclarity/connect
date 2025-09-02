@@ -171,5 +171,95 @@ locals {
       }
       description = "TruHearing"
     }
+    "Ascend Medical" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18663490483"
+        }
+      }
+      description = "Ascend Medical"
+    }
+    "Behavioral Health" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18003308913"
+        }
+      }
+      description = "Behavioral Health"
+    }
+    "CVS Caremark" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18005528159"
+        }
+      }
+      description = "CVS Caremark"
+    }
+    "DentaQuest/ EyeQuest (TX)" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18008962373"
+        }
+      }
+      description = "DentaQuest/ EyeQuest (TX)"
+    }
+    "Health Tap" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18889742651"
+        }
+      }
+      description = "Health Tap"
+    }
+    "Language Line" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18337141339"
+        }
+      }
+      description = "Language Line"
+    }
+    "Matrix" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18884659032"
+        }
+      }
+      description = "Matrix"
+    }
+    "Telesales" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18008366890"
+        }
+      }
+      description = "Telesales"
+    }
+    "Reminder Call" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18882547488"
+        }
+      }
+      description = "Reminder Call"
+    }
+    "IHC Enrollment" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+12015024800"
+        }
+      }
+      description = "IHC Enrollment"
+    }
   }
 }
