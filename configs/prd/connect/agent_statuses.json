@@ -14,5 +14,9 @@
   {
     "name": "Training",
     "state": "ENABLED"
+  },
+  {
+    "name": "Pre Shift",
+    "state": "ENABLED"
   }
 ]
