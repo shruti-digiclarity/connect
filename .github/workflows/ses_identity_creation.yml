@@ -3,7 +3,6 @@ name: Create SES Email Identity
 on:
   workflow_dispatch:
     inputs:
-      inputs:
       environment:
         description: "Environment"
         required: true
