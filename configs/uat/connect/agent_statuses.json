@@ -16,7 +16,47 @@
     "state": "ENABLED"
   },
   {
+    "name": "ADA Break",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Additional Wrap Time",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Coaching",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Grievance Writing",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Meeting",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Personal",
+    "state": "ENABLED"
+  },
+  {
     "name": "Pre Shift",
+    "state": "ENABLED"
+  },
+  {
+    "name": "End Shift",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Project",
+    "state": "ENABLED"
+  },
+  {
+    "name": "SME",
+    "state": "ENABLED"
+  },
+  {
+    "name": "System Downtime",
     "state": "ENABLED"
   }
 ]
