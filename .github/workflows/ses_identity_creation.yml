@@ -4,9 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        type: string
         description: "Environment"
-        default: "dev"
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+        - dev
+        - uat
+        - prd
       email_identity:
         description: "Email address or domain to verify in AWS SES"
         required: true

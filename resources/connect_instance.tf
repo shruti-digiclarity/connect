@@ -1,5 +1,5 @@
 module "amazon_connect" {
-  source                            = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=v1.0.1"
+  source                            = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-amazonconnect-wrapper?ref=v1.0.2"
   region_prefix                     = local.region_prefix
   company_prefix                    = var.company_prefix
   env                               = var.env

@@ -60,6 +60,7 @@ locals {
     ignore_source_code_hash = true
     tags                    = local.tags
   }
+  call_recording_bucket_name = format("%s-s3-call-recording-%s-%s", var.company_prefix, local.region_prefix, var.env)
 
   tags = {
     company    = var.company
@@ -100,6 +101,36 @@ locals {
         {
           type        = "Service"
           identifiers = ["kinesisvideo.amazonaws.com"]
+        }
+      ]
+    },
+    {
+      sid = "AllowS3ReplicationDecrypt"
+      actions = [
+        "kms:Decrypt*",
+        "kms:DescribeKey"
+      ]
+      resources = ["*"]
+      principals = [
+        {
+          type        = "AWS"
+          identifiers = [module.iam_role.iam_role_arn]
+        }
+      ]
+      conditions = [
+        {
+          test     = "StringLike"
+          variable = "kms:EncryptionContext:aws:s3:arn"
+          values = [
+            "arn:aws:s3:::${local.call_recording_bucket_name}/*"
+          ]
+        },
+        {
+          test     = "StringEquals"
+          variable = "kms:ViaService"
+          values = [
+            "s3.us-east-1.amazonaws.com"
+          ]
         }
       ]
     }
