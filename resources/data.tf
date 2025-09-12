@@ -295,3 +295,16 @@ data "aws_iam_policy_document" "campaign_attribution_lambda_policy" {
     ]
   }
 }
+
+data "aws_iam_policy_document" "slack_notifier_lambda_policy" {
+  version = "2012-10-17"
+  statement {
+    sid     = "AllowSecretsManager"
+    effect  = "Allow"
+    actions = ["secretsmanager:GetSecretValue"]
+    resources = [
+      module.connect_slack_notifier_secret.secret_arn[0]
+    ]
+  }
+}
+

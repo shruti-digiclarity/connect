@@ -91,3 +91,8 @@ variable "destination_kms_key_id" {
   description = "The KMS key ARN for the destination bucket."
   type        = string
 }
+
+variable "slack_notification_channel" {
+  type        = string
+  description = "Slack channel to send lambda error notification to"
+}
