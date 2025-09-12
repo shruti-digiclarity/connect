@@ -214,6 +214,18 @@ module "slack_notifier_lambda" {
     SLACK_CHANNEL = var.slack_notification_channel
   }
   tags = local.lambda_node_default_configurations.tags
+  allowed_triggers = {
+    AllowLogsInvokeLeadGenerationLambda = {
+      service        = "logs.${local.region}"
+      action         = "lambda:InvokeFunction"
+      source_arn     = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
+    }
+    AllowLogsInvokeCampaignAttributionLambda = {
+      service        = "logs.${local.region}"
+      action         = "lambda:InvokeFunction"
+      source_arn     = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
+    }
+  }
 }
 
 
