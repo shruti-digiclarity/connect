@@ -209,6 +209,7 @@ module "slack_notifier_lambda" {
   ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["slack_notifier_lambda_policy"]
+  publish                 = true  # make current versioned trigger works with aws lambda permission
   environment_variables = {
     ENV = var.env
     SLACK_CHANNEL = var.slack_notification_channel
