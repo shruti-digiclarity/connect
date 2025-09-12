@@ -64,7 +64,7 @@
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "477e3014-44a3-4463-a097-3648a1a40c54",
+            "id": "5c768fd3-d4dd-408a-a8d3-12b2403d2eaa",
             "operator": {
               "name": "Equals",
               "value": "Equals",
@@ -109,7 +109,7 @@
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "66ddf086-9bc3-4514-bf4a-a6416ac65d06",
+            "id": "9ad3fcfe-fe8a-4e68-91dc-8a79da538388",
             "operator": {
               "name": "Equals",
               "value": "Equals",
@@ -237,12 +237,6 @@
             },
             "ch-error-queue-arn": {
               "useDynamic": true
-            },
-            "voice-engine-en": {
-              "useDynamic": true
-            },
-            "voice-style-en": {
-              "useDynamic": true
             }
           }
         },
@@ -260,9 +254,7 @@
           "isTestCall",
           "collectExtention",
           "ch-lmda-ivr-get-connect-config-arn",
-          "ch-error-queue-arn",
-          "voice-engine-en",
-          "voice-style-en"
+          "ch-error-queue-arn"
         ]
       },
       "Logging enabled?": {
@@ -274,31 +266,13 @@
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "e49c8a6f-64e8-4acf-87f0-a83fe032a8a1",
+            "id": "0f7cf531-7df6-43d7-897e-b37c4217af92",
             "operator": {
               "name": "Equals",
               "value": "Equals",
               "shortDisplay": "="
             },
             "value": "false"
-          }
-        ]
-      },
-      "4c44110a-a63f-4842-9b08-ec11026a5218": {
-        "position": {
-          "x": 905.6,
-          "y": 421.6
-        },
-        "conditions": [],
-        "conditionMetadata": [
-          {
-            "id": "fba2f432-6fe8-48ed-be5a-276a021daac1",
-            "operator": {
-              "name": "Equals",
-              "value": "Equals",
-              "shortDisplay": "="
-            },
-            "value": "CCV"
           }
         ]
       },
@@ -309,7 +283,7 @@
         },
         "parameters": {
           "Attributes": {
-            "ch-ccvlob-queue-es": {
+            "ch-ccvlob-queue-sp": {
               "useDynamic": true
             },
             "ch-ccvlob-queue-en": {
@@ -318,8 +292,26 @@
           }
         },
         "dynamicParams": [
-          "ch-ccvlob-queue-es",
+          "ch-ccvlob-queue-sp",
           "ch-ccvlob-queue-en"
+        ]
+      },
+      "4c44110a-a63f-4842-9b08-ec11026a5218": {
+        "position": {
+          "x": 905.6,
+          "y": 422.4
+        },
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "f1134909-1e5f-4040-bf09-7b53f10088d8",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "ccv"
+          }
         ]
       }
     },
@@ -668,9 +660,7 @@
           "isTestCall": "$.External.isTestCall",
           "collectExtention": "$.External.collectExtention",
           "ch-lmda-ivr-get-connect-config-arn": "$.External.ch-lmda-ivr-get-connect-config-arn",
-          "ch-error-queue-arn": "$.External.ch-error-queue-arn",
-          "voice-engine-en": "$.External.voice-engine-en",
-          "voice-style-en": "$.External.voice-style-en"
+          "ch-error-queue-arn": "$.External.ch-error-queue-arn"
         },
         "TargetContact": "Current"
       },
@@ -715,35 +705,8 @@
     },
     {
       "Parameters": {
-        "ComparisonValue": "$.Attributes.lobName"
-      },
-      "Identifier": "4c44110a-a63f-4842-9b08-ec11026a5218",
-      "Type": "Compare",
-      "Transitions": {
-        "NextAction": "Logging enabled?",
-        "Conditions": [
-          {
-            "NextAction": "cc2a2061-e81c-47b1-8b7e-b47e63ac9c11",
-            "Condition": {
-              "Operator": "Equals",
-              "Operands": [
-                "CCV"
-              ]
-            }
-          }
-        ],
-        "Errors": [
-          {
-            "NextAction": "Logging enabled?",
-            "ErrorType": "NoMatchingCondition"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
         "Attributes": {
-          "ch-ccvlob-queue-es": "$.External.ch-ccvlob-queue-es",
+          "ch-ccvlob-queue-sp": "$.External.ch-ccvlob-queue-sp",
           "ch-ccvlob-queue-en": "$.External.ch-ccvlob-queue-en"
         },
         "TargetContact": "Current"
@@ -756,6 +719,33 @@
           {
             "NextAction": "Logging enabled?",
             "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.lobName"
+      },
+      "Identifier": "4c44110a-a63f-4842-9b08-ec11026a5218",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Logging enabled?",
+        "Conditions": [
+          {
+            "NextAction": "cc2a2061-e81c-47b1-8b7e-b47e63ac9c11",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "ccv"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Logging enabled?",
+            "ErrorType": "NoMatchingCondition"
           }
         ]
       }
