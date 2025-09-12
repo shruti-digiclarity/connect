@@ -64,7 +64,7 @@
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "5c768fd3-d4dd-408a-a8d3-12b2403d2eaa",
+            "id": "ab31fdb5-b993-47e4-be60-52a5d9469ad5",
             "operator": {
               "name": "Equals",
               "value": "Equals",
@@ -109,7 +109,7 @@
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "9ad3fcfe-fe8a-4e68-91dc-8a79da538388",
+            "id": "90cdfbc8-4c4f-4c18-8b35-cef8490cdaac",
             "operator": {
               "name": "Equals",
               "value": "Equals",
@@ -266,13 +266,31 @@
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "0f7cf531-7df6-43d7-897e-b37c4217af92",
+            "id": "38893e25-3eb7-4ba0-a70f-1be579bda2ec",
             "operator": {
               "name": "Equals",
               "value": "Equals",
               "shortDisplay": "="
             },
             "value": "false"
+          }
+        ]
+      },
+      "4c44110a-a63f-4842-9b08-ec11026a5218": {
+        "position": {
+          "x": 905.6,
+          "y": 422.4
+        },
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "fa7421a5-b6ee-4b0b-9180-5aeb7ac04447",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "ccv"
           }
         ]
       },
@@ -294,24 +312,6 @@
         "dynamicParams": [
           "ch-ccvlob-queue-sp",
           "ch-ccvlob-queue-en"
-        ]
-      },
-      "4c44110a-a63f-4842-9b08-ec11026a5218": {
-        "position": {
-          "x": 905.6,
-          "y": 422.4
-        },
-        "conditions": [],
-        "conditionMetadata": [
-          {
-            "id": "f1134909-1e5f-4040-bf09-7b53f10088d8",
-            "operator": {
-              "name": "Equals",
-              "value": "Equals",
-              "shortDisplay": "="
-            },
-            "value": "ccv"
-          }
         ]
       }
     },
@@ -705,26 +705,6 @@
     },
     {
       "Parameters": {
-        "Attributes": {
-          "ch-ccvlob-queue-sp": "$.External.ch-ccvlob-queue-sp",
-          "ch-ccvlob-queue-en": "$.External.ch-ccvlob-queue-en"
-        },
-        "TargetContact": "Current"
-      },
-      "Identifier": "cc2a2061-e81c-47b1-8b7e-b47e63ac9c11",
-      "Type": "UpdateContactAttributes",
-      "Transitions": {
-        "NextAction": "Logging enabled?",
-        "Errors": [
-          {
-            "NextAction": "Logging enabled?",
-            "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
         "ComparisonValue": "$.Attributes.lobName"
       },
       "Identifier": "4c44110a-a63f-4842-9b08-ec11026a5218",
@@ -746,6 +726,26 @@
           {
             "NextAction": "Logging enabled?",
             "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "ch-ccvlob-queue-sp": "$.External.ch-ccvlob-queue-es",
+          "ch-ccvlob-queue-en": "$.External.ch-ccvlob-queue-en"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "cc2a2061-e81c-47b1-8b7e-b47e63ac9c11",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "Logging enabled?",
+        "Errors": [
+          {
+            "NextAction": "Logging enabled?",
+            "ErrorType": "NoMatchingError"
           }
         ]
       }
