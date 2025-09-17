@@ -84,4 +84,17 @@ module "iam_user" {
   create_user   = true
   name          = format("%s-iam-vm-s3-presigned-%s-%s", var.company_prefix, local.region_prefix, var.env)
   force_destroy = "true"
+  inline_policy_statements = [
+    {
+      sid    = "S3BucketPermissions"
+      effect = "Allow"
+      actions = [
+        "s3:GetObject"
+      ]
+      resources = [
+        module.s3_voice_mail_recording.bucket_arn,
+        "${module.s3_voice_mail_recording.bucket_arn}/*"
+      ]
+    }
+  ]
 }
