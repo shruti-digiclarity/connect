@@ -47,7 +47,7 @@ module "iam_user_crerdentials_secret" {
   source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.2"
 
   items = {
-    connect_lead_generation = {
+    iam_user_crerdentials = {
       name        = format("%s-smgr-iam-vm-user-details-%s-%s", var.company_prefix, local.region_prefix, var.env)
       description = "Secret for IAM user credentials"
       secret_string = jsonencode({
