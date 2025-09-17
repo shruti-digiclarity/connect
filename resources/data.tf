@@ -162,7 +162,7 @@ data "aws_iam_policy_document" "voice_mail_presigner_lambda_policy" {
   statement {
     effect = "Allow"
     actions = [
-      "GetSecretValue"
+      "secretsmanager:GetSecretValue"
     ]
     resources = [
       module.iam_user_crerdentials_secret.secret_arn[0],
