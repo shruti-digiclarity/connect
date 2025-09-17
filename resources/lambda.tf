@@ -56,7 +56,7 @@ module "voice_mail_presigner_lambda" {
   name                    = format("%s-lmda-voice-mail-presigner-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_presigner.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-presigner.zip"
+  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-presigner-v2.zip"
   layers                  = []
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
@@ -209,22 +209,22 @@ module "slack_notifier_lambda" {
   ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["slack_notifier_lambda_policy"]
-  publish                 = true  # make current versioned trigger works with aws lambda permission
+  publish                 = true # make current versioned trigger works with aws lambda permission
   environment_variables = {
-    ENV = var.env
+    ENV           = var.env
     SLACK_CHANNEL = var.slack_notification_channel
   }
   tags = local.lambda_node_default_configurations.tags
   allowed_triggers = {
     AllowLogsInvokeLeadGenerationLambda = {
-      service        = "logs.${var.region}"
-      action         = "lambda:InvokeFunction"
-      source_arn     = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
+      service    = "logs.${var.region}"
+      action     = "lambda:InvokeFunction"
+      source_arn = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
     }
     AllowLogsInvokeCampaignAttributionLambda = {
-      service        = "logs.${var.region}"
-      action         = "lambda:InvokeFunction"
-      source_arn     = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
+      service    = "logs.${var.region}"
+      action     = "lambda:InvokeFunction"
+      source_arn = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
     }
   }
 }
