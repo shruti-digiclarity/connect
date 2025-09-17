@@ -5,7 +5,8 @@
       "Sid": "S3BucketPermissions",
       "Effect": "Allow",
       "Action": [
-        "s3:GetObject"
+        "s3:GetObject",
+        "kms:Decrypt"
       ],
       "Resource": [
         "${bucket_arn}",
