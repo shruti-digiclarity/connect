@@ -5,12 +5,21 @@
       "Sid": "S3BucketPermissions",
       "Effect": "Allow",
       "Action": [
-        "s3:GetObject",
-        "kms:Decrypt"
+        "s3:GetObject"
       ],
       "Resource": [
         "${bucket_arn}",
         "${bucket_arn}/*"
+      ]
+    },
+    {
+      "Sid": "S3BucketPermissions",
+      "Effect": "Allow",
+      "Action": [
+        "kms:Decrypt"
+      ],
+      "Resource": [
+        "*"
       ]
     }
   ]
