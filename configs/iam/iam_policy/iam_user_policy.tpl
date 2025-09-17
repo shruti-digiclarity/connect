@@ -13,7 +13,7 @@
       ]
     },
     {
-      "Sid": "S3BucketPermissions",
+      "Sid": "KmsPermission",
       "Effect": "Allow",
       "Action": [
         "kms:Decrypt"
