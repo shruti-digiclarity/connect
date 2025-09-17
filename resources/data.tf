@@ -159,16 +159,16 @@ data "aws_iam_policy_document" "voice_mail_presigner_lambda_policy" {
       "arn:aws:kms:${var.region}:${var.account_number}:key/*"
     ]
   }
-  # statement {
-  #   effect = "Allow"
-  #   actions = [
-  #     "GetSecretValue"
-  #   ]
-  #   resources = [
-  #     module.iam_user_crerdentials_secret.secret_arn,
-  #     "${module.iam_user_crerdentials_secret.secret_arn}/*"
-  #   ]
-  # }
+  statement {
+    effect = "Allow"
+    actions = [
+      "GetSecretValue"
+    ]
+    resources = [
+      module.iam_user_crerdentials_secret.secret_arn,
+      "${module.iam_user_crerdentials_secret.secret_arn}/*"
+    ]
+  }
 }
 
 

@@ -15,7 +15,7 @@ output "kinesis_stream_arn" {
 }
 
 output "secret_arn" {
-  description = "ARN of the Kinesis stream for media streams."
+  description = "Secret ARN for IAM user credentials."
   value       = module.iam_user_crerdentials_secret.secret_arn
 }
 
