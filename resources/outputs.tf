@@ -14,8 +14,8 @@ output "kinesis_stream_arn" {
   value       = module.kinesis.kinesis_stream_arn
 }
 
-output "iam_policy_arn" {
+output "secret_arn" {
   description = "ARN of the Kinesis stream for media streams."
-  value       = module.iam_user_policy
+  value       = module.iam_user_crerdentials_secret.secret_arn
 }
 
