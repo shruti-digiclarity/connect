@@ -63,7 +63,10 @@ module "voice_mail_presigner_lambda" {
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["voice_mail_presigner_lambda_policy"]
-  tags                    = local.lambda_default_configurations.tags
+  environment_variables = {
+    secrets_key_id = module.iam_user_crerdentials_secret.secret_arn
+  }
+  tags = local.lambda_default_configurations.tags
 }
 
 module "voice_mail_transcriber_lambda" {
