@@ -43,7 +43,7 @@ module "connect_slack_notifier_secret" {
   }
 }
 
-module "ima_user_crerdentials_secret" {
+module "iam_user_crerdentials_secret" {
   source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.2"
 
   items = {
