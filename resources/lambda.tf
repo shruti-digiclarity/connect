@@ -64,7 +64,7 @@ module "voice_mail_presigner_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["voice_mail_presigner_lambda_policy"]
   environment_variables = {
-    secrets_key_id = module.iam_user_crerdentials_secret.secret_arn
+    secrets_key_id = module.iam_user_crerdentials_secret.secret_arn[0]
   }
   tags = local.lambda_default_configurations.tags
 }
