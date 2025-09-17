@@ -101,7 +101,7 @@ module "iam_user" {
   create_user   = true
   name          = format("%s-iam-vm-s3-presigned-%s-%s", var.company_prefix, local.region_prefix, var.env)
   force_destroy = "true"
-  policy_arn = [
-    module.iam_user_policy.policy_arn
-  ]
+  policy_arns = {
+    s3_access = module.iam_user_policy.policy_arn
+  }
 }
