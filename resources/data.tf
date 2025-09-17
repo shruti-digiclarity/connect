@@ -165,8 +165,8 @@ data "aws_iam_policy_document" "voice_mail_presigner_lambda_policy" {
       "GetSecretValue"
     ]
     resources = [
-      module.iam_user_crerdentials_secret.secret_arn,
-      "${module.iam_user_crerdentials_secret.secret_arn}/*"
+      module.iam_user_crerdentials_secret.secret_arn[0],
+      "${module.iam_user_crerdentials_secret.secret_arn[0]}/*"
     ]
   }
 }
