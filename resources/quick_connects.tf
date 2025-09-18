@@ -307,112 +307,112 @@ locals {
       description = "IHC"
     }
     "Community Surgical" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18003492990"
-                }
-            }
-            description = "Community Surgical"
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18003492990"
         }
-        "Centauri" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18772364471"
-                }
-            }
-            description = "Centauri"
+      }
+      description = "Community Surgical"
+    }
+    "Centauri" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18772364471"
         }
-        "Ocean Home health" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18882943352"
-                }
-            }
-            description = "Ocean Home health"
+      }
+      description = "Centauri"
+    }
+    "Ocean Home health" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18882943352"
         }
-        "CVS PPO Backdoor" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18889700877"
-                }
-            }
-            description = "CVS PPO Backdoor"
+      }
+      description = "Ocean Home health"
+    }
+    "CVS PPO Backdoor" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18889700877"
         }
-        "CVS HMO Backdoor" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18889700875"
-                }
-            }
-            description = "CVS HMO Backdoor"
+      }
+      description = "CVS PPO Backdoor"
+    }
+    "CVS HMO Backdoor" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18889700875"
         }
-        "UM" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18889951690"
-                }
-            }
-            description = "UM"
+      }
+      description = "CVS HMO Backdoor"
+    }
+    "UM" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18889951690"
         }
-        "Divine Medical Supply" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+19739005920"
-                }
-            }
-            description = "Divine Medical Supply"
+      }
+      description = "UM"
+    }
+    "Divine Medical Supply" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+19739005920"
         }
-        "Livanta" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18668155440"
-                }
-            }
-            description = "Livanta"
+      }
+      description = "Divine Medical Supply"
+    }
+    "Livanta" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18668155440"
         }
-        "Teladoc" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18008352362"
-                }
-            }
-            description = "Teladoc"
+      }
+      description = "Livanta"
+    }
+    "Teladoc" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18008352362"
         }
-        "Integra" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18887298818"
-                }
-            }
-            description = "Integra"
+      }
+      description = "Teladoc"
+    }
+    "Integra" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18887298818"
         }
-        "Forefront" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18666117873"
-                }
-            }
-            description = "Forefront"
+      }
+      description = "Integra"
+    }
+    "Forefront" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18666117873"
         }
-        "Tru_Hearing" = {
-            quick_connect_config = {
-                quick_connect_type = "PHONE_NUMBER"
-                phone_config = {
-                    phone_number = "+18552055574"
-                }
-            }
-            description = "Tru_Hearing"
+      }
+      description = "Forefront"
+    }
+    "Tru_Hearing" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18552055574"
         }
+      }
+      description = "Tru_Hearing"
+    }
   }
 }
