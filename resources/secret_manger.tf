@@ -48,3 +48,18 @@ module "iam_user_crerdentials_secret" {
     }
   }
 }
+
+module "connect_slack_notifier_secret" {
+  source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.2"
+
+  items = {
+    connect_lead_generation = {
+      name                    = "aws-connect-slack-notifier"
+      description             = "Secret for connect slack notifier"
+      secret_string           = jsonencode({})
+      tags                    = local.tags
+      create                  = true
+      recovery_window_in_days = 30
+    }
+  }
+}
