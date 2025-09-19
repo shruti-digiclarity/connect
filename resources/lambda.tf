@@ -207,30 +207,44 @@ module "slack_notifier_lambda" {
   runtime                 = local.lambda_node_default_configurations.runtime
   local_existing_package  = local.lambda_node_default_configurations.package
   layers                  = []
-  timeout                 = 3
+  timeout                 = 900
   memory_size             = local.lambda_node_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["slack_notifier_lambda_policy"]
-  publish                 = true # make current versioned trigger works with aws lambda permission
+  publish                 = true  # make current versioned trigger works with aws lambda permission
+  create = {
+    # IMPORTANT: do not create triggers on the current version, since we are using alias
+    cv_allowed_triggers = false
+    unq_alias_allowed_triggers = false
+  }
   environment_variables = {
-    ENV           = var.env
+    ENV = var.env
     SLACK_CHANNEL = var.slack_notification_channel
   }
   tags = local.lambda_node_default_configurations.tags
-  allowed_triggers = {
-    AllowLogsInvokeLeadGenerationLambda = {
-      service    = "logs.${var.region}"
-      action     = "lambda:InvokeFunction"
-      source_arn = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
-    }
-    AllowLogsInvokeCampaignAttributionLambda = {
-      service    = "logs.${var.region}"
-      action     = "lambda:InvokeFunction"
-      source_arn = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
-    }
-  }
+
+  allowed_triggers = {} # be explicit; keep empty here
 }
 
+module "slack_notifier_lambda_alias_live" {
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-lambda/modules/alias?ref=v1.0.2"
 
+  name                    = "live"
+  function_name           = module.slack_notifier_lambda.lambda_function_name
+  function_version        = module.slack_notifier_lambda.lambda_function_version
 
+  allowed_triggers = {
+    # AllowLogsInvokeLeadGenerationLambda = {
+    #   service        = "logs.${var.region}"
+    #   action         = "lambda:InvokeFunction"
+    #   source_arn     = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
+    # }
+    # AllowLogsInvokeCampaignAttributionLambda = {
+    #   service        = "logs.${var.region}"
+    #   action         = "lambda:InvokeFunction"
+    #   source_arn     = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
+    # }
+  }
+
+}   
