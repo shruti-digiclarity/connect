@@ -200,37 +200,4 @@ module "campaign_attribution_lambda" {
   tags = local.lambda_node_default_configurations.tags
 }
 
-module "slack_notifier_lambda" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.2"
-  name                    = format("%s-lmda-slack-notifier-%s-%s", var.company_prefix, local.region_prefix, var.env)
-  handler                 = local.lambda_node_default_configurations.handler
-  runtime                 = local.lambda_node_default_configurations.runtime
-  local_existing_package  = local.lambda_node_default_configurations.package
-  layers                  = []
-  timeout                 = 3
-  memory_size             = local.lambda_node_default_configurations.memory_size
-  ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
-  attach                  = { policy_jsons = true }
-  iam_configuration       = local.lambda_iam_configurations["slack_notifier_lambda_policy"]
-  publish                 = true # make current versioned trigger works with aws lambda permission
-  environment_variables = {
-    ENV           = var.env
-    SLACK_CHANNEL = var.slack_notification_channel
-  }
-  tags = local.lambda_node_default_configurations.tags
-  allowed_triggers = {
-    AllowLogsInvokeLeadGenerationLambda = {
-      service    = "logs.${var.region}"
-      action     = "lambda:InvokeFunction"
-      source_arn = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
-    }
-    AllowLogsInvokeCampaignAttributionLambda = {
-      service    = "logs.${var.region}"
-      action     = "lambda:InvokeFunction"
-      source_arn = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
-    }
-  }
-}
-
-
 

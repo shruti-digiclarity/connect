@@ -221,9 +221,5 @@ locals {
       number_of_policy_jsons = 1
       policy_jsons           = [data.aws_iam_policy_document.campaign_attribution_lambda_policy.json]
     }
-    slack_notifier_lambda_policy = {
-      number_of_policy_jsons = 1
-      policy_jsons           = [data.aws_iam_policy_document.slack_notifier_lambda_policy.json]
-    }
   }
 }
