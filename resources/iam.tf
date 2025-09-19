@@ -77,3 +77,19 @@ module "iam_role" {
     }
   ]
 }
+
+module "iam_user_policy" {
+  source        = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-iam//modules//iam-policy?ref=master"
+  create_policy = true
+  name          = format("%s-iam-vm-s3-presigned-%s-%s", var.company_prefix, local.region_prefix, var.env)
+  policy = templatefile("../configs/iam/iam_policy/iam_user_policy.tpl", {
+    bucket_arn = module.s3_voice_mail_recording.bucket_arn
+  })
+}
+module "iam_user" {
+  source        = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-iam//modules//iam-user?ref=master"
+  create_user   = true
+  name          = format("%s-iam-vm-s3-presigned-%s-%s", var.company_prefix, local.region_prefix, var.env)
+  force_destroy = "true"
+  policy_arns   = [module.iam_user_policy.arn]
+}

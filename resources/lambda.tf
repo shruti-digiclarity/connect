@@ -56,14 +56,17 @@ module "voice_mail_presigner_lambda" {
   name                    = format("%s-lmda-voice-mail-presigner-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_presigner.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-presigner.zip"
+  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-presigner-v2.zip"
   layers                  = []
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["voice_mail_presigner_lambda_policy"]
-  tags                    = local.lambda_default_configurations.tags
+  environment_variables = {
+    secrets_key_id = module.iam_user_crerdentials_secret.secret_arn[0]
+  }
+  tags = local.lambda_default_configurations.tags
 }
 
 module "voice_mail_transcriber_lambda" {
@@ -73,7 +76,7 @@ module "voice_mail_transcriber_lambda" {
   runtime                 = local.lambda_default_configurations.runtime
   local_existing_package  = "../lambda_function/ch-lmda-voice-mail-transcriber.zip"
   layers                  = []
-  timeout                 = 3
+  timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
@@ -91,7 +94,7 @@ module "get_connect_config_lambda" {
   runtime                 = local.lambda_default_configurations.runtime
   local_existing_package  = local.lambda_default_configurations.package
   layers                  = []
-  timeout                 = 3
+  timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
@@ -109,7 +112,7 @@ module "check_holiday_and_hoop_lambda" {
   runtime                 = local.lambda_default_configurations.runtime
   local_existing_package  = local.lambda_default_configurations.package
   layers                  = [module.check_holiday_and_hoop_lambda_backend.lambda_layer_arn]
-  timeout                 = 3
+  timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
@@ -127,7 +130,7 @@ module "match_extension_lambda" {
   runtime                 = local.lambda_default_configurations.runtime
   local_existing_package  = local.lambda_default_configurations.package
   layers                  = []
-  timeout                 = 3
+  timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
@@ -168,7 +171,7 @@ module "lead_generation_lambda" {
   runtime                 = local.lambda_node_default_configurations.runtime
   local_existing_package  = local.lambda_node_default_configurations.package
   layers                  = []
-  timeout                 = 3
+  timeout                 = 900
   memory_size             = local.lambda_node_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
@@ -186,7 +189,7 @@ module "campaign_attribution_lambda" {
   runtime                 = local.lambda_node_default_configurations.runtime
   local_existing_package  = local.lambda_node_default_configurations.package
   layers                  = []
-  timeout                 = 3
+  timeout                 = 900
   memory_size             = local.lambda_node_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
@@ -196,4 +199,5 @@ module "campaign_attribution_lambda" {
   }
   tags = local.lambda_node_default_configurations.tags
 }
+
 
