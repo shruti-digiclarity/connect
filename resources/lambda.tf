@@ -227,9 +227,9 @@ module "slack_notifier_lambda" {
 module "slack_notifier_lambda_alias_live" {
   source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper/alias?ref=v1.0.2"
 
-  name            = "live"
-  function_name   = module.slack_notifier_lambda.lambda_function_name
-  function_version= module.slack_notifier_lambda.lambda_function_version
+  name                    = "live"
+  function_name           = module.slack_notifier_lambda.lambda_function_name
+  function_version        = module.slack_notifier_lambda.lambda_function_version
 
   allowed_triggers = {
     AllowLogsInvokeLeadGenerationLambda = {
