@@ -235,16 +235,15 @@ module "slack_notifier_lambda_alias_live" {
   function_version        = module.slack_notifier_lambda.lambda_function_version
 
   allowed_triggers = {
-    # AllowLogsInvokeLeadGenerationLambda = {
-    #   service        = "logs.${var.region}"
-    #   action         = "lambda:InvokeFunction"
-    #   source_arn     = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
-    # }
-    # AllowLogsInvokeCampaignAttributionLambda = {
-    #   service        = "logs.${var.region}"
-    #   action         = "lambda:InvokeFunction"
-    #   source_arn     = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
-    # }
+    AllowLogsInvokeLeadGenerationLambda = {
+      service        = "logs.${var.region}"
+      action         = "lambda:InvokeFunction"
+      source_arn     = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
+    }
+    AllowLogsInvokeCampaignAttributionLambda = {
+      service        = "logs.${var.region}"
+      action         = "lambda:InvokeFunction"
+      source_arn     = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
+    }
   }
-
 }   
