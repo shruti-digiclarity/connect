@@ -207,7 +207,7 @@ module "slack_notifier_lambda" {
   runtime                 = local.lambda_node_default_configurations.runtime
   local_existing_package  = local.lambda_node_default_configurations.package
   layers                  = []
-  timeout                 = 3
+  timeout                 = 900
   memory_size             = local.lambda_node_default_configurations.memory_size
   ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
