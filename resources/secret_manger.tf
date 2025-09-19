@@ -60,6 +60,7 @@ module "iam_user_crerdentials_secret" {
       tags                    = local.tags
       create                  = true
       recovery_window_in_days = 30
+      ignore_secret_changes   = true
     }
   }
 }
