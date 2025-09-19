@@ -218,6 +218,19 @@ module "slack_notifier_lambda" {
     SLACK_CHANNEL = var.slack_notification_channel
   }
   tags = local.lambda_node_default_configurations.tags
+
+  # IMPORTANT: do not create triggers on the current version, since we are using alias
+  create_current_version_allowed_triggers = false
+  allowed_triggers = {} # be explicit; keep empty here
+}
+
+module "slack_notifier_lambda_alias_live" {
+  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper/alias?ref=v1.0.2"
+
+  name            = "live"
+  function_name   = module.slack_notifier_lambda.lambda_function_name
+  function_version= module.slack_notifier_lambda.lambda_function_version
+
   allowed_triggers = {
     AllowLogsInvokeLeadGenerationLambda = {
       service        = "logs.${var.region}"
@@ -230,4 +243,4 @@ module "slack_notifier_lambda" {
       source_arn     = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
     }
   }
-}
+}   
