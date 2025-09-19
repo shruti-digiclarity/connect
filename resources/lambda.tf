@@ -213,14 +213,16 @@ module "slack_notifier_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["slack_notifier_lambda_policy"]
   publish                 = true  # make current versioned trigger works with aws lambda permission
+  create = {
+    # IMPORTANT: do not create triggers on the current version, since we are using alias
+    cv_allowed_triggers = false
+  }
   environment_variables = {
     ENV = var.env
     SLACK_CHANNEL = var.slack_notification_channel
   }
   tags = local.lambda_node_default_configurations.tags
 
-  # IMPORTANT: do not create triggers on the current version, since we are using alias
-  create_current_version_allowed_triggers = false
   allowed_triggers = {} # be explicit; keep empty here
 }
 
