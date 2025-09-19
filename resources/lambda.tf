@@ -216,6 +216,7 @@ module "slack_notifier_lambda" {
   create = {
     # IMPORTANT: do not create triggers on the current version, since we are using alias
     cv_allowed_triggers = false
+    unq_alias_allowed_triggers = false
   }
   environment_variables = {
     ENV = var.env
