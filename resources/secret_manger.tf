@@ -40,7 +40,6 @@ module "iam_user_crerdentials_secret" {
         access_key_id     = module.iam_user.iam_access_key_id
         secret_access_key = module.iam_user.iam_access_key_secret
         user_arn          = module.iam_user.iam_user_arn
-        created_date      = timestamp()
       })
       tags                    = local.tags
       create                  = true
