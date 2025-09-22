@@ -41,21 +41,7 @@ module "s3_call_recording" {
       delete_marker_replication = "Disabled"
     }
   }
-  lifecycle_rules = [
-    {
-      id     = "s3-call-recording-lifecycle"
-      status = "Enabled"
-      transition = [
-        {
-          days          = 365 # 1 year
-          storage_class = "GLACIER"
-        }
-      ]
-      expiration = {
-        days = 4020 # 11 years
-      }
-    }
-  ]
+  lifecycle_rules = local.s3_lifecycle_rules
   tags = local.tags
 }
 module "s3_schedueled_report" {
