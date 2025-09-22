@@ -317,4 +317,3 @@ data "aws_iam_policy_document" "slack_notifier_lambda_policy" {
     ]
   }
 }
-
