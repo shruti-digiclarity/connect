@@ -41,6 +41,21 @@ module "s3_call_recording" {
       delete_marker_replication = "Disabled"
     }
   }
+  lifecycle_rules = [
+    {
+      id     = "s3-call-recording-lifecycle"
+      status = "Enabled"
+      transition = [
+        {
+          days          = 365 # 1 year
+          storage_class = "GLACIER"
+        }
+      ]
+      expiration = {
+        days = 4020 # 11 years
+      }
+    }
+  ]
   tags = local.tags
 }
 module "s3_schedueled_report" {
@@ -60,6 +75,21 @@ module "s3_schedueled_report" {
       }
     ]
   }
+  lifecycle_rules = [
+    {
+      id     = "s3-scheduled-report-lifecycle"
+      status = "Enabled"
+      transition = [
+        {
+          days          = 365 # 1 year
+          storage_class = "GLACIER"
+        }
+      ]
+      expiration = {
+        days = 4020 # 11 years
+      }
+    }
+  ]
   tags = local.tags
 }
 
@@ -90,6 +120,21 @@ module "s3_voice_mail_recording" {
     }
   }
   versioning_configuration = { status = true, mfa_delete = false }
+  lifecycle_rules = [
+    {
+      id     = "voice-mail-recording-lifecycle"
+      status = "Enabled"
+      transition = [
+        {
+          days          = 365 # 1 year
+          storage_class = "GLACIER"
+        }
+      ]
+      expiration = {
+        days = 4020 # 11 years
+      }
+    }
+  ]
   tags                     = local.tags
 }
 
@@ -121,6 +166,21 @@ module "s3_voice_mail_transcript" {
       }
     }
   }
+  lifecycle_rules = [
+    {
+      id     = "voice-mail-transcript-lifecycle"
+      status = "Enabled"
+      transition = [
+        {
+          days          = 365 # 1 year
+          storage_class = "GLACIER"
+        }
+      ]
+      expiration = {
+        days = 4020 # 11 years
+      }
+    }
+  ]
 }
 
 # New S3 bucket for connect
