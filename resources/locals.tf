@@ -226,4 +226,20 @@ locals {
       policy_jsons           = [data.aws_iam_policy_document.slack_notifier_lambda_policy.json]
     }
   }
+
+  s3_lifecycle_rules = [
+    {
+      id     = "s3-lifecycle-rule"
+      status = "Enabled"
+      transition = [
+        {
+          days          = 365 # 1 year
+          storage_class = "GLACIER"
+        }
+      ]
+      expiration = {
+        days = 4020 # 11 years
+      }
+    }
+  ]
 }
