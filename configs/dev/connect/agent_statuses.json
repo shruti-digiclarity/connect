@@ -70,5 +70,21 @@
   {
     "name": "In Field",
     "state": "ENABLED"
+  },
+  {
+    "name": "Available",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Ready",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Away from Desktop",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Offline",
+    "state": "ENABLED"
   }
 ]
