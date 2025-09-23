@@ -18,15 +18,6 @@ locals {
       }
       description = "CMS Translator Services."
     }
-    "CVS Caremark" = {
-      quick_connect_config = {
-        quick_connect_type = "PHONE_NUMBER"
-        phone_config = {
-          phone_number = "+14803914600"
-        }
-      }
-      description = "CVS Caremark."
-    }
     "DentaQuest" = {
       quick_connect_config = {
         quick_connect_type = "PHONE_NUMBER"
@@ -260,6 +251,168 @@ locals {
         }
       }
       description = "IHC Enrollment"
+    }
+    "Customer Service" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18887781478"
+        }
+      }
+      description = "Customer Service"
+    }
+    "DentaQuest/ EyeQuest (NJ)" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18553437404"
+        }
+      }
+      description = "DentaQuest/ EyeQuest (NJ)"
+    }
+    "DentaQuest/ EyeQuest (PA)" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18008962377"
+        }
+      }
+      description = "DentaQuest/ EyeQuest (PA)"
+    }
+    "DentaQuest/ EyeQuest (SC)" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18006089522"
+        }
+      }
+      description = "DentaQuest/ EyeQuest (SC)"
+    }
+    "DentaQuest/ EyeQuest (GA)" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18003415525"
+        }
+      }
+      description = "DentaQuest/ EyeQuest (GA)"
+    }
+    "IHC" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+12015597600"
+        }
+      }
+      description = "IHC"
+    }
+    "Community Surgical" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18003492990"
+        }
+      }
+      description = "Community Surgical"
+    }
+    "Centauri" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18772364471"
+        }
+      }
+      description = "Centauri"
+    }
+    "Ocean Home health" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18882943352"
+        }
+      }
+      description = "Ocean Home health"
+    }
+    "CVS PPO Backdoor" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18889700877"
+        }
+      }
+      description = "CVS PPO Backdoor"
+    }
+    "CVS HMO Backdoor" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18889700875"
+        }
+      }
+      description = "CVS HMO Backdoor"
+    }
+    "UM" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18889951690"
+        }
+      }
+      description = "UM"
+    }
+    "Divine Medical Supply" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+19739005920"
+        }
+      }
+      description = "Divine Medical Supply"
+    }
+    "Livanta" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18668155440"
+        }
+      }
+      description = "Livanta"
+    }
+    "Teladoc" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18008352362"
+        }
+      }
+      description = "Teladoc"
+    }
+    "Integra" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18887298818"
+        }
+      }
+      description = "Integra"
+    }
+    "Forefront" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18666117873"
+        }
+      }
+      description = "Forefront"
+    }
+    "Tru_Hearing" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18552055574"
+        }
+      }
+      description = "Tru_Hearing"
     }
   }
 }
