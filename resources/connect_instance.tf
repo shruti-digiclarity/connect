@@ -7,7 +7,7 @@ module "amazon_connect" {
   create_instance                   = true
   instance_identity_management_type = "SAML"
   instance_storage_configs          = local.instance_storage_configs
-  multi_party_conference_enabled    = false
+  multi_party_conference_enabled    = true
   hours_of_operations               = local.hours_of_operations
   queues                            = local.queues
   contact_flows                     = local.contact_flows
