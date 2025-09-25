@@ -62,5 +62,17 @@
   {
     "name": "Ready",
     "state": "ENABLED"
+  },
+  {
+    "name": "Technical issues",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Meal",
+    "state": "ENABLED"
+  },
+  {
+    "name": "In Field",
+    "state": "ENABLED"
   }
 ]
