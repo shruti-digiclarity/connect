@@ -41,6 +41,7 @@ module "s3_call_recording" {
       delete_marker_replication = "Disabled"
     }
   }
+  lifecycle_rules = local.s3_lifecycle_rules
   tags = local.tags
 }
 module "s3_schedueled_report" {
@@ -60,6 +61,7 @@ module "s3_schedueled_report" {
       }
     ]
   }
+  lifecycle_rules = local.s3_lifecycle_rules
   tags = local.tags
 }
 
@@ -90,6 +92,7 @@ module "s3_voice_mail_recording" {
     }
   }
   versioning_configuration = { status = true, mfa_delete = false }
+  lifecycle_rules = local.s3_lifecycle_rules
   tags                     = local.tags
 }
 
@@ -121,6 +124,7 @@ module "s3_voice_mail_transcript" {
       }
     }
   }
+  lifecycle_rules = local.s3_lifecycle_rules
 }
 
 # New S3 bucket for connect
