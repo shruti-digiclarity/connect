@@ -54,9 +54,5 @@
   {
     "name": "System Downtime",
     "state": "ENABLED"
-  },
-  {
-    "name": "Ready",
-    "state": "ENABLED"
   }
 ]
