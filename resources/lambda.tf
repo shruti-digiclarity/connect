@@ -3,7 +3,7 @@ module "voice_mail_packager_lambda" {
   name                    = format("%s-lmda-voice-mail-packager-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_packager.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager-v3.zip"
+  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager-v4.zip"
   layers                  = []
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
@@ -100,7 +100,7 @@ module "get_connect_config_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["get_connect_config_lambda_policy"]
   environment_variables = {
-    CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
+    CONFIG_TABLE_NAME             = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
     OUTBOUND_CALLER_ID_TABLE_NAME = "${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${local.region_prefix}-${var.env}"
   }
   tags = local.lambda_default_configurations.tags
@@ -213,14 +213,14 @@ module "slack_notifier_lambda" {
   ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["slack_notifier_lambda_policy"]
-  publish                 = true  # make current versioned trigger works with aws lambda permission
+  publish                 = true # make current versioned trigger works with aws lambda permission
   create = {
     # IMPORTANT: do not create triggers on the current version, since we are using alias
-    cv_allowed_triggers = false
+    cv_allowed_triggers        = false
     unq_alias_allowed_triggers = false
   }
   environment_variables = {
-    ENV = var.env
+    ENV           = var.env
     SLACK_CHANNEL = var.slack_notification_channel
   }
   tags = local.lambda_node_default_configurations.tags
@@ -229,22 +229,22 @@ module "slack_notifier_lambda" {
 }
 
 module "slack_notifier_lambda_alias_live" {
-  source                  = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-lambda/modules/alias?ref=v1.0.2"
+  source = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-lambda/modules/alias?ref=v1.0.2"
 
-  name                    = "live"
-  function_name           = module.slack_notifier_lambda.lambda_function_name
-  function_version        = module.slack_notifier_lambda.lambda_function_version
+  name             = "live"
+  function_name    = module.slack_notifier_lambda.lambda_function_name
+  function_version = module.slack_notifier_lambda.lambda_function_version
 
   allowed_triggers = {
     AllowLogsInvokeLeadGenerationLambda = {
-      service        = "logs.${var.region}"
-      action         = "lambda:InvokeFunction"
-      source_arn     = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
+      service    = "logs.${var.region}"
+      action     = "lambda:InvokeFunction"
+      source_arn = "${module.lead_generation_lambda.lambda_cloudwatch_log_group_arn}:*"
     }
     AllowLogsInvokeCampaignAttributionLambda = {
-      service        = "logs.${var.region}"
-      action         = "lambda:InvokeFunction"
-      source_arn     = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
+      service    = "logs.${var.region}"
+      action     = "lambda:InvokeFunction"
+      source_arn = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
     }
   }
 }   
