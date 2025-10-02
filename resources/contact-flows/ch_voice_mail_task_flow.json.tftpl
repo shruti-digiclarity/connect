@@ -1,10 +1,10 @@
 {
   "Version": "2019-10-30",
-  "StartAction": "Set the target queue",
+  "StartAction": "62e779f7-b338-4be1-9800-8f70d80828db",
   "Metadata": {
     "entryPointPosition": {
-      "x": 20.8,
-      "y": 20
+      "x": -499.2,
+      "y": -133.6
     },
     "ActionMetadata": {
       "End flow": {
@@ -23,8 +23,8 @@
       },
       "Set the target queue": {
         "position": {
-          "x": 140,
-          "y": 17.6
+          "x": -23.2,
+          "y": 60.8
         },
         "isFriendlyName": true,
         "parameters": {
@@ -33,6 +33,37 @@
           }
         },
         "useDynamic": true
+      },
+      "Set the target queue-copy-1": {
+        "position": {
+          "x": 139.2,
+          "y": -165.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "AgentId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "62e779f7-b338-4be1-9800-8f70d80828db": {
+        "position": {
+          "x": -334.4,
+          "y": -162.4
+        },
+        "conditions": [],
+        "conditionMetadata": [
+          {
+            "id": "f96231f8-771c-4aa5-9f93-94380d62df5e",
+            "operator": {
+              "name": "Equals",
+              "value": "Equals",
+              "shortDisplay": "="
+            },
+            "value": "true"
+          }
+        ]
       }
     },
     "Annotations": [],
@@ -79,6 +110,49 @@
           {
             "NextAction": "Route voicemail",
             "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "AgentId": "$.Attributes.agentEmail"
+      },
+      "Identifier": "Set the target queue-copy-1",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "Route voicemail",
+        "Errors": [
+          {
+            "NextAction": "Route voicemail",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.agentSpecific"
+      },
+      "Identifier": "62e779f7-b338-4be1-9800-8f70d80828db",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Set the target queue",
+        "Conditions": [
+          {
+            "NextAction": "Set the target queue-copy-1",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "true"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set the target queue",
+            "ErrorType": "NoMatchingCondition"
           }
         ]
       }
