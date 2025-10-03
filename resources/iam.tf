@@ -1,5 +1,5 @@
 module "iam_role" {
-  source                          = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-iam//modules//iam-assumable-role?ref=master"
+  source                          = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-iam//modules//iam-assumable-role?ref=v1.0.3"
   create_role                     = true
   role_name                       = format("%s-iam-s3-replication-%s-%s", var.company_prefix, local.region_prefix, var.env)
   role_path                       = "/service-role/"
@@ -79,7 +79,7 @@ module "iam_role" {
 }
 
 module "iam_user_policy" {
-  source        = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-iam//modules//iam-policy?ref=master"
+  source        = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-iam//modules//iam-policy?ref=v1.0.3"
   create_policy = true
   name          = format("%s-iam-vm-s3-presigned-%s-%s", var.company_prefix, local.region_prefix, var.env)
   policy = templatefile("../configs/iam/iam_policy/iam_user_policy.tpl", {
@@ -87,7 +87,7 @@ module "iam_user_policy" {
   })
 }
 module "iam_user" {
-  source        = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-iam//modules//iam-user?ref=master"
+  source        = "git@github.com:CloverHealth/ccaas-terraform-modules.git//terraform-aws-iam//modules//iam-user?ref=v1.0.3"
   create_user   = true
   name          = format("%s-iam-vm-s3-presigned-%s-%s", var.company_prefix, local.region_prefix, var.env)
   force_destroy = "true"
