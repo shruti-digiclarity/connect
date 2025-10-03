@@ -8,7 +8,7 @@ locals {
     }
     quick_connect_queue = {
       description = "Quick Connect Queue"
-      hours_of_operation_id = data.amazon_connect_hours_of_operations["ch_constant_hours"].hours_of_operation_id
+      hours_of_operation_id = module.amazon_connect_hours_of_operations["ch_constant_hours"].hours_of_operation_id
       statement = "ENABLED"
       quick_connect_ids = []
       tags = local.tags
