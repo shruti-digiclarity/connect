@@ -1,4 +1,8 @@
 data "aws_caller_identity" "current" {}
+
+data "aws_connect_instance" "amazon_connect" {
+  instance_alias = "${var.company_prefix}-connect-${local.region_prefix}-${var.env}"
+}
 data "aws_iam_policy_document" "match_extension_lambda_policy" {
   version = "2012-10-17"
   statement {
