@@ -323,3 +323,23 @@ data "aws_iam_policy_document" "slack_notifier_lambda_policy" {
 data "aws_dynamodb_table" "customer_outbound_callerid_mapping_table" {
   name = "${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${local.region_prefix}-${var.env}"
 }
+
+data "aws_connect_quick_connect" "jilliann_perez" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Jilliann Perez"
+}
+
+data "aws_connect_quick_connect" "janine_gutierrez" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Janine Gutierrez"
+}
+
+data "aws_connect_quick_connect" "vanessa_osorio" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Vanessa Osorio"
+}
+
+data "aws_connect_quick_connect" "christina_feindt" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Christina Feindt"
+}
