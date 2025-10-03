@@ -323,3 +323,8 @@ data "aws_iam_policy_document" "slack_notifier_lambda_policy" {
 data "aws_dynamodb_table" "customer_outbound_callerid_mapping_table" {
   name = "${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${local.region_prefix}-${var.env}"
 }
+
+data "aws_connect_hours_of_operation" "basic_hours" {
+  instance_id = data.aws_connect_instance.amazon_connect.id
+  name = "Basic Hours"
+}

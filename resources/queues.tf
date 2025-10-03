@@ -6,5 +6,12 @@ locals {
       status                = "ENABLED"
       tags                  = local.tags
     }
+    quick_connect_queue = {
+      description = "Quick Connect Queue"
+      hours_of_operation_id = data.aws_connect_hours_of_operation.basic_hours.hours_of_operation_id
+      statement = "ENABLED"
+      quick_connect_ids = []
+      tags = local.tags
+    }
   }
 }
