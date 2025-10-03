@@ -247,4 +247,4 @@ module "slack_notifier_lambda_alias_live" {
       source_arn = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
     }
   }
-}   
+}
