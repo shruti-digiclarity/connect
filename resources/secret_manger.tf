@@ -1,5 +1,5 @@
 module "connect_lead_generation_secret" {
-  source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.2"
+  source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.3"
 
   items = {
     connect_lead_generation = {
@@ -14,7 +14,7 @@ module "connect_lead_generation_secret" {
 }
 
 module "connect_campaign_attribution_secret" {
-  source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.2"
+  source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.3"
 
   items = {
     connect_lead_generation = {
@@ -29,7 +29,7 @@ module "connect_campaign_attribution_secret" {
 }
 
 module "iam_user_crerdentials_secret" {
-  source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.2"
+  source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.3"
 
   items = {
     iam_user_crerdentials = {
@@ -49,7 +49,7 @@ module "iam_user_crerdentials_secret" {
 }
 
 module "connect_slack_notifier_secret" {
-  source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.2"
+  source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.3"
 
   items = {
     connect_lead_generation = {
