@@ -344,9 +344,9 @@ data "aws_connect_quick_connect" "christina_feindt" {
   name        = "Christina Feindt"
 }
 
-data "aws_connect_quick_connect" "melissa_evans" {
+data "aws_connect_quick_connect" "melissa_jevic" {
   instance_id = module.amazon_connect.instance_id
-  name        = "Melissa Evans"
+  name        = "Melissa Jevic"
 }
 
 data "aws_connect_quick_connect" "cathy_wallin" {
@@ -762,9 +762,4 @@ data "aws_connect_quick_connect" "nora_torres" {
 data "aws_connect_quick_connect" "samantha_cordero" {
   instance_id = module.amazon_connect.instance_id
   name        = "Samantha Cordero"
-}
-
-data "aws_connect_queue" "ch_ccv_ga_scheduling_en" {
-  instance_id = module.amazon_connect.instance_id
-  name = "ch_ccv_ga_scheduling_en"
 }
