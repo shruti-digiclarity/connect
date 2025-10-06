@@ -6,9 +6,9 @@ locals {
       status                = "ENABLED"
       tags                  = local.tags
     }
-    quick_connect_queue = {
+    ch_quick_connect_queue = {
       description = "Quick Connect Queue"
-      hours_of_operation_id = module.amazon_connect.hours_of_operations["ch_constant_hours"].hours_of_operation_id
+      hours_of_operation_id = module.amazon_connect.hours_of_operations["ch_24x7_hours"].hours_of_operation_id
       status = "ENABLED"
       quick_connect_ids = [
         data.aws_connect_quick_connect.jilliann_perez.quick_connect_id,
