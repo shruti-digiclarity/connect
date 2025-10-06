@@ -419,7 +419,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For CCV GA Scheduling EN"
@@ -429,7 +429,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For CCV GA Scheduling SP"
@@ -439,7 +439,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For CCV Scheduling EN"
@@ -449,7 +449,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For CCV Scheduling SP"
@@ -459,7 +459,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For CCV WHV Scheduling EN"
@@ -469,7 +469,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For CCV WHV Scheduling SP"
@@ -479,7 +479,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For CARE MANAGEMENT EN"
@@ -489,7 +489,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For CARE MANAGEMENT SP"
@@ -499,7 +499,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For IHC Admin Coordinators EN"
@@ -509,7 +509,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For IHC Admin Coordinators SP"
@@ -519,7 +519,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For IHC PCC EN"
@@ -529,7 +529,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For IHC PCC SP"
@@ -539,7 +539,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For IHC Enrollment Welcome Team SP"
@@ -549,7 +549,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["quick_connect_queue"].queue_id
+          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
         } 
       }
       description = "Quick Connect For IHC Enrollment Welcome Team EN"
