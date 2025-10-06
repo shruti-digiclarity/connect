@@ -98,7 +98,15 @@ locals {
         data.aws_connect_quick_connect.jahaira_allende.quick_connect_id,
         data.aws_connect_quick_connect.susan_hall.quick_connect_id,
         data.aws_connect_quick_connect.nora_torres.quick_connect_id,
-        data.aws_connect_quick_connect.samantha_cordero.quick_connect_id
+        data.aws_connect_quick_connect.samantha_cordero.quick_connect_id,
+        data.aws_connect_quick_connect.ch_ihc_admin_coordinators_en.quick_connect_id,
+        data.aws_connect_quick_connect.ch_ihc_admin_coordinators_sp.quick_connect_id,
+        data.aws_connect_quick_connect.ch_ihc_pcc_en.quick_connect_id,
+        data.aws_connect_quick_connect.ch_ihc_pcc_sp.quick_connect_id,
+        data.aws_connect_quick_connect.ch_ihc_enrollment_welcome_team_sp.quick_connect_id,
+        data.aws_connect_quick_connect.ch_ihc_enrollment_welcome_team_en.quick_connect_id,
+        data.aws_connect_quick_connect.ch_clinical_care_management_en.quick_connect_id,
+        data.aws_connect_quick_connect.ch_clinical_care_management_sp.quick_connect_id
       ]
       tags = local.tags
     }

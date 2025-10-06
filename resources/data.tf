@@ -763,3 +763,73 @@ data "aws_connect_quick_connect" "samantha_cordero" {
   instance_id = module.amazon_connect.instance_id
   name        = "Samantha Cordero"
 }
+
+data "aws_connect_quick_connect" "ch_ihc_admin_coordinators_en" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ihc_admin_coordinators_en"
+}
+
+data "aws_connect_quick_connect" "ch_ihc_admin_coordinators_sp" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ihc_admin_coordinators_sp"
+}
+
+data "aws_connect_quick_connect" "ch_ihc_pcc_en" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ihc_pcc_en"
+}
+
+data "aws_connect_quick_connect" "ch_ihc_pcc_sp" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ihc_pcc_sp"
+}
+
+data "aws_connect_quick_connect" "ch_ihc_enrollment_welcome_team_sp" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ihc_enrollment_welcome_team_sp"
+}
+
+data "aws_connect_quick_connect" "ch_ihc_enrollment_welcome_team_en" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ihc_enrollment_welcome_team_en"
+}
+
+data "aws_connect_quick_connect" "ch_clinical_care_management_en" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_clinical_care_management_en"
+}
+
+data "aws_connect_quick_connect" "ch_clinical_care_management_sp" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_clinical_care_management_sp"
+}
+
+# data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_en"{
+#   instance_id = module.amazon_connect.instance_id
+#   name        = "ch_ccv_ga_scheduling_en"
+# }
+
+# data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_sp"{
+#   instance_id = module.amazon_connect.instance_id
+#   name        = "ch_ccv_ga_scheduling_sp"
+# }
+
+# data "aws_connect_quick_connect" "ch_ccv_scheduling_en" {
+#   instance_id = module.amazon_connect.instance_id
+#   name        = "ch_ccv_scheduling_en"
+# }
+
+# data "aws_connect_quick_connect" "ch_ccv_scheduling_sp" {
+#   instance_id = module.amazon_connect.instance_id
+#   name        = "ch_ccv_scheduling_sp"
+# }
+
+# data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_en"{
+#   instance_id = module.amazon_connect.instance_id
+#   name        = "ch_ccv_whv_scheduling_en"
+# }
+
+# data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_sp"{
+#   instance_id = module.amazon_connect.instance_id
+#   name        = "ch_ccv_whv_scheduling_sp"
+# }
