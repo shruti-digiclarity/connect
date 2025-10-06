@@ -424,9 +424,9 @@ data "aws_connect_quick_connect" "marie_cadestin" {
   name        = "Marie Cadestin"
 }
 
-data "aws_connect_quick_connect" "mary_vuolo" {
+data "aws_connect_quick_connect" "mary_zebrowski_vuolo" {
   instance_id = module.amazon_connect.instance_id
-  name        = "Mary Vuolo"
+  name        = "Mary Zebrowski-Vuolo"
 }
 
 data "aws_connect_quick_connect" "mily_febus" {
@@ -444,9 +444,9 @@ data "aws_connect_quick_connect" "nancy_nunez" {
   name        = "Nancy Nunez"
 }
 
-data "aws_connect_quick_connect" "tara_elze" {
+data "aws_connect_quick_connect" "tara_elzey" {
   instance_id = module.amazon_connect.instance_id
-  name        = "Tara Elze"
+  name        = "Tara Elzey"
 }
 
 data "aws_connect_quick_connect" "tia_thomas" {
@@ -964,12 +964,12 @@ data "aws_connect_quick_connect" "ch_clinical_care_management_sp" {
   name        = "ch_clinical_care_management_sp"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_en"{
+data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_en" {
   instance_id = module.amazon_connect.instance_id
   name        = "ch_ccv_ga_scheduling_en"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_sp"{
+data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_sp" {
   instance_id = module.amazon_connect.instance_id
   name        = "ch_ccv_ga_scheduling_sp"
 }
@@ -984,12 +984,12 @@ data "aws_connect_quick_connect" "ch_ccv_scheduling_sp" {
   name        = "ch_ccv_scheduling_sp"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_en"{
+data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_en" {
   instance_id = module.amazon_connect.instance_id
   name        = "ch_ccv_whv_scheduling_en"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_sp"{
+data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_sp" {
   instance_id = module.amazon_connect.instance_id
   name        = "ch_ccv_whv_scheduling_sp"
 }

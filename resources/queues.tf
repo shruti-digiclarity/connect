@@ -7,9 +7,9 @@ locals {
       tags                  = local.tags
     }
     ch_quick_connect_queue = {
-      description = "Quick Connect Queue"
+      description           = "Quick Connect Queue"
       hours_of_operation_id = module.amazon_connect.hours_of_operations["ch_24x7_hours"].hours_of_operation_id
-      status = "ENABLED"
+      status                = "ENABLED"
       quick_connect_ids = [
         data.aws_connect_quick_connect.jilliann_perez.quick_connect_id,
         data.aws_connect_quick_connect.janine_gutierrez.quick_connect_id,
@@ -31,11 +31,11 @@ locals {
         data.aws_connect_quick_connect.maria_lent.quick_connect_id,
         data.aws_connect_quick_connect.maria_vallejos.quick_connect_id,
         data.aws_connect_quick_connect.marie_cadestin.quick_connect_id,
-        data.aws_connect_quick_connect.mary_vuolo.quick_connect_id,
+        data.aws_connect_quick_connect.mary_zebrowski_vuolo.quick_connect_id,
         data.aws_connect_quick_connect.mily_febus.quick_connect_id,
         data.aws_connect_quick_connect.molly_desarme.quick_connect_id,
         data.aws_connect_quick_connect.nancy_nunez.quick_connect_id,
-        data.aws_connect_quick_connect.tara_elze.quick_connect_id,
+        data.aws_connect_quick_connect.tara_elzey.quick_connect_id,
         data.aws_connect_quick_connect.tia_thomas.quick_connect_id,
         data.aws_connect_quick_connect.wendy_valencia.quick_connect_id,
         data.aws_connect_quick_connect.beatrice_gomez.quick_connect_id,
