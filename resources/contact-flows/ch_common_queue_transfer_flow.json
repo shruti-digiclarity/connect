@@ -1,0 +1,393 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "Set customer journey",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -702.4,
+      "y": 64
+    },
+    "ActionMetadata": {
+      "b554e4e3-a996-4a0c-9379-583471b9f838": {
+        "position": {
+          "x": 788,
+          "y": 399.2
+        },
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "9576ec61-4572-4f0e-a2e9-cfe40feca873": {
+        "position": {
+          "x": 434.4,
+          "y": 60
+        }
+      },
+      "9b12100d-2b9f-484e-8877-8aa9e9d102ec": {
+        "position": {
+          "x": 2133.6,
+          "y": 364
+        }
+      },
+      "5c51e920-43fb-4e14-a524-e9b588f5649d": {
+        "position": {
+          "x": 1784,
+          "y": 116.8
+        },
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "80724773-0ea0-4cc0-b63d-806e8b05f06e": {
+        "position": {
+          "x": 811.2,
+          "y": 44.8
+        },
+        "parameters": {
+          "SSML": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
+      },
+      "Customer Journey Unexpected Error-copy-1-copy-1": {
+        "position": {
+          "x": 1284.8,
+          "y": -52
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Customer Journey Unexpected Error-copy-1": {
+        "position": {
+          "x": 1294.4,
+          "y": 277.6
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "6e139993-5c76-4d61-a381-5a764f710182": {
+        "position": {
+          "x": 1056,
+          "y": -140.8
+        }
+      },
+      "ca4cf8c2-f45c-4a4d-91f0-da2789dc0b00": {
+        "position": {
+          "x": 44.8,
+          "y": 78.4
+        },
+        "parameters": {
+          "FlowAttributes": {
+            "ch-prompt-out-of-hours-message": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-transfering-failure-message": {
+              "Value": {
+                "useDynamic": true
+              }
+            },
+            "ch-prompt-transfering-message": {
+              "Value": {
+                "useDynamic": true
+              }
+            }
+          }
+        }
+      },
+      "Set customer journey": {
+        "position": {
+          "x": -505.6,
+          "y": 77.6
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "Set customer journey-copy-1": {
+        "position": {
+          "x": 59.2,
+          "y": 364.8
+        },
+        "isFriendlyName": true,
+        "dynamicParams": []
+      },
+      "getConnectConfig lmda call": {
+        "position": {
+          "x": -260.8,
+          "y": 77.6
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "LambdaFunctionARN": {
+            "useDynamic": true
+          },
+          "LambdaInvocationAttributes": {
+            "languageCode": {
+              "useDynamic": true
+            },
+            "countryCode": {
+              "useDynamic": true
+            }
+          }
+        },
+        "dynamicMetadata": {
+          "configType": false,
+          "value": false,
+          "languageCode": true,
+          "countryCode": true
+        },
+        "useDynamic": true
+      }
+    },
+    "Annotations": [],
+    "name": "ch_common_queue_transfer_flow",
+    "description": "",
+    "type": "queueTransfer",
+    "status": "published",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.ch-prompt-out-of-hours-message"
+      },
+      "Identifier": "b554e4e3-a996-4a0c-9379-583471b9f838",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "9b12100d-2b9f-484e-8877-8aa9e9d102ec",
+        "Errors": [
+          {
+            "NextAction": "9b12100d-2b9f-484e-8877-8aa9e9d102ec",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "9576ec61-4572-4f0e-a2e9-cfe40feca873",
+      "Type": "CheckHoursOfOperation",
+      "Transitions": {
+        "NextAction": "5c51e920-43fb-4e14-a524-e9b588f5649d",
+        "Conditions": [
+          {
+            "NextAction": "80724773-0ea0-4cc0-b63d-806e8b05f06e",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "True"
+              ]
+            }
+          },
+          {
+            "NextAction": "b554e4e3-a996-4a0c-9379-583471b9f838",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "False"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "5c51e920-43fb-4e14-a524-e9b588f5649d",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "9b12100d-2b9f-484e-8877-8aa9e9d102ec",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.ch-prompt-transfering-failure-message"
+      },
+      "Identifier": "5c51e920-43fb-4e14-a524-e9b588f5649d",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "9b12100d-2b9f-484e-8877-8aa9e9d102ec",
+        "Errors": [
+          {
+            "NextAction": "9b12100d-2b9f-484e-8877-8aa9e9d102ec",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "SSML": "$.FlowAttributes.ch-prompt-transfering-message"
+      },
+      "Identifier": "80724773-0ea0-4cc0-b63d-806e8b05f06e",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "6e139993-5c76-4d61-a381-5a764f710182",
+        "Errors": [
+          {
+            "NextAction": "6e139993-5c76-4d61-a381-5a764f710182",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Queue capacity reached"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "5c51e920-43fb-4e14-a524-e9b588f5649d",
+        "Errors": [
+          {
+            "NextAction": "5c51e920-43fb-4e14-a524-e9b588f5649d",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | Error while transfering in queue"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Customer Journey Unexpected Error-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "5c51e920-43fb-4e14-a524-e9b588f5649d",
+        "Errors": [
+          {
+            "NextAction": "5c51e920-43fb-4e14-a524-e9b588f5649d",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "6e139993-5c76-4d61-a381-5a764f710182",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "Customer Journey Unexpected Error-copy-1",
+        "Errors": [
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1-copy-1",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "Customer Journey Unexpected Error-copy-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "FlowAttributes": {
+          "ch-prompt-out-of-hours-message": {
+            "Value": "$.External.ch-prompt-out-of-hours-message"
+          },
+          "ch-prompt-transfering-failure-message": {
+            "Value": "$.External.ch-prompt-transfering-failure-message"
+          },
+          "ch-prompt-transfering-message": {
+            "Value": "$.External.ch-prompt-transfering-message"
+          }
+        }
+      },
+      "Identifier": "ca4cf8c2-f45c-4a4d-91f0-da2789dc0b00",
+      "Type": "UpdateFlowAttributes",
+      "Transitions": {
+        "NextAction": "9576ec61-4572-4f0e-a2e9-cfe40feca873",
+        "Errors": [
+          {
+            "NextAction": "9576ec61-4572-4f0e-a2e9-cfe40feca873",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | ch_common_queue_transfer_flow"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set customer journey",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "getConnectConfig lmda call",
+        "Errors": [
+          {
+            "NextAction": "getConnectConfig lmda call",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Attributes": {
+          "customerJourney": "$.Attributes.customerJourney | getConnectConfig lmda Failed"
+        },
+        "TargetContact": "Current"
+      },
+      "Identifier": "Set customer journey-copy-1",
+      "Type": "UpdateContactAttributes",
+      "Transitions": {
+        "NextAction": "9576ec61-4572-4f0e-a2e9-cfe40feca873",
+        "Errors": [
+          {
+            "NextAction": "9576ec61-4572-4f0e-a2e9-cfe40feca873",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "$.Attributes.ch-lmda-ivr-get-connect-config-arn",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "configType": "contact-flows",
+          "value": "ch_common_queue_transfer_flow",
+          "languageCode": "$.Attributes.languageCode",
+          "countryCode": "$.Attributes.countryCode"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "getConnectConfig lmda call",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "ca4cf8c2-f45c-4a4d-91f0-da2789dc0b00",
+        "Errors": [
+          {
+            "NextAction": "Set customer journey-copy-1",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
