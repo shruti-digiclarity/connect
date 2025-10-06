@@ -539,9 +539,9 @@ data "aws_connect_quick_connect" "maria_penaherrera" {
   name        = "Maria Penaherrera"
 }
 
-data "aws_connect_quick_connect" "ana_jozamera" {
+data "aws_connect_quick_connect" "ana_joza_mera" {
   instance_id = module.amazon_connect.instance_id
-  name        = "Ana Jozamera"
+  name        = "Ana Joza mera"
 }
 
 data "aws_connect_quick_connect" "carmen_rodriguez" {

@@ -54,7 +54,7 @@ locals {
         data.aws_connect_quick_connect.fiorela_valdez.quick_connect_id,
         data.aws_connect_quick_connect.awilda_rios.quick_connect_id,
         data.aws_connect_quick_connect.maria_penaherrera.quick_connect_id,
-        data.aws_connect_quick_connect.ana_jozamera.quick_connect_id,
+        data.aws_connect_quick_connect.ana_joza_mera.quick_connect_id,
         data.aws_connect_quick_connect.carmen_rodriguez.quick_connect_id,
         data.aws_connect_quick_connect.linette_roman.quick_connect_id,
         data.aws_connect_quick_connect.andrea_morris.quick_connect_id,
