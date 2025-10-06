@@ -763,3 +763,8 @@ data "aws_connect_quick_connect" "samantha_cordero" {
   instance_id = module.amazon_connect.instance_id
   name        = "Samantha Cordero"
 }
+
+data "aws_connect_queue" "ch_ccv_ga_scheduling_en" {
+  instance_id = module.amazon_connect.instance_id
+  name = "ch_ccv_ga_scheduling_en"
+}

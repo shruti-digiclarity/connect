@@ -419,7 +419,7 @@ locals {
         quick_connect_type="QUEUE"
         queue_config ={
           contact_flow_id = split("/",module.amazon_connect.contact_flows["ch_common_queue_transfer_flow"].arn)[3]
-          queue_id = module.amazon_connect.queues["ch_quick_connect_queue"].queue_id
+          queue_id = data.amazon_connect_queue.ch_ccv_ga_scheduling_en.queue_id
         } 
       }
       description = "Quick Connect For CCV GA Scheduling EN"
