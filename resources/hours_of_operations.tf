@@ -42,7 +42,7 @@ locals {
       ]
       tags = local.tags
     }
-    ch_constant_hours = {
+    ch_24x7_hours = {
       description = "Always open hours"
       time_zone   = "EST"
       config = [
