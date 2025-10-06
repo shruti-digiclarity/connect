@@ -22,7 +22,7 @@ locals {
     }
     "ch_common_queue_transfer_flow" = {
       content = templatefile(
-        "${path.module}/contact-flows/ch_common_queue_transfer_flow.json.tftpl", {}
+        "${path.module}/contact-flows/ch_common_queue_transfer_flow.json", {}
       )
       type = "QUEUE_TRANSFER"
       description = "ch_common_queue_transfer_flow"
