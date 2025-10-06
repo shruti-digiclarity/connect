@@ -764,6 +764,166 @@ data "aws_connect_quick_connect" "samantha_cordero" {
   name        = "Samantha Cordero"
 }
 
+
+data "aws_connect_quick_connect" "patrikia_baynes" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Patrikia Baynes"
+}
+
+data "aws_connect_quick_connect" "ashlee_harris" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Ashlee Harris"
+}
+
+data "aws_connect_quick_connect" "abby_landers" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Abby Landers"
+}
+
+data "aws_connect_quick_connect" "kessia_guzman" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Kessia Guzman"
+}
+
+data "aws_connect_quick_connect" "kofi_bryant_harris" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Kofi Bryant-Harris"
+}
+
+data "aws_connect_quick_connect" "linda_goulet" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Linda Goulet"
+}
+
+data "aws_connect_quick_connect" "mayra_gonzalez" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Mayra Gonzalez"
+}
+
+data "aws_connect_quick_connect" "shemika_redfearn" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Shemika Redfearn"
+}
+
+data "aws_connect_quick_connect" "teddy_lowe" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Teddy Lowe"
+}
+
+data "aws_connect_quick_connect" "diana_hill" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Diana Hill"
+}
+
+data "aws_connect_quick_connect" "carlos_garcia_jurado" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Carlos Garcia Jurado"
+}
+
+data "aws_connect_quick_connect" "jairo_guerra_fandino" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Jairo Guerra Fandino"
+}
+
+data "aws_connect_quick_connect" "jeisson_lopez_agudelo" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Jeisson Lopez Agudelo"
+}
+
+data "aws_connect_quick_connect" "john_argote_castellanos" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "John Argote Castellanos"
+}
+
+data "aws_connect_quick_connect" "juan_macareno_restrepo" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Juan Macareno Restrepo"
+}
+
+data "aws_connect_quick_connect" "valeria_contreras_correa" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Valeria Contreras Correa"
+}
+
+data "aws_connect_quick_connect" "april_liborio" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "April Liborio"
+}
+
+data "aws_connect_quick_connect" "constance_hands" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Constance Hands"
+}
+
+data "aws_connect_quick_connect" "damaris_amaya_torres" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Damaris Amaya Torres"
+}
+
+data "aws_connect_quick_connect" "denys_jara_santos" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Denys Jara Santos"
+}
+
+data "aws_connect_quick_connect" "detrius_smallwood" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Detrius Smallwood"
+}
+
+data "aws_connect_quick_connect" "dilda_castillo_castro" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Dilda Castillo Castro"
+}
+
+data "aws_connect_quick_connect" "frantia_lawton" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Frantia Lawton"
+}
+
+data "aws_connect_quick_connect" "shameil_porter" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Shameil Porter"
+}
+
+data "aws_connect_quick_connect" "tracy_davenport" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Tracy Davenport"
+}
+
+data "aws_connect_quick_connect" "yury_beltran_vargas" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Yury Beltran Vargas"
+}
+
+data "aws_connect_quick_connect" "andres_onoro_abdala" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Andres Onoro Abdala"
+}
+
+data "aws_connect_quick_connect" "michelle_smith" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Michelle Smith"
+}
+
+data "aws_connect_quick_connect" "trineaka_irby" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Trineaka Irby"
+}
+
+data "aws_connect_quick_connect" "earline_mixon" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Earline Mixon"
+}
+
+data "aws_connect_quick_connect" "athena_watkins" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Athena Watkins"
+}
+
+data "aws_connect_quick_connect" "dallen_kimball" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Dallen Kimball"
+}
 data "aws_connect_quick_connect" "ch_ihc_admin_coordinators_en" {
   instance_id = module.amazon_connect.instance_id
   name        = "ch_ihc_admin_coordinators_en"
@@ -804,32 +964,32 @@ data "aws_connect_quick_connect" "ch_clinical_care_management_sp" {
   name        = "ch_clinical_care_management_sp"
 }
 
-# data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_en"{
-#   instance_id = module.amazon_connect.instance_id
-#   name        = "ch_ccv_ga_scheduling_en"
-# }
+data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_en"{
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ccv_ga_scheduling_en"
+}
 
-# data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_sp"{
-#   instance_id = module.amazon_connect.instance_id
-#   name        = "ch_ccv_ga_scheduling_sp"
-# }
+data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_sp"{
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ccv_ga_scheduling_sp"
+}
 
-# data "aws_connect_quick_connect" "ch_ccv_scheduling_en" {
-#   instance_id = module.amazon_connect.instance_id
-#   name        = "ch_ccv_scheduling_en"
-# }
+data "aws_connect_quick_connect" "ch_ccv_scheduling_en" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ccv_scheduling_en"
+}
 
-# data "aws_connect_quick_connect" "ch_ccv_scheduling_sp" {
-#   instance_id = module.amazon_connect.instance_id
-#   name        = "ch_ccv_scheduling_sp"
-# }
+data "aws_connect_quick_connect" "ch_ccv_scheduling_sp" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ccv_scheduling_sp"
+}
 
-# data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_en"{
-#   instance_id = module.amazon_connect.instance_id
-#   name        = "ch_ccv_whv_scheduling_en"
-# }
+data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_en"{
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ccv_whv_scheduling_en"
+}
 
-# data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_sp"{
-#   instance_id = module.amazon_connect.instance_id
-#   name        = "ch_ccv_whv_scheduling_sp"
-# }
+data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_sp"{
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ccv_whv_scheduling_sp"
+}
