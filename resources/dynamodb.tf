@@ -1,5 +1,5 @@
 module "connect_config_dynamodb" {
-  source                             = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-dynamodb-table-wrapper?ref=v1.0.2"
+  source                             = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-dynamodb-table-wrapper?ref=v1.0.3"
   name                               = format("%s-dydb-connect-config-%s-%s", var.company_prefix, local.region_prefix, var.env)
   billing_mode                       = "PAY_PER_REQUEST"
   deletion_protection_enabled        = false
