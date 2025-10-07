@@ -924,6 +924,11 @@ data "aws_connect_quick_connect" "dallen_kimball" {
   instance_id = module.amazon_connect.instance_id
   name        = "Dallen Kimball"
 }
+
+data "aws_connect_quick_connect" "steve_assad" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Steve Assad"
+}
 data "aws_connect_quick_connect" "ihc_admin_coordinators_english" {
   instance_id = module.amazon_connect.instance_id
   name        = "IHC Admin Coordinators English"

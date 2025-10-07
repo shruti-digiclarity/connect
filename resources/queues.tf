@@ -131,6 +131,7 @@ locals {
         data.aws_connect_quick_connect.earline_mixon.quick_connect_id,
         data.aws_connect_quick_connect.athena_watkins.quick_connect_id,
         data.aws_connect_quick_connect.dallen_kimball.quick_connect_id,
+        data.aws_connect_quick_connect.steve_assad.quick_connect_id,
         data.aws_connect_quick_connect.ihc_admin_coordinators_english.quick_connect_id,
         data.aws_connect_quick_connect.ihc_admin_coordinators_spanish.quick_connect_id,
         data.aws_connect_quick_connect.ihc_pcc_english.quick_connect_id,
