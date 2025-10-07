@@ -414,5 +414,32 @@ locals {
       }
       description = "Tru_Hearing"
     }
+    "Eyequest" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18008962377"
+        }
+      }
+      description = "Eyequest"
+    }
+    "Live Healthy" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18445295869"
+        }
+      }
+      description = "Live Healthy"
+    }
+    "BH Scheduling" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18003308913"
+        }
+      }
+      description = "BH Scheduling"
+    }
   }
 }
