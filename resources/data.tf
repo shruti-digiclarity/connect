@@ -964,32 +964,32 @@ data "aws_connect_quick_connect" "ch_clinical_care_management_sp" {
   name        = "ch_clinical_care_management_sp"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_en" {
+data "aws_connect_quick_connect" "ga_ccv_scheduling_english" {
   instance_id = module.amazon_connect.instance_id
-  name        = "ch_ccv_ga_scheduling_en"
+  name        = "GA CCV Scheduling English"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_ga_scheduling_sp" {
+data "aws_connect_quick_connect" "ga_ccv_scheduling_spanish" {
   instance_id = module.amazon_connect.instance_id
-  name        = "ch_ccv_ga_scheduling_sp"
+  name        = "GA CCV Scheduling Spanish"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_scheduling_en" {
+data "aws_connect_quick_connect" "ccv_scheduling_english" {
   instance_id = module.amazon_connect.instance_id
-  name        = "ch_ccv_scheduling_en"
+  name        = "CCV Scheduling English"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_scheduling_sp" {
+data "aws_connect_quick_connect" "ccv_scheduling_spanish" {
   instance_id = module.amazon_connect.instance_id
-  name        = "ch_ccv_scheduling_sp"
+  name        = "CCV Scheduling Spanish"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_en" {
+data "aws_connect_quick_connect" "whv_scheduling_english" {
   instance_id = module.amazon_connect.instance_id
-  name        = "ch_ccv_whv_scheduling_en"
+  name        = "WHV Scheduling English"
 }
 
-data "aws_connect_quick_connect" "ch_ccv_whv_scheduling_sp" {
+data "aws_connect_quick_connect" "whv_scheduling_spanish" {
   instance_id = module.amazon_connect.instance_id
-  name        = "ch_ccv_whv_scheduling_sp"
+  name        = "WHV Scheduling Spanish"
 }

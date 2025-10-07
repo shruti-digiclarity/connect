@@ -139,12 +139,12 @@ locals {
         data.aws_connect_quick_connect.ch_ihc_enrollment_welcome_team_en.quick_connect_id,
         data.aws_connect_quick_connect.ch_clinical_care_management_en.quick_connect_id,
         data.aws_connect_quick_connect.ch_clinical_care_management_sp.quick_connect_id,
-        data.aws_connect_quick_connect.ch_ccv_ga_scheduling_en.quick_connect_id,
-        data.aws_connect_quick_connect.ch_ccv_ga_scheduling_sp.quick_connect_id,
-        data.aws_connect_quick_connect.ch_ccv_scheduling_en.quick_connect_id,
-        data.aws_connect_quick_connect.ch_ccv_scheduling_sp.quick_connect_id,
-        data.aws_connect_quick_connect.ch_ccv_whv_scheduling_en.quick_connect_id,
-        data.aws_connect_quick_connect.ch_ccv_whv_scheduling_sp.quick_connect_id
+        data.aws_connect_quick_connect.ga_ccv_scheduling_english.quick_connect_id,
+        data.aws_connect_quick_connect.ga_ccv_scheduling_spanish.quick_connect_id,
+        data.aws_connect_quick_connect.ccv_scheduling_english.quick_connect_id,
+        data.aws_connect_quick_connect.ccv_scheduling_spanish.quick_connect_id,
+        data.aws_connect_quick_connect.whv_scheduling_english.quick_connect_id,
+        data.aws_connect_quick_connect.whv_scheduling_spanish.quick_connect_id
       ]
       tags = local.tags
     }
