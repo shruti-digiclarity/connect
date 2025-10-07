@@ -184,7 +184,7 @@ locals {
       quick_connect_config = {
         quick_connect_type = "PHONE_NUMBER"
         phone_config = {
-          phone_number = "+18005528159"
+          phone_number = "+14803914600"
         }
       }
       description = "CVS Caremark"
@@ -440,6 +440,24 @@ locals {
         }
       }
       description = "BH Scheduling"
+    }
+    "CVS_Caremark" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18005528159"
+        }
+      }
+      description = "CVS_Caremark"
+    }
+    "DentaQuest_" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18553437404"
+        }
+      }
+      description = "CVS_Caremark"
     }
   }
 }
