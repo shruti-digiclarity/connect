@@ -459,5 +459,23 @@ locals {
       }
       description = "CVS_Caremark"
     }
+    "CCV/RPP" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18882547488"
+        }
+      }
+      description = "CCV/RPP"
+    }
+    "OTC" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18778312945"
+        }
+      }
+      description = "OTC"
+    }
   }
 }
