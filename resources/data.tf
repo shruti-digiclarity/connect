@@ -224,9 +224,7 @@ data "aws_iam_policy_document" "get_connect_config_lambda_policy" {
     ]
     resources = [
       module.connect_config_dynamodb.dynamodb_table_arn,
-      "${module.connect_config_dynamodb.dynamodb_table_arn}/*",
-      data.aws_dynamodb_table.customer_outbound_callerid_mapping_table.arn,
-      "${data.aws_dynamodb_table.customer_outbound_callerid_mapping_table.arn}/*"
+      "${module.connect_config_dynamodb.dynamodb_table_arn}/*"
     ]
   }
   statement {
@@ -320,9 +318,6 @@ data "aws_iam_policy_document" "slack_notifier_lambda_policy" {
   }
 }
 
-data "aws_dynamodb_table" "customer_outbound_callerid_mapping_table" {
-  name = "${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${local.region_prefix}-${var.env}"
-}
 
 data "aws_connect_quick_connect" "jilliann_perez" {
   instance_id = module.amazon_connect.instance_id
