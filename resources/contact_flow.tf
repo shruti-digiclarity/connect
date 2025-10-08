@@ -6,6 +6,7 @@ locals {
         {
           ch_dnis_error_queue_arn       = module.amazon_connect.queues["ch_dnis_error"].arn
           get_connect_config_lambda_arn = module.get_connect_config_lambda.lambda_function_arn
+          lambda_function_name = "${var.company_prefix}-lmda-get-connect-config-${local.region_prefix}-${var.env}"
         }
       )
       type        = "CONTACT_FLOW"
