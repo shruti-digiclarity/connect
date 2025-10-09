@@ -54,5 +54,21 @@
   {
     "name": "System Downtime",
     "state": "ENABLED"
+  },
+  {
+    "name": "Technical issues",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Additional Wrap Time",
+    "state": "ENABLED"
+  },
+  {
+    "name": "Meal",
+    "state": "ENABLED"
+  },
+  {
+    "name": "In Field",
+    "state": "ENABLED"
   }
 ]

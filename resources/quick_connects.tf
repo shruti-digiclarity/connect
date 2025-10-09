@@ -184,7 +184,7 @@ locals {
       quick_connect_config = {
         quick_connect_type = "PHONE_NUMBER"
         phone_config = {
-          phone_number = "+18005528159"
+          phone_number = "+14803914600"
         }
       }
       description = "CVS Caremark"
@@ -413,6 +413,69 @@ locals {
         }
       }
       description = "Tru_Hearing"
+    }
+    "Eyequest" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18008962377"
+        }
+      }
+      description = "Eyequest"
+    }
+    "Live Healthy" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18445295869"
+        }
+      }
+      description = "Live Healthy"
+    }
+    "BH Scheduling" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18003308913"
+        }
+      }
+      description = "BH Scheduling"
+    }
+    "CVS_Caremark" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18005528159"
+        }
+      }
+      description = "CVS_Caremark"
+    }
+    "DentaQuest_" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18553437404"
+        }
+      }
+      description = "CVS_Caremark"
+    }
+    "CCV/RPP" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18882547488"
+        }
+      }
+      description = "CCV/RPP"
+    }
+    "OTC" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18778312945"
+        }
+      }
+      description = "OTC"
     }
   }
 }
