@@ -3,41 +3,14 @@
   "StartAction": "62e779f7-b338-4be1-9800-8f70d80828db",
   "Metadata": {
     "entryPointPosition": {
-      "x": -499.2,
-      "y": -133.6
+      "x": -780,
+      "y": -120
     },
     "ActionMetadata": {
-      "End flow": {
-        "position": {
-          "x": 620,
-          "y": 78.4
-        },
-        "isFriendlyName": true
-      },
-      "Route voicemail": {
-        "position": {
-          "x": 382.4,
-          "y": 18.4
-        },
-        "isFriendlyName": true
-      },
-      "Set the target queue": {
-        "position": {
-          "x": -23.2,
-          "y": 60.8
-        },
-        "isFriendlyName": true,
-        "parameters": {
-          "QueueId": {
-            "useDynamic": true
-          }
-        },
-        "useDynamic": true
-      },
       "Set the target queue-copy-1": {
         "position": {
-          "x": 139.2,
-          "y": -165.6
+          "x": 0,
+          "y": -260
         },
         "isFriendlyName": true,
         "parameters": {
@@ -47,15 +20,22 @@
         },
         "useDynamic": true
       },
+      "End flow": {
+        "position": {
+          "x": 560,
+          "y": 0
+        },
+        "isFriendlyName": true
+      },
       "62e779f7-b338-4be1-9800-8f70d80828db": {
         "position": {
-          "x": -334.4,
-          "y": -162.4
+          "x": -560,
+          "y": -260
         },
         "conditions": [],
         "conditionMetadata": [
           {
-            "id": "f96231f8-771c-4aa5-9f93-94380d62df5e",
+            "id": "d08348c7-1a91-42f1-be65-26f54d0ba9d2",
             "operator": {
               "name": "Equals",
               "value": "Equals",
@@ -64,21 +44,170 @@
             "value": "true"
           }
         ]
+      },
+      "5bd72548-a327-4b8c-a90e-50fc5c564753": {
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "parameters": {
+          "QueueId": {
+            "displayName": "ch_ihc_pcc_vm"
+          }
+        },
+        "queue": {
+          "text": "ch_ihc_pcc_vm"
+        }
+      },
+      "737025f0-d27a-4890-a3b3-84c984993338": {
+        "position": {
+          "x": 0,
+          "y": 260
+        },
+        "parameters": {
+          "QueueId": {
+            "displayName": "ch_ihc_admin_coordinators_vm"
+          }
+        },
+        "queue": {
+          "text": "ch_ihc_admin_coordinators_vm"
+        }
+      },
+      "Route voicemail": {
+        "position": {
+          "x": 280,
+          "y": 0
+        },
+        "isFriendlyName": true
+      },
+      "f49f2081-c31d-4d0d-a099-4be952458e8b": {
+        "position": {
+          "x": -280,
+          "y": 0
+        },
+        "conditionMetadata": [
+          {
+            "id": "80425046-eb5b-47c8-8092-ab9d809c23a7",
+            "operator": {
+              "name": "Starts with",
+              "value": "StartsWith",
+              "shortDisplay": "starts with"
+            },
+            "value": "ch_ihc_pcc"
+          },
+          {
+            "id": "5107e58c-9bff-4997-9513-f74c5a779448",
+            "operator": {
+              "name": "Starts with",
+              "value": "StartsWith",
+              "shortDisplay": "starts with"
+            },
+            "value": "ch_ihc_admin_coordinators"
+          }
+        ]
+      },
+      "Set the target queue": {
+        "position": {
+          "x": 0,
+          "y": 520
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "QueueId": {
+            "useDynamic": true
+          }
+        },
+        "useDynamic": true
       }
     },
     "Annotations": [],
     "name": "ch-voice-mail-task-flow",
     "description": "",
     "type": "contactFlow",
-    "status": "PUBLISHED",
+    "status": "published",
     "hash": {}
   },
   "Actions": [
+    {
+      "Parameters": {
+        "AgentId": "$.Attributes.agentEmail"
+      },
+      "Identifier": "Set the target queue-copy-1",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "Route voicemail",
+        "Errors": [
+          {
+            "NextAction": "Route voicemail",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
     {
       "Parameters": {},
       "Identifier": "End flow",
       "Type": "DisconnectParticipant",
       "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "ComparisonValue": "$.Attributes.agentSpecific"
+      },
+      "Identifier": "62e779f7-b338-4be1-9800-8f70d80828db",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "f49f2081-c31d-4d0d-a099-4be952458e8b",
+        "Conditions": [
+          {
+            "NextAction": "Set the target queue-copy-1",
+            "Condition": {
+              "Operator": "Equals",
+              "Operands": [
+                "true"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "f49f2081-c31d-4d0d-a099-4be952458e8b",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:069062667280:instance/0134762c-aab8-41b4-be69-f8d01ab154d0/queue/f6bc17bb-f57a-4bf9-a1a4-6e7b34777058"
+      },
+      "Identifier": "5bd72548-a327-4b8c-a90e-50fc5c564753",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "Route voicemail",
+        "Errors": [
+          {
+            "NextAction": "Route voicemail",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-east-1:069062667280:instance/0134762c-aab8-41b4-be69-f8d01ab154d0/queue/707263d3-4ba3-410a-a544-95fa08bef503"
+      },
+      "Identifier": "737025f0-d27a-4890-a3b3-84c984993338",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "Route voicemail",
+        "Errors": [
+          {
+            "NextAction": "Route voicemail",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
     },
     {
       "Parameters": {},
@@ -100,7 +229,43 @@
     },
     {
       "Parameters": {
-        "QueueId": "$.Attributes.VM_Task_Queue"
+        "ComparisonValue": "$.Queue.Name"
+      },
+      "Identifier": "f49f2081-c31d-4d0d-a099-4be952458e8b",
+      "Type": "Compare",
+      "Transitions": {
+        "NextAction": "Set the target queue",
+        "Conditions": [
+          {
+            "NextAction": "5bd72548-a327-4b8c-a90e-50fc5c564753",
+            "Condition": {
+              "Operator": "TextStartsWith",
+              "Operands": [
+                "ch_ihc_pcc"
+              ]
+            }
+          },
+          {
+            "NextAction": "737025f0-d27a-4890-a3b3-84c984993338",
+            "Condition": {
+              "Operator": "TextStartsWith",
+              "Operands": [
+                "ch_ihc_admin_coordinators"
+              ]
+            }
+          }
+        ],
+        "Errors": [
+          {
+            "NextAction": "Set the target queue",
+            "ErrorType": "NoMatchingCondition"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "$.Attributes.vmTaskQueue"
       },
       "Identifier": "Set the target queue",
       "Type": "UpdateContactTargetQueue",
@@ -110,49 +275,6 @@
           {
             "NextAction": "Route voicemail",
             "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "AgentId": "$.Attributes.agentEmail"
-      },
-      "Identifier": "Set the target queue-copy-1",
-      "Type": "UpdateContactTargetQueue",
-      "Transitions": {
-        "NextAction": "Route voicemail",
-        "Errors": [
-          {
-            "NextAction": "Route voicemail",
-            "ErrorType": "NoMatchingError"
-          }
-        ]
-      }
-    },
-    {
-      "Parameters": {
-        "ComparisonValue": "$.Attributes.agentSpecific"
-      },
-      "Identifier": "62e779f7-b338-4be1-9800-8f70d80828db",
-      "Type": "Compare",
-      "Transitions": {
-        "NextAction": "Set the target queue",
-        "Conditions": [
-          {
-            "NextAction": "Set the target queue-copy-1",
-            "Condition": {
-              "Operator": "Equals",
-              "Operands": [
-                "true"
-              ]
-            }
-          }
-        ],
-        "Errors": [
-          {
-            "NextAction": "Set the target queue",
-            "ErrorType": "NoMatchingCondition"
           }
         ]
       }

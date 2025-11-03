@@ -202,7 +202,7 @@ locals {
       quick_connect_config = {
         quick_connect_type = "PHONE_NUMBER"
         phone_config = {
-          phone_number = "+18889742651"
+          phone_number = "+16097109780"
         }
       }
       description = "Health Tap"

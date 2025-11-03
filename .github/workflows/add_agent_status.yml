@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        type: string
+        type: choice
         description: "Environment"
         default: "dev"
         options:
@@ -15,10 +15,6 @@ on:
         type: string
         description: "Provide AWS region"
         default: "us-east-1"
-      instance_id:
-        type: string
-        description: "The identifier of the Amazon Connect instance."
-        required: true
 
 permissions:
   id-token: write
@@ -33,18 +29,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set AWS Account Number
+    - name: Set AWS Account Number and Instance ID
       id: account-mapping
       run: |
         case "${{ inputs.environment }}" in
           dev)
             echo "aws_account=716537843042" >> $GITHUB_OUTPUT
+            echo "instance_id=a79d3fbd-901e-4815-8d30-f662ff92ad78" >> $GITHUB_OUTPUT
             ;;
           uat)
             echo "aws_account=272103761966" >> $GITHUB_OUTPUT
+            echo "instance_id=7b1335fb-83b2-414e-b783-e26d1e0b6d90" >> $GITHUB_OUTPUT
             ;;
           prd)
             echo "aws_account=617842005266" >> $GITHUB_OUTPUT
+            echo "instance_id=ea550b7a-6948-4901-bfed-474dcf26c873" >> $GITHUB_OUTPUT
             ;;
           *)
             echo "Unknown environment: ${{ inputs.environment }}"
@@ -65,4 +64,4 @@ jobs:
     - name: Create Amazon Connect Agent States
       run: |
         chmod +x ./scripts/add_agent_statuses.sh
-        ./scripts/add_agent_statuses.sh "${{ inputs.instance_id }}" "${{ inputs.environment }}" "${{ steps.account-mapping.outputs.aws_account }}" "${{ inputs.aws_region }}"
+        ./scripts/add_agent_statuses.sh "${{ steps.account-mapping.outputs.instance_id }}" "${{ inputs.environment }}" "${{ steps.account-mapping.outputs.aws_account }}" "${{ inputs.aws_region }}"

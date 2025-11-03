@@ -15,7 +15,11 @@ locals {
     }
     "ch_voice_mail_task_flow" = {
       content = templatefile(
-        "${path.module}/contact-flows/ch_voice_mail_task_flow.json.tftpl", {}
+        "${path.module}/contact-flows/ch_voice_mail_task_flow.json.tftpl", 
+        {
+          ch_ihc_pcc_vm_queue_id = data.aws_connect_queue.ihc_pcc_vm.queue_id
+          ch_ihc_admin_coordinators_vm_queue_id = data.aws_connect_queue.ihc_admin_coordinators_vm.queue_id
+        }
       )
       type        = "CONTACT_FLOW"
       description = "ch_voice_mail_task_flow"

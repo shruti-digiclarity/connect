@@ -318,6 +318,15 @@ data "aws_iam_policy_document" "slack_notifier_lambda_policy" {
   }
 }
 
+data "aws_connect_queue" "ihc_pcc_vm" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ihc_pcc_vm"
+}
+
+data "aws_connect_queue" "ihc_admin_coordinators_vm" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ch_ihc_admin_coordinators_vm"
+}
 
 data "aws_connect_quick_connect" "jilliann_perez" {
   instance_id = module.amazon_connect.instance_id

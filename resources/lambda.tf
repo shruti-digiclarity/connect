@@ -3,7 +3,7 @@ module "voice_mail_packager_lambda" {
   name                    = format("%s-lmda-voice-mail-packager-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_packager.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager-v6.zip"
+  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager-v7.zip"
   layers                  = []
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
@@ -100,7 +100,7 @@ module "get_connect_config_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["get_connect_config_lambda_policy"]
   environment_variables = {
-    CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
+    CONFIG_TABLE_NAME             = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
   }
   tags = local.lambda_default_configurations.tags
 }

@@ -1,6 +1,6 @@
 # Existing S3 bucket configurations (unchanged)
 module "s3_call_recording" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.3"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.4"
   bucket_name              = format("%s-s3-call-recording-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
@@ -43,9 +43,14 @@ module "s3_call_recording" {
   }
   lifecycle_rules = local.s3_lifecycle_rules
   tags            = local.tags
+  metric_configuration = {
+    entire_bucket = {
+      name = "EntireBucketMetrics"
+    }
+  }
 }
 module "s3_schedueled_report" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.3"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.4"
   bucket_name              = format("%s-s3-schedule-reports-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
@@ -63,10 +68,15 @@ module "s3_schedueled_report" {
   }
   lifecycle_rules = local.s3_lifecycle_rules
   tags            = local.tags
+  metric_configuration = {
+    entire_bucket = {
+      name = "EntireBucketMetrics"
+    }
+  }
 }
 
 module "s3_voice_mail_recording" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.3"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.4"
   bucket_name              = format("%s-s3-voice-mail-recording-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
@@ -94,15 +104,25 @@ module "s3_voice_mail_recording" {
   versioning_configuration = { status = true, mfa_delete = false }
   lifecycle_rules          = local.s3_lifecycle_rules
   tags                     = local.tags
+  metric_configuration = {
+    entire_bucket = {
+      name = "EntireBucketMetrics"
+    }
+  }
 }
 
 module "s3_voice_mail_transcript" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.3"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.4"
   bucket_name              = format("%s-s3-voice-mail-transcript-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
   versioning_configuration = { status = true, mfa_delete = false }
   tags                     = local.tags
+  metric_configuration = {
+    entire_bucket = {
+      name = "EntireBucketMetrics"
+    }
+  }
   encryption_configuration = {
     rule = [
       {
@@ -129,7 +149,7 @@ module "s3_voice_mail_transcript" {
 
 # New S3 bucket for connect
 module "s3_connect" {
-  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.3"
+  source                   = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-s3-bucket-wrapper?ref=v1.0.4"
   bucket_name              = format("%s-s3-connect-%s-%s", var.company_prefix, local.region_prefix, var.env)
   acl                      = null
   public_acl_configuration = null
@@ -161,4 +181,9 @@ module "s3_connect" {
     }
   ]
   tags = local.tags
+  metric_configuration = {
+    entire_bucket = {
+      name = "EntireBucketMetrics"
+    }
+  }
 }
