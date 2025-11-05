@@ -1,0 +1,185 @@
+name: DynamoDB Table Copy
+
+on:
+  workflow_dispatch:
+    inputs:
+      SOURCE_TABLE:
+        description: 'Source DynamoDB table (full name)'
+        required: true
+        type: string
+      TARGET_TABLE:
+        description: 'Target DynamoDB table (full name)'
+        required: true
+        type: string
+      AWS_REGION:
+        description: 'AWS Region'
+        required: true
+        type: string
+        default: 'us-east-1'
+      ENVIRONMENT:
+        description: 'Deployment Environment'
+        required: true
+        type: choice
+        options:
+          - dev
+          - uat
+          - prd
+        default: 'dev'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  copy-dynamodb:
+    name: Copy DynamoDB Table
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.ENVIRONMENT }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Validate Input Tables
+        run: |
+          SRC="${{ inputs.SOURCE_TABLE }}"
+          TGT="${{ inputs.TARGET_TABLE }}"
+          
+          if [[ -z "$SRC" || -z "$TGT" ]]; then
+            echo "Error: Both source and target tables are required."
+            exit 1
+          fi
+          
+          if [[ "$SRC" == "$TGT" ]]; then
+            echo "Error: Source and target tables cannot be the same."
+            exit 1
+          fi
+          
+          echo "Source Table: $SRC"
+          echo "Target Table: $TGT"
+          echo "AWS Region: ${{ inputs.AWS_REGION }}"
+          echo "Environment: ${{ inputs.ENVIRONMENT }}"
+
+      - name: Get AWS Account Number
+        id: account
+        run: |
+          ACCOUNT_NUMBER="${{ vars.AWS_ACCOUNT_NUMBER }}"
+          if [[ -z "$ACCOUNT_NUMBER" ]]; then
+            echo "Error: AWS_ACCOUNT_NUMBER repository variable is not set."
+            exit 1
+          fi
+          echo "account_number=$ACCOUNT_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ steps.account.outputs.account_number }}:role/${{ vars.SHARED_DEPLOYMENT_ROLE }}
+          role-session-name: GitHubActions-DynamoDBCopy-${{ github.run_id }}
+          aws-region: ${{ inputs.AWS_REGION }}
+
+      - name: Mask AWS Credentials
+        run: |
+          echo "::add-mask::${{ env.AWS_ACCESS_KEY_ID }}"
+          echo "::add-mask::${{ env.AWS_SECRET_ACCESS_KEY }}"
+          echo "::add-mask::${{ env.AWS_SESSION_TOKEN }}"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Boto3
+        run: |
+          pip install boto3 botocore --quiet
+
+      - name: Run DynamoDB Copy (Inline Script)
+        env:
+          SOURCE_TABLE: ${{ inputs.SOURCE_TABLE }}
+          TARGET_TABLE: ${{ inputs.TARGET_TABLE }}
+          AWS_REGION: ${{ inputs.AWS_REGION }}
+        run: |
+          python -c '
+          import boto3
+          import sys
+          import os
+          from botocore.exceptions import ClientError
+
+          src_name = os.environ["SOURCE_TABLE"]
+          tgt_name = os.environ["TARGET_TABLE"]
+          region = os.environ["AWS_REGION"]
+
+          print(f"\nCopying DynamoDB data:\n  Source: {src_name}\n  Target: {tgt_name}\n  Region: {region}")
+
+          dynamodb = boto3.resource("dynamodb", region_name=region)
+          client = boto3.client("dynamodb", region_name=region)
+
+          try:
+              src_table = dynamodb.Table(src_name)
+              tgt_table = dynamodb.Table(tgt_name)
+
+              # Validate tables exist
+              client.describe_table(TableName=src_name)
+              client.describe_table(TableName=tgt_name)
+              print("Both tables exist and are accessible.")
+          except ClientError as e:
+              error_code = e.response["Error"]["Code"]
+              if error_code == "ResourceNotFoundException":
+                  print(f"Error: Table not found: {e}")
+              else:
+                  print(f"Error: Access denied or other error: {e}")
+              sys.exit(1)
+
+          # Get primary key schema
+          try:
+              key_schema = src_table.key_schema
+              pkeys = [k["AttributeName"] for k in key_schema if k["KeyType"] in ["HASH", "RANGE"]]
+              print(f"Primary keys: {pkeys}")
+          except Exception as e:
+              print(f"Error: Failed to get key schema: {e}")
+              sys.exit(1)
+
+          total_copied = 0
+          response = src_table.scan()
+          items = response.get("Items", [])
+
+          if not items:
+              print("Source table is empty. Nothing to copy.")
+          else:
+              print(f"Starting copy of {len(items)} items from first page...")
+
+          with tgt_table.batch_writer(overwrite_by_pkeys=pkeys) as batch:
+              for item in items:
+                  batch.put_item(Item=item)
+                  total_copied += 1
+
+          # Handle pagination
+          while "LastEvaluatedKey" in response:
+              response = src_table.scan(ExclusiveStartKey=response["LastEvaluatedKey"])
+              items = response.get("Items", [])
+              print(f"Copying additional {len(items)} items...")
+              with tgt_table.batch_writer(overwrite_by_pkeys=pkeys) as batch:
+                  for item in items:
+                      batch.put_item(Item=item)
+                      total_copied += 1
+
+          print(f"\nSUCCESS: Copied {total_copied} items from {src_name} → {tgt_name}")
+          '
+
+      - name: Add Summary to GitHub Step
+        if: success()
+        run: |
+          echo "## DynamoDB Copy Completed" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Source:** \`${{ inputs.SOURCE_TABLE }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Target:** \`${{ inputs.TARGET_TABLE }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Region:** \`${{ inputs.AWS_REGION }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** \`${{ inputs.ENVIRONMENT }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "> Copy completed successfully using inline script." >> $GITHUB_STEP_SUMMARY
+
+      - name: Fail on Error
+        if: failure()
+        run: |
+          echo "## DynamoDB Copy Failed" >> $GITHUB_STEP_SUMMARY
+          echo "See logs above for details." >> $GITHUB_STEP_SUMMARY
+          exit 1
