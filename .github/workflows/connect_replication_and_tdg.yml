@@ -1,0 +1,169 @@
+name: Amazon Connect Replication & TDG
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Choose environment (dev, uat, prd)'
+        required: true
+        type: choice
+        options: [dev, uat, prd]
+        default: dev
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  replicate-once:
+    name: Replicate & Create TDG – ${{ inputs.environment }}
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y wget git curl python3 python3-pip jq unzip bash awscli
+          wget -q https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+          unzip -q awscli-exe-linux-x86_64.zip
+          sudo ./aws/install
+          rm -rf awscli-exe-linux-x86_64.zip aws/
+
+      - name: Get AWS Account Number
+        run: |
+          ACCOUNT_NUMBER="${{ vars.AWS_ACCOUNT_NUMBER }}"
+          if [ -z "$ACCOUNT_NUMBER" ]; then
+            echo "AWS_ACCOUNT_NUMBER variable not set"
+            exit 1
+          fi
+          echo "AWS_ACCOUNT_NUMBER=$ACCOUNT_NUMBER" >> $GITHUB_ENV
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ env.ACTUAL_ACCOUNT_NUMBER }}:role/${{ vars.SHARED_DEPLOYMENT_ROLE }}
+          role-session-name: ConnectReplication-${{ inputs.environment }}
+          aws-region: us-east-1
+
+      - name: Mask AWS Credentials
+        run: |
+          echo "::add-mask::${{ env.AWS_ACCESS_KEY_ID }}"
+          echo "::add-mask::${{ env.AWS_SECRET_ACCESS_KEY }}"
+          echo "::add-mask::${{ env.AWS_SESSION_TOKEN }}"
+
+      - name: Set Variables & Discover Instance ID
+        id: config
+        run: |
+          ENV="${{ inputs.environment }}"
+          SRC_REGION="us-east-1"
+          REPLICA_REGION="us-west-2"
+          
+          SRC_ALIAS="ch-connect-use1-$ENV"
+          REPLICA_ALIAS="ch-connect-use2-$ENV"
+          TDG_NAME="ch-connect-tdg-$ENV"
+          TOKEN="gh-${{ github.run_id }}-${{ github.run_attempt }}"
+
+          echo "ENV=$ENV" >> $GITHUB_OUTPUT
+          echo "SRC_REGION=$SRC_REGION" >> $GITHUB_OUTPUT
+          echo "REPLICA_REGION=$REPLICA_REGION" >> $GITHUB_OUTPUT
+          echo "SRC_ALIAS=$SRC_ALIAS" >> $GITHUB_OUTPUT
+          echo "REPLICA_ALIAS=$REPLICA_ALIAS" >> $GITHUB_OUTPUT
+          echo "TDG_NAME=$TDG_NAME" >> $GITHUB_OUTPUT
+          echo "TOKEN=$TOKEN" >> $GITHUB_OUTPUT
+
+          echo "Discovering instance with alias: $SRC_ALIAS"
+          INSTANCES=$(aws connect list-instances --region $SRC_REGION --output json)
+
+          INSTANCE_ID=$(echo "$INSTANCES" | jq -r --arg a "$SRC_ALIAS" \
+            '.InstanceSummaryList[] | select(.InstanceAlias == $a) | .Id')
+
+          if [ -z "$INSTANCE_ID" ] || [ "$INSTANCE_ID" = "null" ]; then
+            echo "No instance found with alias: $SRC_ALIAS"
+            exit 1
+          fi
+
+          echo "Found Instance ID: $INSTANCE_ID"
+          echo "INSTANCE_ID=$INSTANCE_ID" >> $GITHUB_OUTPUT
+
+      - name: Replicate Amazon Connect Instance
+        id: replicate
+        run: |
+          aws connect replicate-instance \
+            --instance-id ${{ steps.config.outputs.INSTANCE_ID }} \
+            --replica-region ${{ steps.config.outputs.REPLICA_REGION }} \
+            --replica-alias ${{ steps.config.outputs.REPLICA_ALIAS }} \
+            --client-token ${{ steps.config.outputs.TOKEN }} \
+            --region ${{ steps.config.outputs.SRC_REGION }} \
+            --output json > replicate-output.json
+
+          cat replicate-output.json
+
+          REPLICATED_ARN=$(jq -r '.Arn' replicate-output.json)
+          echo "REPLICATED_ARN=$REPLICATED_ARN" >> $GITHUB_OUTPUT
+
+      - name: Create Traffic Distribution Group
+        run: |
+          aws connect create-traffic-distribution-group \
+            --name ${{ steps.config.outputs.TDG_NAME }} \
+            --description "TDG for ${{ steps.config.outputs.ENV }} setup" \
+            --instance-id ${{ steps.replicate.outputs.INSTANCE_ID }} \
+            --client-token ${{ steps.config.outputs.TOKEN }}-tdg \
+            --tags Environment=${{ steps.config.outputs.ENV }},Project=ch-connect,Setup=OneTime \
+            --region ${{ steps.config.outputs.SRC_REGION }} \
+            --output json > tdg-output.json
+
+          cat tdg-output.json
+
+      - name: Generate Summary
+        run: |
+          cat > summary.md << EOF
+          # Amazon Connect Replication Complete
+
+          **Environment**: ${{ steps.config.outputs.ENV }}  
+          **Source Region**: ${{ steps.config.outputs.SRC_REGION }}  
+          **Replica Region**: ${{ steps.config.outputs.REPLICA_REGION }}
+
+          ## Source Instance  
+          - **Alias**: \`${{ steps.config.outputs.SRC_ALIAS }}\`
+          - **ID**: \`${{ steps.config.outputs.INSTANCE_ID }}\`
+
+          ## Replicated Instance
+          - **Alias**: \`${{ steps.config.outputs.REPLICA_ALIAS }}\`
+          - **ARN**: \`${{ steps.replicate.outputs.REPLICATED_ARN }}\`
+
+          ## Traffic Distribution Group
+          - **Name**: \`${{ steps.config.outputs.TDG_NAME }}\`
+          - **ARN**: \`$(jq -r '.Arn' tdg-output.json)\`
+
+          **Run**: #${{ github.run_number }} | $(date)
+          EOF
+          cat summary.md
+
+      - name: Comment on PR (if applicable)
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('summary.md', 'utf8');
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body
+            });
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: connect-replication-${{ inputs.environment }}
+          path: |
+            replicate-output.json
+            tdg-output.json
+            summary.md
+          retention-days: 30
