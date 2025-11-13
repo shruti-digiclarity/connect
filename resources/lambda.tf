@@ -3,7 +3,7 @@ module "voice_mail_packager_lambda" {
   name                    = format("%s-lmda-voice-mail-packager-%s-%s", var.company_prefix, local.region_prefix, var.env)
   handler                 = "ch_voice_mail_packager.lambda_handler"
   runtime                 = local.lambda_default_configurations.runtime
-  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager-v7.zip"
+  local_existing_package  = "../lambda_function/ch-lmda-voice-mail-packager-v8.zip"
   layers                  = []
   timeout                 = 900
   memory_size             = local.lambda_default_configurations.memory_size
@@ -42,7 +42,7 @@ module "kvs_to_s3_lambda" {
       starting_position                  = "LATEST"
       batch_size                         = 100
       maximum_batching_window_in_seconds = null
-      maximum_retry_attempts             = -1
+      maximum_retry_attempts             = 3
       maximum_record_age_in_seconds      = -1
       bisect_batch_on_function_error     = false
     }
