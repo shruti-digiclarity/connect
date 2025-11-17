@@ -1,0 +1,82 @@
+name: Move S3 Data to Contact Records
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: "Environment"
+        default: "dev"
+        options:
+        - dev
+        - uat
+        - prd
+      aws_region:
+        type: string
+        description: "AWS region"
+        default: "us-east-1"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  move-s3-data:
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.environment }}
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Map environment → AWS Account + S3 bucket
+    - name: Set AWS Account Number and S3 Bucket
+      id: mapping
+      run: |
+        case "${{ inputs.environment }}" in
+          dev)
+            echo "aws_account=716537843042" >> $GITHUB_OUTPUT
+            echo "bucket=ch-s3-connect-use1-dev" >> $GITHUB_OUTPUT
+            ;;
+          uat)
+            echo "aws_account=272103761966" >> $GITHUB_OUTPUT
+            echo "bucket=ch-s3-connect-use1-uat" >> $GITHUB_OUTPUT
+            ;;
+          prd)
+            echo "aws_account=617842005266" >> $GITHUB_OUTPUT
+            echo "bucket=ch-s3-connect-use1-prd" >> $GITHUB_OUTPUT
+            ;;
+          *)
+            echo "Unknown environment: ${{ inputs.environment }}"
+            exit 1
+            ;;
+        esac
+
+    - name: Install AWS CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y awscli
+
+    - name: Authenticate to AWS via OIDC
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ inputs.aws_region }}
+        role-to-assume: arn:aws:iam::${{ steps.mapping.outputs.aws_account }}:role/ch-iam-shared-deployment-role-${{ inputs.environment }}
+
+    - name: Copy S3 files to contact records directory
+      run: |
+        BUCKET="${{ steps.mapping.outputs.bucket }}"
+        SOURCE="s3://$BUCKET/CTR/2025/"
+        TARGET="s3://$BUCKET/amazon/connect/contact-records/2025/"
+
+        echo "Copying from $SOURCE to $TARGET ..."
+        aws s3 sync "$SOURCE" "$TARGET" --exact-timestamps
+
+    # Uncomment to delete source after copying
+    # - name: Remove original S3 files after successful copy
+    #   if: success()
+    #   run: |
+    #     BUCKET="${{ steps.mapping.outputs.bucket }}"
+    #     SOURCE="s3://$BUCKET/CTR/2025/"
+    #     echo "Deleting source files at: $SOURCE"
+    #     aws s3 rm "$SOURCE" --recursive
