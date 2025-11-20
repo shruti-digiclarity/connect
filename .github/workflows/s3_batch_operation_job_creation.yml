@@ -1,0 +1,100 @@
+name: S3 Batch Operation Job
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment"
+        default: "dev"
+        type: choice
+        options:
+          - dev
+          - uat
+          - prd
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  create-and-run-job:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Map environment → AWS Account + S3 bucket
+    - name: Set AWS Account Number and S3 Bucket
+      id: mapping
+      run: |
+        case "${{ github.event.inputs.environment }}" in
+          dev)
+            echo "source_aws_account=716537843042" >> $GITHUB_OUTPUT
+            echo "source_bucket=ch-s3-connect-use1-dev" >> $GITHUB_OUTPUT
+            echo "destination_aws_account=426179662616" >> $GITHUB_OUTPUT
+            echo "destination_bucket=clover-vendor-data-dev" >> $GITHUB_OUTPUT
+            ;;
+          uat)
+            echo "source_aws_account=272103761966" >> $GITHUB_OUTPUT
+            echo "source_bucket=ch-s3-connect-use1-uat" >> $GITHUB_OUTPUT
+            echo "destination_aws_account=426179662616" >> $GITHUB_OUTPUT
+            echo "destination_bucket=clover-vendor-data-uat" >> $GITHUB_OUTPUT
+            ;;
+          prd)
+            echo "source_aws_account=617842005266" >> $GITHUB_OUTPUT
+            echo "source_bucket=ch-s3-connect-use1-prd" >> $GITHUB_OUTPUT
+            echo "destination_aws_account=168723764897" >> $GITHUB_OUTPUT
+            echo "destination_bucket=clover-vendor-data-prd" >> $GITHUB_OUTPUT
+            ;;
+          *)
+            echo "Unknown environment: ${{ github.event.inputs.environment }}"
+            exit 1
+            ;;
+        esac
+
+    - name: Install AWS CLI
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y awscli
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::${{steps.mapping.outputs.source_aws_account}}:role/ch-iam-s3-replication-use1-${{ github.event.inputs.environment }}
+        aws-region: us-east-1
+
+    - name: Create S3 Replication Batch Job
+      id: create_job
+      run: |
+        JOB_ID=$(aws s3control create-job \
+          --region us-east-1 \
+          --account-id ${{steps.mapping.outputs.source_aws_account}} \
+          --priority 10 \
+          --role-arn arn:aws:iam::${{steps.mapping.outputs.source_aws_account}}:role/ch-iam-s3-replication-use1-${{ github.event.inputs.environment }} \
+          --operation '{
+              "S3ReplicateObject": {}
+          }' \
+          --manifest-generator '{
+              "S3JobManifestGenerator": {
+                "ExpectedBucketOwner": "${{steps.mapping.outputs.source_aws_account}}",
+                "SourceBucket": "arn:aws:s3:::${{steps.mapping.outputs.source_bucket}}",
+                "EnableManifestOutput": false,
+                "Filter": { "EligibleForReplication": true }
+              }
+          }' \
+          --report '{
+                "Bucket": "arn:aws:s3:::${{ steps.mapping.outputs.destination_bucket }}",
+                "Prefix": "reports",
+                "Format": "Report_CSV_20180820",
+                "Enabled": true,
+                "ReportScope": "AllTasks"
+          }' \
+          --no-confirmation-required \
+          --query 'JobId' \
+          --output text)
+
+        if [ -z "$JOB_ID" ] || [ "$JOB_ID" == "None" ]; then
+          echo "Failed to create job. Check permissions/replication config."
+          exit 1
+        fi
+
+        echo "job_id=$JOB_ID" >> $GITHUB_OUTPUT
