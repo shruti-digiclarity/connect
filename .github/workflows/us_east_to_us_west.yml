@@ -1,4 +1,4 @@
-name: Amazon Connect Failover
+name: US-EAST-1 to US-WEST-2
 
 on:
   workflow_dispatch:
@@ -74,7 +74,7 @@ jobs:
 
           TDG_JSON=$(aws connect list-traffic-distribution-groups \
             --region ${{ steps.cfg.outputs.SRC_REGION }} \
-            --query 'TrafficDistributionGroups[?IsDefault==`true`].{Id:Id, Arn:Arn, Status:Status}' \
+            --query 'TrafficDistributionGroupSummaryList[?IsDefault==`true`].{Id:Id, Arn:Arn, Status:Status}' \
             --output json || echo "[]")
 
           echo "$TDG_JSON" | jq .
@@ -96,7 +96,7 @@ jobs:
           echo "Shifting all telephony, agents & sign-ins to us-west-2"
 
           aws connect update-traffic-distribution \
-            --traffic-distribution-group-id "$TDG_ID" \
+            --id "$TDG_ID" \
             --region ${{ steps.cfg.outputs.SRC_REGION }} \
             --telephony-config '{
               "Distributions": [
@@ -148,7 +148,7 @@ jobs:
           ————————————————————————————————————————————————————————————————————————————————
           Verification Command (run after ~5–10 minutes)
           ————————————————————————————————————————————————————————————————————————————————
-          aws connect describe-traffic-distribution-group --traffic-distribution-group-id $TDG_ID --region us-east-1
+          aws connect get-traffic-distribution --id $TDG_ID
 
           Confirm all "Status" fields show "COMPLETED" and percentages are 100/0 as above.
           ==================================================================================
