@@ -60,28 +60,40 @@ jobs:
           echo "AWS Region: ${{ inputs.AWS_REGION }}"
           echo "Environment: ${{ inputs.ENVIRONMENT }}"
 
-      - name: Get AWS Account Number
-        id: account
+      - name: Validate Environment & Set Account/Role
+        id: env_config
         run: |
-          ACCOUNT_NUMBER="${{ vars.AWS_ACCOUNT_NUMBER }}"
-          if [[ -z "$ACCOUNT_NUMBER" ]]; then
-            echo "Error: AWS_ACCOUNT_NUMBER repository variable is not set."
-            exit 1
-          fi
-          echo "account_number=$ACCOUNT_NUMBER" >> $GITHUB_OUTPUT
+          ENV="${{ inputs.ENVIRONMENT }}"
+          case "$ENV" in
+            dev)
+              ACCOUNT="716537843042"
+              ROLE="ch-iam-shared-deployment-role-dev"
+              ;;
+            uat)
+              ACCOUNT="272103761966"
+              ROLE="ch-iam-shared-deployment-role-uat"
+              ;;
+            prd)
+              ACCOUNT="617842005266"
+              ROLE="ch-iam-shared-deployment-role-prd"
+              ;;
+            *)
+              echo "Error: Invalid ENVIRONMENT: $ENV. Must be dev, uat, or prd."
+              exit 1
+              ;;
+          esac
+          
+          echo "Using AWS Account: $ACCOUNT"
+          echo "Using IAM Role: $ROLE"
+          echo "account_id=$ACCOUNT" >> $GITHUB_OUTPUT
+          echo "iam_role=$ROLE" >> $GITHUB_OUTPUT
 
       - name: Configure AWS Credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::${{ steps.account.outputs.account_number }}:role/${{ vars.SHARED_DEPLOYMENT_ROLE }}
+          role-to-assume: arn:aws:iam::${{ steps.env_config.outputs.account_id }}:role/${{ steps.env_config.outputs.iam_role }}
           role-session-name: GitHubActions-DynamoDBCopy-${{ github.run_id }}
           aws-region: ${{ inputs.AWS_REGION }}
-
-      - name: Mask AWS Credentials
-        run: |
-          echo "::add-mask::${{ env.AWS_ACCESS_KEY_ID }}"
-          echo "::add-mask::${{ env.AWS_SECRET_ACCESS_KEY }}"
-          echo "::add-mask::${{ env.AWS_SESSION_TOKEN }}"
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -174,6 +186,8 @@ jobs:
           echo "**Target:** \`${{ inputs.TARGET_TABLE }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**Region:** \`${{ inputs.AWS_REGION }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**Environment:** \`${{ inputs.ENVIRONMENT }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**AWS Account:** \`${{ steps.env_config.outputs.account_id }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**IAM Role:** \`${{ steps.env_config.outputs.iam_role }}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "> Copy completed successfully using inline script." >> $GITHUB_STEP_SUMMARY
 

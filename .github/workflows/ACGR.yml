@@ -1,0 +1,170 @@
+name: Amazon Connect Replication
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Choose environment (dev, uat, prd)'
+        required: true
+        type: choice
+        options: [dev, uat, prd]
+        default: dev
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  replicate-connect-instance:
+    name: Replicate Instance – ${{ inputs.environment }}
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y wget git curl python3 python3-pip jq unzip bash
+          wget -q https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+          unzip -q awscli-exe-linux-x86_64.zip
+          sudo ./aws/install --update
+          rm -rf awscli-exe-linux-x86_64.zip aws/
+
+      - name: Set Environment Variables
+        id: cfg
+        run: |
+          ENV="${{ inputs.environment }}"
+          SRC_REGION="us-east-1"
+          REPLICA_REGION="us-west-2"
+          
+          SRC_ALIAS="ch-connect-use1-$ENV"
+          REPLICA_ALIAS="ch-connect-usw2-$ENV"
+          TOKEN="gh-${{ github.run_id }}-${{ github.run_attempt }}"
+
+          case "$ENV" in
+            dev)
+              ACCOUNT="716537843042"
+              ROLE="ch-iam-shared-deployment-role-dev"
+              INSTANCE_ID="a79d3fbd-901e-4815-8d30-f662ff92ad78"
+              ;;
+            uat)
+              ACCOUNT="272103761966"
+              ROLE="ch-iam-shared-deployment-role-uat"
+              INSTANCE_ID="7b1335fb-83b2-414e-b783-e26d1e0b6d90"
+              ;;
+            prd)
+              ACCOUNT="617842005266"
+              ROLE="ch-iam-shared-deployment-role-prd"
+              INSTANCE_ID="ea550b7a-6948-4901-bfed-474dcf26c873"
+              ;;
+            *)
+              echo "Error: Invalid environment: $ENV"
+              exit 1
+              ;;
+          esac
+
+          echo "ENV=$ENV" >> $GITHUB_OUTPUT
+          echo "ACCOUNT=$ACCOUNT" >> $GITHUB_OUTPUT
+          echo "ROLE=$ROLE" >> $GITHUB_OUTPUT
+          echo "INSTANCE_ID=$INSTANCE_ID" >> $GITHUB_OUTPUT
+          echo "SRC_REGION=$SRC_REGION" >> $GITHUB_OUTPUT
+          echo "REPLICA_REGION=$REPLICA_REGION" >> $GITHUB_OUTPUT
+          echo "SRC_ALIAS=$SRC_ALIAS" >> $GITHUB_OUTPUT
+          echo "REPLICA_ALIAS=$REPLICA_ALIAS" >> $GITHUB_OUTPUT
+          echo "TOKEN=$TOKEN" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ steps.cfg.outputs.ACCOUNT }}:role/${{ steps.cfg.outputs.ROLE }}
+          role-session-name: GitHubActions-Replicate-${{ inputs.environment }}
+          aws-region: ${{ steps.cfg.outputs.SRC_REGION }}
+
+      - name: Mask AWS Credentials
+        run: |
+          echo "::add-mask::${{ env.AWS_ACCESS_KEY_ID }}"
+          echo "::add-mask::${{ env.AWS_SECRET_ACCESS_KEY }}"
+          echo "::add-mask::${{ env.AWS_SESSION_TOKEN }}"
+
+      - name: Replicate Amazon Connect Instance
+        id: replicate
+        run: |
+          echo "Initiating replication of instance ${{ steps.cfg.outputs.INSTANCE_ID }}"
+          echo "Source: ${{ steps.cfg.outputs.SRC_REGION }} → Replica: ${{ steps.cfg.outputs.REPLICA_REGION }}"
+          echo "Replica Alias: ${{ steps.cfg.outputs.REPLICA_ALIAS }}"
+
+          aws connect replicate-instance \
+            --instance-id ${{ steps.cfg.outputs.INSTANCE_ID }} \
+            --replica-region ${{ steps.cfg.outputs.REPLICA_REGION }} \
+            --replica-alias ${{ steps.cfg.outputs.REPLICA_ALIAS }} \
+            --client-token ${{ steps.cfg.outputs.TOKEN }} \
+            --region ${{ steps.cfg.outputs.SRC_REGION }} \
+            --output json > replicate-output.json
+
+          cat replicate-output.json
+
+          REPLICATED_ARN=$(jq -r '.Arn' replicate-output.json)
+          REPLICA_ID=$(jq -r '.Id' replicate-output.json)
+          echo "REPLICATED_ARN=$REPLICATED_ARN" >> $GITHUB_OUTPUT
+          echo "REPLICA_ID=$REPLICA_ID" >> $GITHUB_OUTPUT
+
+      - name: Generate Replication Audit Report
+        run: |
+          cat > replication-report-${{ inputs.environment }}.txt << 'EOF'
+          ==================================================================================
+                     AMAZON CONNECT INSTANCE REPLICATION - AUDIT REPORT
+          ==================================================================================
+          Status          : REPLICATION INITIATED SUCCESSFULLY
+          Environment     : ${{ inputs.environment }}
+          Run ID          : ${{ github.run_id }}
+          Run Attempt     : ${{ github.run_attempt }}
+          Initiated By    : ${{ github.actor }}
+          Initiated At    : $(date '+%Y-%m-%d %H:%M:%S %Z')
+          GitHub Run URL  : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ————————————————————————————————————————————————————————————————————————————————
+          Source Instance
+          ————————————————————————————————————————————————————————————————————————————————
+          Account         : ${{ steps.cfg.outputs.ACCOUNT }}
+          Region          : us-east-1
+          Instance ID     : ${{ steps.cfg.outputs.INSTANCE_ID }}
+          ————————————————————————————————————————————————————————————————————————————————
+          Replica Configuration
+          ————————————————————————————————————————————————————————————————————————————————
+          Target Region   : us-west-2
+          Replica Alias   : ${{ steps.cfg.outputs.REPLICA_ALIAS }}
+          Client Token    : ${{ steps.cfg.outputs.TOKEN }}
+          ————————————————————————————————————————————————————————————————————————————————
+          How to Check Replication Status (After 15–20 minutes)
+          ————————————————————————————————————————————————————————————————————————————————
+          Run this exact command:
+              aws connect describe-instance --instance-id ${{ steps.cfg.outputs.INSTANCE_ID }} --region us-east-1
+
+          Look for this section in the output:
+              "ReplicaSummaryList": [
+                  {
+                      "Region": "us-west-2",
+                      "ReplicationStatus": "COMPLETED"
+                  }
+              ]
+
+          Expected completion time: 15–25 minutes
+          ==================================================================================
+          This artifact serves as official proof of replication initiation.
+          ==================================================================================
+          EOF
+
+          echo "Audit report generated: replication-report-${{ inputs.environment }}.txt"
+          cat replication-report-${{ inputs.environment }}.txt
+
+      - name: Upload Replication Audit Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: connect-replication-audit-${{ inputs.environment }}-${{ github.run_id }}
+          path: |
+            replication-report-${{ inputs.environment }}.txt
+            replicate-output.json
+          retention-days: 90

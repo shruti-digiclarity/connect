@@ -1,0 +1,167 @@
+name: Amazon Connect Failback
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Choose environment (dev, uat, prd)'
+        required: true
+        type: choice
+        options: [dev, uat, prd]
+        default: dev
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  failback-traffic:
+    name: Failback to us-east-1 – ${{ inputs.environment }}
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install AWS CLI + jq
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq unzip
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip -q awscliv2.zip
+          sudo ./aws/install --update
+          rm -rf awscliv2.zip aws
+
+      - name: Set Environment Variables
+        id: cfg
+        run: |
+          ENV="${{ inputs.environment }}"
+          SRC_REGION="us-east-1"
+          REPLICA_REGION="us-west-2"
+
+          case "$ENV" in
+            dev)  ACCOUNT="716537843042"; ROLE="ch-iam-shared-deployment-role-dev";  INSTANCE_ID="a79d3fbd-901e-4815-8d30-f662ff92ad78" ;;
+            uat)  ACCOUNT="272103761966"; ROLE="ch-iam-shared-deployment-role-uat";  INSTANCE_ID="7b1335fb-83b2-414e-b783-e26d1e0b6d90" ;;
+            prd)  ACCOUNT="617842005266"; ROLE="ch-iam-shared-deployment-role-prd";  INSTANCE_ID="ea550b7a-6948-4901-bfed-474dcf26c873" ;;
+            *)    echo "Invalid environment"; exit 1 ;;
+          esac
+
+          echo "ENV=$ENV" >> $GITHUB_OUTPUT
+          echo "ACCOUNT=$ACCOUNT" >> $GITHUB_OUTPUT
+          echo "ROLE=$ROLE" >> $GITHUB_OUTPUT
+          echo "INSTANCE_ID=$INSTANCE_ID" >> $GITHUB_OUTPUT
+          echo "SRC_REGION=$SRC_REGION" >> $GITHUB_OUTPUT
+          echo "REPLICA_REGION=$REPLICA_REGION" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ steps.cfg.outputs.ACCOUNT }}:role/${{ steps.cfg.outputs.ROLE }}
+          role-session-name: GitHubActions-Failback-${{ inputs.environment }}
+          aws-region: ${{ steps.cfg.outputs.SRC_REGION }}
+
+      - name: Mask Credentials
+        run: |
+          echo "::add-mask::${{ env.AWS_ACCESS_KEY_ID }}"
+          echo "::add-mask::${{ env.AWS_SECRET_ACCESS_KEY }}"
+          echo "::add-mask::${{ env.AWS_SESSION_TOKEN }}"
+
+      - name: Fetch Default TDG ID
+        id: tdg
+        run: |
+          echo "Fetching default Traffic Distribution Group ID..."
+          
+          TDG_JSON=$(aws connect list-traffic-distribution-groups \
+            --region ${{ steps.cfg.outputs.SRC_REGION }} \
+            --query 'TrafficDistributionGroups[?IsDefault==`true`].{Id:Id}' \
+            --output json)
+          
+          echo "$TDG_JSON" | jq .
+          
+          TDG_ID=$(echo "$TDG_JSON" | jq -r '.[0].Id // empty')
+          
+          if [[ -z "$TDG_ID" ]]; then
+            echo "Error: No default TDG found. Is multi-region replication active?"
+            exit 1
+          fi
+          
+          echo "Default TDG ID: $TDG_ID"
+          echo "TDG_ID=$TDG_ID" >> $GITHUB_OUTPUT
+
+      - name: Execute Failback (Shift 100% traffic back to us-east-1)
+        run: |
+          TDG_ID="${{ steps.tdg.outputs.TDG_ID }}"
+          echo "Initiating FAILBACK for TDG $TDG_ID"
+          echo "Moving all traffic back to us-east-1 (primary)"
+
+          aws connect update-traffic-distribution \
+            --traffic-distribution-group-id "$TDG_ID" \
+            --region ${{ steps.cfg.outputs.SRC_REGION }} \
+            --telephony-config '{
+              "Distributions": [
+                { "Region": "${{ steps.cfg.outputs.SRC_REGION }}",     "Percentage": 100 },
+                { "Region": "${{ steps.cfg.outputs.REPLICA_REGION }}", "Percentage": 0 }
+              ]
+            }' \
+            --agent-config '{
+              "Distributions": [
+                { "Region": "${{ steps.cfg.outputs.SRC_REGION }}",     "Percentage": 100 },
+                { "Region": "${{ steps.cfg.outputs.REPLICA_REGION }}", "Percentage": 0 }
+              ]
+            }' \
+            --sign-in-config '{
+              "Distributions": [
+                { "Region": "${{ steps.cfg.outputs.SRC_REGION }}",     "Enabled": true },
+                { "Region": "${{ steps.cfg.outputs.REPLICA_REGION }}", "Enabled": false }
+              ]
+            }'
+
+          echo "Failback command executed successfully."
+
+      - name: Generate Failback Audit Report
+        run: |
+          TDG_ID="${{ steps.tdg.outputs.TDG_ID }}"
+          cat > failback-report-${{ inputs.environment }}.txt << EOF
+          ==================================================================================
+                     AMAZON CONNECT TRAFFIC FAILBACK - AUDIT REPORT
+          ==================================================================================
+          Status          : FAILBACK INITIATED SUCCESSFULLY
+          Environment     : ${{ inputs.environment }}
+          Run ID          : ${{ github.run_id }}
+          Run Attempt     : ${{ github.run_attempt }}
+          Initiated By    : ${{ github.actor }}
+          Initiated At    : $(date '+%Y-%m-%d %H:%M:%S %Z')
+          GitHub Run URL  : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ————————————————————————————————————————————————————————————————————————————————
+          Primary Instance (now Active again)
+          ————————————————————————————————————————————————————————————————————————————————
+          Account         : ${{ steps.cfg.outputs.ACCOUNT }}
+          Region          : us-east-1
+          Instance ID     : ${{ steps.cfg.outputs.INSTANCE_ID }}
+          ————————————————————————————————————————————————————————————————————————————————
+          Failback Result
+          ————————————————————————————————————————————————————————————————————————————————
+          Active Region   : us-east-1 (100% telephony, agents & sign-ins)
+          Inactive Region : us-west-2 (0%)
+          TDG Used        : default (ID: $TDG_ID)
+          ————————————————————————————————————————————————————————————————————————————————
+          Verification Command (run after ~5–10 minutes)
+          ————————————————————————————————————————————————————————————————————————————————
+          aws connect describe-traffic-distribution-group --traffic-distribution-group-id $TDG_ID --region us-east-1
+
+          Confirm us-east-1 shows 100% and Status: "COMPLETED"
+          ==================================================================================
+          Traffic successfully restored to primary region.
+          ==================================================================================
+          EOF
+
+          echo "Failback audit report generated"
+          cat failback-report-${{ inputs.environment }}.txt
+
+      - name: Upload Failback Audit Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: connect-failback-${{ inputs.environment }}-${{ github.run_id }}
+          path: failback-report-${{ inputs.environment }}.txt
+          retention-days: 90
