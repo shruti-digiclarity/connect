@@ -1,0 +1,198 @@
+name: Claim Phone Number for Amazon Connect
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Choose environment (dev, uat, prd)'
+        required: true
+        type: choice
+        options: [dev, uat, prd]
+        default: dev
+      phone_number_type:
+        description: 'Phone number type'
+        required: true
+        type: choice
+        options: [DID, TOLL_FREE, UIFN, SHARED, THIRD_PARTY_TF, THIRD_PARTY_DID, SHORT_CODE]
+        default: DID
+      country_code:
+        description: 'ISO country code (e.g., US)'
+        required: true
+        type: string
+        default: 'US'
+      max_items:
+        description: 'Maximum number of phone numbers to search (up to 1000)'
+        required: false
+        type: number
+        default: 10
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  claim-phone-number:
+    name: Claim Phone Number – ${{ inputs.environment }}
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install AWS CLI + jq
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq unzip
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip -q awscliv2.zip
+          sudo ./aws/install --update
+          rm -rf awscliv2.zip aws
+
+      - name: Set Environment Variables
+        id: cfg
+        run: |
+          ENV="${{ inputs.environment }}"
+          REGION="us-east-1"
+          PHONE_TYPE="${{ inputs.phone_number_type }}"
+          COUNTRY_CODE="${{ inputs.country_code }}"
+          MAX_ITEMS="${{ inputs.max_items }}"
+
+          case "$ENV" in
+            dev)  ACCOUNT="716537843042"; ROLE="ch-iam-shared-deployment-role-dev";  INSTANCE_ID="a79d3fbd-901e-4815-8d30-f662ff92ad78" ;;
+            uat)  ACCOUNT="272103761966"; ROLE="ch-iam-shared-deployment-role-uat";  INSTANCE_ID="7b1335fb-83b2-414e-b783-e26d1e0b6d90" ;;
+            prd)  ACCOUNT="617842005266"; ROLE="ch-iam-shared-deployment-role-prd";  INSTANCE_ID="ea550b7a-6948-4901-bfed-474dcf26c873" ;;
+            *)    echo "Invalid environment"; exit 1 ;;
+          esac
+
+          echo "ENV=$ENV" >> $GITHUB_OUTPUT
+          echo "ACCOUNT=$ACCOUNT" >> $GITHUB_OUTPUT
+          echo "ROLE=$ROLE" >> $GITHUB_OUTPUT
+          echo "INSTANCE_ID=$INSTANCE_ID" >> $GITHUB_OUTPUT
+          echo "REGION=$REGION" >> $GITHUB_OUTPUT
+          echo "PHONE_TYPE=$PHONE_TYPE" >> $GITHUB_OUTPUT
+          echo "COUNTRY_CODE=$COUNTRY_CODE" >> $GITHUB_OUTPUT
+          echo "MAX_ITEMS=$MAX_ITEMS" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS Credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ steps.cfg.outputs.ACCOUNT }}:role/${{ steps.cfg.outputs.ROLE }}
+          role-session-name: GitHubActions-ClaimPhone-${{ inputs.environment }}
+          aws-region: ${{ steps.cfg.outputs.REGION }}
+
+      - name: Mask Credentials
+        run: |
+          echo "::add-mask::${{ env.AWS_ACCESS_KEY_ID }}"
+          echo "::add-mask::${{ env.AWS_SECRET_ACCESS_KEY }}"
+          echo "::add-mask::${{ env.AWS_SESSION_TOKEN }}"
+
+      - name: Search Available Phone Numbers
+        id: search
+        run: |
+          echo "Searching for available ${{ steps.cfg.outputs.PHONE_TYPE }} phone numbers in ${{ steps.cfg.outputs.COUNTRY_CODE }}..."
+
+          SEARCH_JSON=$(aws connect search-available-phone-numbers \
+            --instance-id ${{ steps.cfg.outputs.INSTANCE_ID }} \
+            --phone-number-country-code ${{ steps.cfg.outputs.COUNTRY_CODE }} \
+            --phone-number-type ${{ steps.cfg.outputs.PHONE_TYPE }} \
+            --target-region ${{ steps.cfg.outputs.REGION }} \
+            --max-items ${{ steps.cfg.outputs.MAX_ITEMS }} \
+            --output json || echo "[]")
+
+          echo "$SEARCH_JSON" | jq .
+
+          PHONE_NUMBERS=$(echo "$SEARCH_JSON" | jq -r '.AvailablePhoneNumbers[] // empty')
+
+          if [[ -z "$PHONE_NUMBERS" ]]; then
+            echo "Error: No available ${{ steps.cfg.outputs.PHONE_TYPE }} phone numbers found in ${{ steps.cfg.outputs.COUNTRY_CODE }}."
+            exit 1
+          fi
+
+          echo "Found $(echo "$PHONE_NUMBERS" | wc -l) available phone numbers."
+          echo "PHONE_NUMBERS<<EOF" >> $GITHUB_OUTPUT
+          echo "$PHONE_NUMBERS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Claim Phone Number
+        id: claim
+        run: |
+          PHONE_NUMBERS="${{ steps.search.outputs.PHONE_NUMBERS }}"
+          TOKEN="gh-${{ github.run_id }}-${{ github.run_attempt }}"
+          CLAIMED_NUMBER=""
+          SUCCESS=false
+
+          echo "Attempting to claim a phone number..."
+
+          for PHONE in $PHONE_NUMBERS; do
+            echo "Trying to claim $PHONE..."
+
+            CLAIM_OUTPUT=$(aws connect claim-phone-number \
+              --phone-number "$PHONE" \
+              --target-region ${{ steps.cfg.outputs.REGION }} \
+              --client-token "$TOKEN-$PHONE" \
+              --output json 2>&1)
+
+            if [[ $? -eq 0 ]]; then
+              echo "Successfully claimed $PHONE"
+              CLAIMED_NUMBER="$PHONE"
+              SUCCESS=true
+              break
+            else
+              echo "Failed to claim $PHONE: $CLAIM_OUTPUT"
+            fi
+          done
+
+          if [[ "$SUCCESS" != "true" ]]; then
+            echo "Error: Failed to claim any phone number after trying all available ones."
+            exit 1
+          fi
+
+          echo "CLAIMED_NUMBER=$CLAIMED_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Generate Claim Audit Report
+        run: |
+          CLAIMED_NUMBER="${{ steps.claim.outputs.CLAIMED_NUMBER }}"
+          cat > claim-report-${{ inputs.environment }}.txt << EOF
+          ==================================================================================
+                     AMAZON CONNECT PHONE NUMBER CLAIM - AUDIT REPORT
+          ==================================================================================
+          Status          : PHONE NUMBER CLAIMED SUCCESSFULLY
+          Environment     : ${{ inputs.environment }}
+          Run ID          : ${{ github.run_id }}
+          Run Attempt     : ${{ github.run_attempt }}
+          Initiated By    : ${{ github.actor }}
+          GitHub Run URL  : https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ————————————————————————————————————————————————————————————————————————————————
+          Instance Details
+          ————————————————————————————————————————————————————————————————————————————————
+          Account         : ${{ steps.cfg.outputs.ACCOUNT }}
+          Region          : ${{ steps.cfg.outputs.REGION }}
+          Instance ID     : ${{ steps.cfg.outputs.INSTANCE_ID }}
+          Phone Type      : ${{ inputs.phone_number_type }}
+          Country Code    : ${{ inputs.country_code }}
+          ————————————————————————————————————————————————————————————————————————————————
+          Claim Result
+          ————————————————————————————————————————————————————————————————————————————————
+          Claimed Number  : $CLAIMED_NUMBER
+          Client Token    : gh-${{ github.run_id }}-${{ github.run_attempt }}
+          ————————————————————————————————————————————————————————————————————————————————
+          Verification Command
+          ————————————————————————————————————————————————————————————————————————————————
+          aws connect describe-phone-number 
+
+          Confirm "PhoneNumberStatus" is "ACTIVE" and associated with the instance.
+          ==================================================================================
+          This artifact is official proof of phone number claim.
+          ==================================================================================
+          EOF
+
+          echo "Audit report generated"
+          cat claim-report-${{ inputs.environment }}.txt
+
+      - name: Upload Claim Audit Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: connect-claim-phone-${{ inputs.environment }}-${{ github.run_id }}
+          path: claim-report-${{ inputs.environment }}.txt
+          retention-days: 90
