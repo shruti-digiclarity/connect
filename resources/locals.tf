@@ -46,7 +46,7 @@ locals {
     runtime                 = "python3.12"
     package                 = "../lambda_function/lambda_function.zip"
     timeout                 = 900
-    memory_size             = 128
+    memory_size             = 512
     ignore_source_code_hash = true
     tags                    = local.tags
   }
@@ -56,7 +56,7 @@ locals {
     runtime                 = "nodejs22.x"
     package                 = "../lambda_function/lambda_node_function.zip"
     timeout                 = 900
-    memory_size             = 128
+    memory_size             = 512
     ignore_source_code_hash = true
     tags                    = local.tags
   }

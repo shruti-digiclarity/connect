@@ -145,7 +145,10 @@ locals {
         data.aws_connect_quick_connect.ccv_scheduling_english.quick_connect_id,
         data.aws_connect_quick_connect.ccv_scheduling_spanish.quick_connect_id,
         data.aws_connect_quick_connect.whv_scheduling_english.quick_connect_id,
-        data.aws_connect_quick_connect.whv_scheduling_spanish.quick_connect_id
+        data.aws_connect_quick_connect.whv_scheduling_spanish.quick_connect_id,
+        data.aws_connect_quick_connect.laquila_williams.quick_connect_id,
+        data.aws_connect_quick_connect.esrd_english.quick_connect_id,
+        data.aws_connect_quick_connect.esrd_spanish.quick_connect_id
       ]
       tags = local.tags
     }

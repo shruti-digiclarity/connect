@@ -78,5 +78,9 @@
   {
     "name": "Away from Desktop",
     "state": "ENABLED"
+  },
+  {
+  "name": "In a Visit",
+  "state": "ENABLED"
   }
 ]

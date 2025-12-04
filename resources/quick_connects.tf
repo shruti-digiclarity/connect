@@ -477,5 +477,41 @@ locals {
       }
       description = "OTC"
     }
+    "Silver Sneakers" = {
+      quick_connect_config = {
+          quick_connect_type = "PHONE_NUMBER"
+          phone_config = {
+          phone_number = "+18884234632"
+          }
+      }
+      description = "Silver Sneakers."
+    }
+    "CCV/WHV Reminder Calls" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18882547488"
+        }
+      }
+      description = "CCV/WHV Reminder Calls"
+    }
+    "Sales_Enrollment" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18008366890"
+        }
+      }
+      description = "Sales_Enrollment"
+    }
+    "INTEGRA DME" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18887298818"
+        }
+      }
+      description = "INTEGRA DME"
+    }
   }
 }

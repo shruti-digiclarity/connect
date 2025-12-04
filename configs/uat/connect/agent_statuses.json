@@ -74,5 +74,9 @@
   {
     "name": "In Field",
     "state": "ENABLED"
+  },
+  {
+  "name": "In a Visit",
+  "state": "ENABLED"
   }
 ]

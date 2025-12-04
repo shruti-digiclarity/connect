@@ -1002,3 +1002,20 @@ data "aws_connect_quick_connect" "whv_scheduling_spanish" {
   instance_id = module.amazon_connect.instance_id
   name        = "WHV Scheduling Spanish"
 }
+
+
+data "aws_connect_quick_connect" "laquila_williams" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "Laquila Williams"
+}
+
+
+data "aws_connect_quick_connect" "esrd_english" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ESRD English"
+}
+
+data "aws_connect_quick_connect" "esrd_spanish" {
+  instance_id = module.amazon_connect.instance_id
+  name        = "ESRD Spanish"
+}
