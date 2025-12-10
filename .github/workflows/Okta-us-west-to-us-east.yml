@@ -1,0 +1,57 @@
+name: Okta US-WEST-2 to US-EAST-1
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        description: "Choose environment (dev, uat, prod, lab)"
+        options:
+          - dev
+          - uat
+          - prod
+          - lab
+        required: true
+
+jobs:
+  trigger_okta:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Okta Workflow API
+        id: okta
+        run: |
+          echo "Calling Okta Workflow API (Failback: us-west-2 → us-east-1)..."
+
+          RESPONSE=$(curl -s -X POST \
+            -H "Authorization: SSWS ${{ secrets.OKTA_API_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"env\":\"${{ inputs.env }}\", \"region\":\"us-east-1\"}" \
+            "${{ secrets.OKTA_WORKFLOW_URL }}")
+
+          echo "RAW RESPONSE: $RESPONSE"
+
+          STATUS=$(echo "$RESPONSE" | jq -r '.statusCode // .code // 500')
+          MESSAGE=$(echo "$RESPONSE" | jq -r '.Message // .message // .error.message // "Unknown response"')
+
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "message=$MESSAGE" >> $GITHUB_OUTPUT
+
+      - name: Display Result
+        run: |
+          if [ "${{ steps.okta.outputs.status }}" = "200" ]; then
+            echo "----------------------------------------"
+            echo "Okta Workflow Success (us-west-2 → us-east-1)"
+            echo "Status: ${{ steps.okta.outputs.status }}"
+            echo "Message: ${{ steps.okta.outputs.message }}"
+            echo "----------------------------------------"
+          else
+            echo "----------------------------------------"
+            echo "Okta Workflow Error"
+            echo "Message: ${{ steps.okta.outputs.message }}"
+            echo "----------------------------------------"
+          fi
+
+      - name: Fail pipeline if error
+        if: steps.okta.outputs.status != '200'
+        run: exit 1
