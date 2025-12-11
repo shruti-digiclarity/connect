@@ -513,5 +513,23 @@ locals {
       }
       description = "INTEGRA DME"
     }
+    "Customer/Member Service" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18887781478"
+        }
+      }
+      description = "Customer/Member Service"
+    }
+    "Translator Line" = {
+      quick_connect_config = {
+        quick_connect_type = "PHONE_NUMBER"
+        phone_config = {
+          phone_number = "+18337141339"
+        }
+      }
+      description = "Translator Line"
+    }
   }
 }

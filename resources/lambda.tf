@@ -101,6 +101,7 @@ module "get_connect_config_lambda" {
   iam_configuration       = local.lambda_iam_configurations["get_connect_config_lambda_policy"]
   environment_variables = {
     CONFIG_TABLE_NAME             = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
+    OUTBOUND_CALLER_ID_TABLE_NAME = "${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${var.env}"
   }
   tags = local.lambda_default_configurations.tags
 }

@@ -224,7 +224,9 @@ data "aws_iam_policy_document" "get_connect_config_lambda_policy" {
     ]
     resources = [
       module.connect_config_dynamodb.dynamodb_table_arn,
-      "${module.connect_config_dynamodb.dynamodb_table_arn}/*"
+      "${module.connect_config_dynamodb.dynamodb_table_arn}/*",
+      data.aws_dynamodb_table.customer_outbound_callerid_mapping_table.arn,
+      "${data.aws_dynamodb_table.customer_outbound_callerid_mapping_table.arn}/*"
     ]
   }
   statement {
@@ -281,6 +283,7 @@ data "aws_iam_policy_document" "load_config_data_lambda_policy" {
   }
 }
 
+
 data "aws_iam_policy_document" "lead_generation_lambda_policy" {
   version = "2012-10-17"
   statement {
@@ -316,6 +319,10 @@ data "aws_iam_policy_document" "slack_notifier_lambda_policy" {
       module.connect_slack_notifier_secret.secret_arn[0]
     ]
   }
+}
+
+data "aws_dynamodb_table" "customer_outbound_callerid_mapping_table" {
+  name = "${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${var.env}"
 }
 
 data "aws_connect_queue" "ihc_pcc_vm" {
@@ -914,10 +921,10 @@ data "aws_connect_quick_connect" "trineaka_irby" {
   name        = "Trineaka Irby"
 }
 
-data "aws_connect_quick_connect" "earline_mixon" {
-  instance_id = module.amazon_connect.instance_id
-  name        = "Earline Mixon"
-}
+# data "aws_connect_quick_connect" "earline_mixon" {
+#   instance_id = module.amazon_connect.instance_id
+#   name        = "Earline Mixon"
+# }
 
 data "aws_connect_quick_connect" "athena_watkins" {
   instance_id = module.amazon_connect.instance_id

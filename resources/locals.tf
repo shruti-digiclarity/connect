@@ -129,7 +129,7 @@ locals {
           test     = "StringEquals"
           variable = "kms:ViaService"
           values = [
-            "s3.us-east-1.amazonaws.com"
+            "s3.${var.region}.amazonaws.com"
           ]
         }
       ]

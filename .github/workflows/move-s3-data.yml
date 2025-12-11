@@ -67,16 +67,7 @@ jobs:
       run: |
         BUCKET="${{ steps.mapping.outputs.bucket }}"
         SOURCE="s3://$BUCKET/CTR/2025/"
-        TARGET="s3://$BUCKET/amazon/connect/contact-records/2025/"
+        TARGET="s3://$BUCKET/amazon/connect/contact-trace-records/2025/"
 
         echo "Copying from $SOURCE to $TARGET ..."
         aws s3 sync "$SOURCE" "$TARGET" --exact-timestamps
-
-    # Uncomment to delete source after copying
-    # - name: Remove original S3 files after successful copy
-    #   if: success()
-    #   run: |
-    #     BUCKET="${{ steps.mapping.outputs.bucket }}"
-    #     SOURCE="s3://$BUCKET/CTR/2025/"
-    #     echo "Deleting source files at: $SOURCE"
-    #     aws s3 rm "$SOURCE" --recursive

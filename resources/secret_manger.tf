@@ -62,3 +62,4 @@ module "connect_slack_notifier_secret" {
     }
   }
 }
+

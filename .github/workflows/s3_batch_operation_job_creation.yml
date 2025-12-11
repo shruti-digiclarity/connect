@@ -11,6 +11,7 @@ on:
           - dev
           - uat
           - prd
+
 permissions:
   id-token: write
   contents: read
@@ -18,15 +19,16 @@ permissions:
 jobs:
   create-and-run-job:
     runs-on: ubuntu-22.04
+    environment: ${{ inputs.environment }}
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    # Map environment → AWS Account + S3 bucket
-    - name: Set AWS Account Number and S3 Bucket
+    - name: Map environment → AWS accounts + buckets
       id: mapping
       run: |
-        case "${{ github.event.inputs.environment }}" in
+        case "${{ inputs.environment }}" in
           dev)
             echo "source_aws_account=716537843042" >> $GITHUB_OUTPUT
             echo "source_bucket=ch-s3-connect-use1-dev" >> $GITHUB_OUTPUT
@@ -43,58 +45,58 @@ jobs:
             echo "source_aws_account=617842005266" >> $GITHUB_OUTPUT
             echo "source_bucket=ch-s3-connect-use1-prd" >> $GITHUB_OUTPUT
             echo "destination_aws_account=168723764897" >> $GITHUB_OUTPUT
-            echo "destination_bucket=clover-vendor-data-prd" >> $GITHUB_OUTPUT
-            ;;
-          *)
-            echo "Unknown environment: ${{ github.event.inputs.environment }}"
-            exit 1
+            echo "destination_bucket=clover-vendor-data" >> $GITHUB_OUTPUT
             ;;
         esac
 
     - name: Install AWS CLI
       run: |
-        sudo apt-get update
+        sudo apt-get update -y
         sudo apt-get install -y awscli
 
-    - name: Configure AWS Credentials
+    - name: Configure AWS Credentials (Source Account)
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::${{steps.mapping.outputs.source_aws_account}}:role/ch-iam-s3-replication-use1-${{ github.event.inputs.environment }}
         aws-region: us-east-1
+        role-to-assume: arn:aws:iam::${{ steps.mapping.outputs.source_aws_account }}:role/ch-iam-shared-deployment-role-${{ inputs.environment }}
 
-    - name: Create S3 Replication Batch Job
+    - name: Create S3 Batch Replication Job
       id: create_job
       run: |
+        REPORT_BUCKET="${{ steps.mapping.outputs.source_bucket }}"   # Must be same account
+        REPORT_PREFIX="batch-op-replication-reports"
+
         JOB_ID=$(aws s3control create-job \
           --region us-east-1 \
-          --account-id ${{steps.mapping.outputs.source_aws_account}} \
+          --account-id ${{ steps.mapping.outputs.source_aws_account }} \
+          --description "S3 Batch Replication Job" \
           --priority 10 \
-          --role-arn arn:aws:iam::${{steps.mapping.outputs.source_aws_account}}:role/ch-iam-s3-replication-use1-${{ github.event.inputs.environment }} \
-          --operation '{
-              "S3ReplicateObject": {}
-          }' \
-          --manifest-generator '{
-              "S3JobManifestGenerator": {
-                "ExpectedBucketOwner": "${{steps.mapping.outputs.source_aws_account}}",
-                "SourceBucket": "arn:aws:s3:::${{steps.mapping.outputs.source_bucket}}",
-                "EnableManifestOutput": false,
-                "Filter": { "EligibleForReplication": true }
+          --role-arn arn:aws:iam::${{ steps.mapping.outputs.source_aws_account }}:role/service-role/ch-iam-s3-replication-use1-${{ inputs.environment }} \
+          --operation '{"S3ReplicateObject":{}}' \
+          --manifest-generator "{
+            \"S3JobManifestGenerator\": {
+              \"ExpectedBucketOwner\": \"${{ steps.mapping.outputs.source_aws_account }}\",
+              \"SourceBucket\": \"arn:aws:s3:::${{ steps.mapping.outputs.source_bucket }}\",
+              \"EnableManifestOutput\": false,
+              \"Filter\": { 
+                \"EligibleForReplication\": true
               }
-          }' \
-          --report '{
-                "Bucket": "arn:aws:s3:::${{ steps.mapping.outputs.destination_bucket }}",
-                "Prefix": "reports",
-                "Format": "Report_CSV_20180820",
-                "Enabled": true,
-                "ReportScope": "AllTasks"
-          }' \
+            }
+          }" \
+          --report "{
+            \"Bucket\": \"arn:aws:s3:::$REPORT_BUCKET\",
+            \"Prefix\": \"$REPORT_PREFIX\",
+            \"Format\": \"Report_CSV_20180820\",
+            \"Enabled\": true,
+            \"ReportScope\": \"AllTasks\"
+          }" \
           --no-confirmation-required \
-          --query 'JobId' \
-          --output text)
+          --query JobId --output text)
 
-        if [ -z "$JOB_ID" ] || [ "$JOB_ID" == "None" ]; then
-          echo "Failed to create job. Check permissions/replication config."
+        if [ -z "$JOB_ID" ] || [ "$JOB_ID" = "None" ]; then
+          echo "Failed to create job"
           exit 1
         fi
 
         echo "job_id=$JOB_ID" >> $GITHUB_OUTPUT
+        echo "✅ Created Replication Job: $JOB_ID"
