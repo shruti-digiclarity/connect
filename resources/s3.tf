@@ -18,29 +18,35 @@ module "s3_call_recording" {
   }
   replication_configuration = {
     role = module.iam_role.iam_role_arn
-    rule = {
-      id       = "ReplicateToDestination"
-      status   = "Enabled"
-      priority = 1
 
-      destination = {
-        bucket             = "arn:aws:s3:::${var.s3_destination_bucket_name}"
-        account_id         = "${var.s3_destination_account_id}"
-        replica_kms_key_id = "arn:aws:kms:${var.s3_destination_region}:${var.s3_destination_account_id}:key/${var.destination_kms_key_id}"
-        access_control_translation = {
-          owner = "Destination"
+    rule = [
+      {
+        id       = "ReplicateToDestination"
+        status   = "Enabled"
+        priority = 1
+
+        delete_marker_replication_status = "Disabled"
+
+        destination = {
+          bucket     = "arn:aws:s3:::${var.s3_destination_bucket_name}"
+          account_id = var.s3_destination_account_id
+
+          replica_kms_key_id = "arn:aws:kms:${var.s3_destination_region}:${var.s3_destination_account_id}:key/${var.destination_kms_key_id}"
+
+          access_control_translation = {
+            owner = "Destination"
+          }
+        }
+
+        source_selection_criteria = {
+          sse_kms_encrypted_objects = {
+            status = "Enabled"
+          }
         }
       }
-
-      source_selection_criteria = {
-        sse_kms_encrypted_objects = {
-          status = "Enabled"
-        }
-      }
-
-      delete_marker_replication = "Disabled"
-    }
+    ]
   }
+
   lifecycle_rules = local.s3_lifecycle_rules
   tags            = local.tags
   metric_configuration = {
