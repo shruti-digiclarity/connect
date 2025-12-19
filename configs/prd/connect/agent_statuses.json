@@ -74,5 +74,9 @@
   {
   "name": "In a Visit",
   "state": "ENABLED"
+  },
+  {
+  "name": "OB Only",
+  "state": "ENABLED"
   }
 ]

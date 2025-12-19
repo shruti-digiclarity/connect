@@ -63,3 +63,17 @@ module "connect_slack_notifier_secret" {
   }
 }
 
+# module "connect_sms_optout_sync_secret" {
+#   source = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-secrets-manager-wrapper?ref=v1.0.3"
+
+#   items = {
+#     connect_lead_generation = {
+#       name                    = "aws-connect-sms-optout-sync"
+#       description             = "Secret for connect SMS OptOut Sync"
+#       secret_string           = jsonencode({})
+#       tags                    = local.tags
+#       create                  = true
+#       recovery_window_in_days = 30
+#     }
+#   }
+# }

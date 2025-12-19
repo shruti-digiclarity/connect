@@ -74,6 +74,7 @@ variable "is_primary" {
   default = false
 }
 
+
 variable "s3_destination_bucket_name" {
   description = "The ARN of the destination S3 bucket for replication."
   type        = string
@@ -92,7 +93,35 @@ variable "destination_kms_key_id" {
   type        = string
 }
 
+variable "replica_dynamodb_kms_key_arn" {
+  description = "KMS key ARN to use for DynamoDB replica encryption (e.g., in us-west-2). If null, the AWS managed key is used."
+  type        = string
+  default     = null
+}
+
 variable "slack_notification_channel" {
   type        = string
   description = "Slack channel to send lambda error notification to"
+}
+
+variable "s3_ctr_destination_bucket_name" {
+  description = "The ARN of the destination S3 bucket for replication."
+  type        = string
+}
+
+variable "ctr_destination_kms_key_id" {
+  description = "The KMS key ARN for the connect destination bucket."
+  type        = string
+}
+
+variable "getDidAttributes_us_west_2_function_arn" {
+  description = "The variable for function arn"
+  type        = string
+  default     = "NeedARN"
+}
+ 
+variable "getDidAttributes_us_east_1_function_arn" {
+  description = "The variable for function arn"
+  type        = string
+  default     = "NeedARN"
 }

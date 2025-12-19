@@ -2,7 +2,7 @@ module "firehose_connect" {
   source                      = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-kinesis-firehose-wrapper?ref=v1.0.3"
   name                        = format("%s-firehose-connect-%s-%s", var.company_prefix, local.region_prefix, var.env)
   destination                 = "s3"
-  s3_prefix                   = "CTR/"
+  s3_prefix                   = "amazon/connect/contact-trace-records/"
   append_delimiter_to_record  = true
   s3_kms_key_arn              = module.common_aws_kms_key.key_arn
   enable_s3_encryption        = true

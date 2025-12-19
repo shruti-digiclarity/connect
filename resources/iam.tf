@@ -35,7 +35,9 @@ module "iam_role" {
       ]
       resources = [
         module.s3_call_recording.bucket_arn,
-        "${module.s3_call_recording.bucket_arn}/*"
+        "${module.s3_call_recording.bucket_arn}/*",
+        module.s3_connect.bucket_arn,
+        "${module.s3_connect.bucket_arn}/*"
       ]
     },
     {
@@ -51,7 +53,9 @@ module "iam_role" {
       ]
       resources = [
         "arn:aws:s3:::${var.s3_destination_bucket_name}",
-        "arn:aws:s3:::${var.s3_destination_bucket_name}/*"
+        "arn:aws:s3:::${var.s3_destination_bucket_name}/*",
+        "arn:aws:s3:::${var.s3_ctr_destination_bucket_name}",
+        "arn:aws:s3:::${var.s3_ctr_destination_bucket_name}/*"
       ]
     },
     {
@@ -72,7 +76,8 @@ module "iam_role" {
         "kms:GenerateDataKey"
       ]
       resources = [
-        "arn:aws:kms:${var.s3_destination_region}:${var.s3_destination_account_id}:key/${var.destination_kms_key_id}"
+        "arn:aws:kms:${var.s3_destination_region}:${var.s3_destination_account_id}:key/${var.destination_kms_key_id}",
+        "arn:aws:kms:${var.region}:${var.s3_destination_account_id}:key/${var.ctr_destination_kms_key_id}"
       ]
     }
   ]

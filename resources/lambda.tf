@@ -11,8 +11,8 @@ module "voice_mail_packager_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["voice_mail_packager_lambda_policy"]
   environment_variables = {
-    CONFIG_TABLE_NAME      = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
-    TASK_FLOW_ID           = module.amazon_connect.contact_flows["ch_voice_mail_task_flow"].contact_flow_id
+    CONFIG_TABLE_NAME      = "${var.company_prefix}-dydb-connect-config-use1-${var.env}"
+    TASK_FLOW_ID           = local.voice_mail_task_flow_id
     default_vm_mode        = "email"
     presigner_function_arn = "${var.company_prefix}-lmda-voice-mail-presigner-${local.region_prefix}-${var.env}"
     s3_recordings_bucket   = "${var.company_prefix}-s3-voice-mail-recording-${local.region_prefix}-${var.env}"
@@ -100,7 +100,7 @@ module "get_connect_config_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["get_connect_config_lambda_policy"]
   environment_variables = {
-    CONFIG_TABLE_NAME             = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
+    CONFIG_TABLE_NAME             = "${var.company_prefix}-dydb-connect-config-use1-${var.env}"
     OUTBOUND_CALLER_ID_TABLE_NAME = "${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${var.env}"
   }
   tags = local.lambda_default_configurations.tags
@@ -119,7 +119,7 @@ module "check_holiday_and_hoop_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["check_holiday_and_hoop_lambda_policy"]
   environment_variables = {
-    CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
+    CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-use1-${var.env}"
   }
   tags = local.lambda_default_configurations.tags
 }
@@ -138,7 +138,7 @@ module "match_extension_lambda" {
   iam_configuration       = local.lambda_iam_configurations["match_extension_lambda"]
   environment_variables = {
     COMPANY_PREFIX    = var.company_prefix
-    CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
+    CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-use1-${var.env}"
     ENV               = var.env
     REGION            = local.region_prefix
     REGION_PREFIX     = local.region_prefix
@@ -159,11 +159,31 @@ module "load_config_data_lambda" {
   attach                  = { policy_jsons = true }
   iam_configuration       = local.lambda_iam_configurations["load_config_data_lambda_policy"]
   environment_variables = {
-    CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-${local.region_prefix}-${var.env}"
+    CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-use1-${var.env}"
     ENV               = var.env
   }
   tags = local.lambda_default_configurations.tags
 }
+
+# module "quick_connect_provisioning" {
+#   source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.3"
+#   name                    = format("%s-lmda-quick-connect-provisioning-%s-%s", var.company_prefix, local.region_prefix, var.env)
+#   handler                 = local.lambda_default_configurations.handler
+#   runtime                 = local.lambda_default_configurations.runtime
+#   local_existing_package  = local.lambda_default_configurations.package
+#   layers                  = []
+#   timeout                 = 900
+#   memory_size             = local.lambda_default_configurations.memory_size
+#   ignore_source_code_hash = local.lambda_default_configurations.ignore_source_code_hash
+#   attach                  = { policy_jsons = true }
+#   iam_configuration       = local.lambda_iam_configurations["quick_connect_provisioning_lambda_policy"]
+#   environment_variables = {
+#     CONFIG_TABLE_NAME = "${var.company_prefix}-dydb-connect-config-use1-${var.env}"
+#     COMMON_QUEUE_ID = try(module.amazon_connect.queues["ch_quick_connect_queue"].queue_id, data.aws_connect_queue.ch_quick_connect_queue.queue_id)
+#     INSTANCE_ID = module.amazon_connect.instance_id
+#   }
+#   tags = local.lambda_default_configurations.tags
+# }
 
 module "lead_generation_lambda" {
   source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.3"
@@ -200,6 +220,24 @@ module "campaign_attribution_lambda" {
   }
   tags = local.lambda_node_default_configurations.tags
 }
+
+# module "sms_optout_sync_lambda" {
+#   source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.3"
+#   name                    = format("%s-lmda-sms-optout-sync-%s-%s", var.company_prefix, local.region_prefix, var.env)
+#   handler                 = local.lambda_node_default_configurations.handler
+#   runtime                 = local.lambda_node_default_configurations.runtime
+#   local_existing_package  = local.lambda_node_default_configurations.package
+#   layers                  = []
+#   timeout                 = 900
+#   memory_size             = local.lambda_node_default_configurations.memory_size
+#   ignore_source_code_hash = local.lambda_node_default_configurations.ignore_source_code_hash
+#   attach                  = { policy_jsons = true }
+#   iam_configuration       = local.lambda_iam_configurations["sms_optout_sync_lambda_policy"]
+#   environment_variables = {
+#     ENV = var.env
+#   }
+#   tags = local.lambda_node_default_configurations.tags
+# }
 
 module "slack_notifier_lambda" {
   source                  = "git@github.com:CloverHealth/ccaas-terraform-modules-wrapper.git//terraform-aws-lambda-wrapper?ref=v1.0.3"
@@ -246,5 +284,10 @@ module "slack_notifier_lambda_alias_live" {
       action     = "lambda:InvokeFunction"
       source_arn = "${module.campaign_attribution_lambda.lambda_cloudwatch_log_group_arn}:*"
     }
+    # AllowLogsInvokeSMSOptOutSyncLambda = {
+    #   service    = "logs.${var.region}"
+    #   action     = "lambda:InvokeFunction"
+    #   source_arn = "${module.sms_optout_sync_lambda.lambda_cloudwatch_log_group_arn}:*"
+    # }
   }
 }

@@ -41,6 +41,10 @@ locals {
   is_primary    = var.region == "us-east-1"
   region_prefix = local.region_prefix_map["${var.region}"]
 
+  connect_instance_id     = var.is_primary ? module.amazon_connect.instance_id : data.aws_connect_instance.amazon_connect.id
+  connect_instance_arn    = var.is_primary ? module.amazon_connect.instance_arn : data.aws_connect_instance.amazon_connect.arn
+  voice_mail_task_flow_id = var.is_primary ? module.amazon_connect.contact_flows["ch_voice_mail_task_flow"].contact_flow_id : data.aws_connect_contact_flow.voice_mail_task_flow[0].contact_flow_id
+
   lambda_default_configurations = {
     handler                 = "lambda_function.lambda_handler"
     runtime                 = "python3.12"
@@ -107,7 +111,10 @@ locals {
     {
       sid = "AllowS3ReplicationDecrypt"
       actions = [
+        "kms:Encrypt",
         "kms:Decrypt*",
+        "kms:ReEncrypt*",
+        "kms:GenerateDataKey*",
         "kms:DescribeKey"
       ]
       resources = ["*"]
@@ -122,7 +129,8 @@ locals {
           test     = "StringLike"
           variable = "kms:EncryptionContext:aws:s3:arn"
           values = [
-            "arn:aws:s3:::${local.call_recording_bucket_name}/*"
+            "arn:aws:s3:::${local.call_recording_bucket_name}/*",
+            "arn:aws:s3:::ch-s3-connect-${local.region_prefix}-${var.env}/*"
           ]
         },
         {
@@ -213,6 +221,10 @@ locals {
       number_of_policy_jsons = 1
       policy_jsons           = [data.aws_iam_policy_document.load_config_data_lambda_policy.json]
     }
+    # quick_connect_provisioning_lambda_policy = {
+    #   number_of_policy_jsons = 1
+    #   policy_jsons           = [data.aws_iam_policy_document.quick_connect_provisioning_lambda_policy.json]
+    # }
     lead_generation_lambda_policy = {
       number_of_policy_jsons = 1
       policy_jsons           = [data.aws_iam_policy_document.lead_generation_lambda_policy.json]
@@ -221,6 +233,10 @@ locals {
       number_of_policy_jsons = 1
       policy_jsons           = [data.aws_iam_policy_document.campaign_attribution_lambda_policy.json]
     }
+    # sms_optout_sync_lambda_policy = {
+    #   number_of_policy_jsons = 1
+    #   policy_jsons           = [data.aws_iam_policy_document.sms_optout_sync_lambda_policy.json]
+    # }
     slack_notifier_lambda_policy = {
       number_of_policy_jsons = 1
       policy_jsons           = [data.aws_iam_policy_document.slack_notifier_lambda_policy.json]

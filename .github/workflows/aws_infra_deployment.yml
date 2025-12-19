@@ -1,4 +1,4 @@
-name: AWS Infrastructure Deployment Pipeline
+name: AWS Infrastructure Deployment Pipeline (Multi-Region)
 
 on:
   workflow_dispatch:
@@ -9,9 +9,9 @@ on:
         default: 'dev'
         type: choice
         options:
-        - dev
-        - uat
-        - prd
+          - dev
+          - uat
+          - prd
 
 permissions:
   contents: read
@@ -19,39 +19,39 @@ permissions:
   pull-requests: write
 
 jobs:
+  # ------------------------------------------------------------------
+  # 1. Validate branch + checkout code (shared across regions)
+  # ------------------------------------------------------------------
   prepare-and-validate:
     name: Prepare and Validate Branch
     runs-on: ubuntu-22.04
+    outputs:
+      env: ${{ steps.set-env.outputs.env }}
     steps:
       - name: Validate Branch and Environment
+        id: set-env
         run: |
           BRANCH="${{ github.ref_name }}"
           ENVIRONMENT="${{ github.event.inputs.environment }}"
-          
+
           echo "Branch: $BRANCH"
           echo "Environment: $ENVIRONMENT"
-          
-          # Validate branch-environment combinations
+
           case "$ENVIRONMENT" in
             "dev")
-              # Any branch can deploy to dev
-              echo "Any branch can deploy to dev environment"
+              echo "Any branch can deploy to dev"
               ;;
             "uat")
-              # Only develop branch can deploy to UAT
               if [[ "$BRANCH" != "develop" ]]; then
-                echo "Error: Only 'develop' branch can deploy to UAT environment. Current branch: '$BRANCH'"
+                echo "Error: Only 'develop' branch can deploy to UAT. Current: '$BRANCH'"
                 exit 1
               fi
-              echo "Develop branch can deploy to UAT environment"
               ;;
             "prd")
-              # Only master branch can deploy to production
               if [[ "$BRANCH" != "master" ]]; then
-                echo "Error: Only 'master' branch can deploy to production environment. Current branch: '$BRANCH'"
+                echo "Error: Only 'master' branch can deploy to production. Current: '$BRANCH'"
                 exit 1
               fi
-              echo "master branch can deploy to production environment"
               ;;
             *)
               echo "Error: Unknown environment '$ENVIRONMENT'"
@@ -59,19 +59,39 @@ jobs:
               ;;
           esac
 
+          echo "env=$ENVIRONMENT" >> $GITHUB_OUTPUT
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
 
-  deploy:
-    name: Deploy to ${{ github.event.inputs.environment }}
+  # ------------------------------------------------------------------
+  # 2. Deploy Infrastructure to us-east-1
+  # ------------------------------------------------------------------
+  deploy-use1:
+    name: Deploy Infrastructure to us-east-1 (${{ github.event.inputs.environment }})
     needs: prepare-and-validate
     uses: CloverHealth/ccaas-shared-pipelines/.github/workflows/aws_infrastructure_deploy.yml@master
     with:
       WORKING_DIRECTORY: resources
       ENVIRONMENTS_CONFIG_DIR: environments
       AWS_REGION: us-east-1
-      CI_ENVIRONMENT_NAME: ${{ github.event.inputs.environment }}
+      CI_ENVIRONMENT_NAME: ${{ needs.prepare-and-validate.outputs.env }}
+    secrets:
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+  # ------------------------------------------------------------------
+  # 3. Deploy Infrastructure to us-west-2 (after use1 succeeds)
+  # ------------------------------------------------------------------
+  deploy-usw2:
+    name: Deploy Infrastructure to us-west-2 (${{ github.event.inputs.environment }})
+    needs: [prepare-and-validate, deploy-use1]
+    uses: CloverHealth/ccaas-shared-pipelines/.github/workflows/aws_infrastructure_deploy.yml@master
+    with:
+      WORKING_DIRECTORY: resources
+      ENVIRONMENTS_CONFIG_DIR: environments
+      AWS_REGION: us-west-2
+      CI_ENVIRONMENT_NAME: ${{ needs.prepare-and-validate.outputs.env }}
     secrets:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

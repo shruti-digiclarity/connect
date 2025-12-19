@@ -1,4 +1,17 @@
 data "aws_caller_identity" "current" {}
+
+data "aws_connect_instance" "amazon_connect" {
+  instance_alias = var.env == "dev" && var.is_primary == false ? "${var.company_prefix}-connect-use2-${var.env}" : "${var.company_prefix}-connect-${local.region_prefix}-${var.env}"
+}
+
+data "aws_connect_contact_flow" "voice_mail_task_flow" {
+  count       = var.is_primary ? 0 : 1 # Only fetch when NOT primary
+  provider    = aws.primary_region
+  instance_id = data.aws_connect_instance.amazon_connect.id
+  name        = "ch_voice_mail_task_flow"
+}
+
+
 data "aws_iam_policy_document" "match_extension_lambda_policy" {
   version = "2012-10-17"
   statement {
@@ -7,8 +20,8 @@ data "aws_iam_policy_document" "match_extension_lambda_policy" {
       "dynamodb:GetItem"
     ]
     resources = [
-      module.connect_config_dynamodb.dynamodb_table_arn,
-      "${module.connect_config_dynamodb.dynamodb_table_arn}/*"
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}",
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}/*"
     ]
   }
   statement {
@@ -33,8 +46,8 @@ data "aws_iam_policy_document" "voice_mail_packager_lambda_policy" {
       "connect:StartTaskContact"
     ]
     resources = [
-      module.amazon_connect.instance_arn,
-      "${module.amazon_connect.instance_arn}/*",
+      local.connect_instance_arn,
+      "${local.connect_instance_arn}/*",
     ]
   }
   statement {
@@ -66,8 +79,8 @@ data "aws_iam_policy_document" "voice_mail_packager_lambda_policy" {
       "dynamodb:GetItem"
     ]
     resources = [
-      module.connect_config_dynamodb.dynamodb_table_arn,
-      "${module.connect_config_dynamodb.dynamodb_table_arn}/*"
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}",
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}/*"
     ]
   }
   statement {
@@ -223,10 +236,10 @@ data "aws_iam_policy_document" "get_connect_config_lambda_policy" {
       "dynamodb:GetItem"
     ]
     resources = [
-      module.connect_config_dynamodb.dynamodb_table_arn,
-      "${module.connect_config_dynamodb.dynamodb_table_arn}/*",
-      data.aws_dynamodb_table.customer_outbound_callerid_mapping_table.arn,
-      "${data.aws_dynamodb_table.customer_outbound_callerid_mapping_table.arn}/*"
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}",
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}/*",
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${var.env}",
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${var.env}/*"
     ]
   }
   statement {
@@ -247,8 +260,8 @@ data "aws_iam_policy_document" "check_holiday_and_hoop_lambda_policy" {
       "dynamodb:GetItem"
     ]
     resources = [
-      module.connect_config_dynamodb.dynamodb_table_arn,
-      "${module.connect_config_dynamodb.dynamodb_table_arn}/*"
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}",
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}/*"
     ]
   }
   statement {
@@ -269,8 +282,8 @@ data "aws_iam_policy_document" "load_config_data_lambda_policy" {
       "dynamodb:BatchWriteItem"
     ]
     resources = [
-      module.connect_config_dynamodb.dynamodb_table_arn,
-      "${module.connect_config_dynamodb.dynamodb_table_arn}/*"
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}",
+      "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}/*"
     ]
   }
   statement {
@@ -283,6 +296,83 @@ data "aws_iam_policy_document" "load_config_data_lambda_policy" {
   }
 }
 
+# data "aws_iam_policy_document" "quick_connect_provisioning_lambda_policy" {
+#   version = "2012-10-17"
+#   statement {
+#     sid    = "AllowCloudWatchLogs"
+#     effect = "Allow"
+#     actions = [
+#       "logs:CreateLogGroup",
+#       "logs:CreateLogStream",
+#       "logs:PutLogEvents"
+#     ]
+#     resources = [
+#       "arn:aws:logs:${var.region}:${var.account_number}:log-group:*"
+#     ]
+#   }
+#   statement {
+#     sid    = "AllowConnectInstanceOperations"
+#     effect = "Allow"
+#     actions = [
+#       "connect:CreateQuickConnect",
+#       "connect:DeleteQuickConnect",
+#       "connect:DescribeQuickConnect",
+#       "connect:DescribeUser",
+#       "connect:DisassociateQueueQuickConnects",
+#       "connect:AssociateQueueQuickConnects",
+#       "connect:ListContactFlows",
+#       "connect:ListQueueQuickConnects",
+#       "connect:ListQuickConnects",
+#       "connect:ListTagsForResource",
+#       "connect:ListUsers",
+#       "connect:ListQueues",
+#       "connect:ListUserHierarchyGroups",
+#       "connect:DescribeUserHierarchyGroup"
+#     ]
+#     resources = [
+#       "arn:aws:connect:${var.region}:${var.account_number}:instance/*"
+#     ]
+#   }
+#   statement {
+#     sid    = "AllowConnectListOperations"
+#     effect = "Allow"
+#     actions = [
+#       "connect:List*"
+#     ]
+#     resources = [
+#       "arn:aws:connect:${var.region}:${var.account_number}:instance/*"
+#     ]
+#   }
+#   statement {
+#     sid    = "AllowConnectTagging"
+#     effect = "Allow"
+#     actions = [
+#       "connect:TagResource"
+#     ]
+#     resources = [
+#       "arn:aws:connect:${var.region}:${var.account_number}:instance/*"
+#     ]
+#   }
+#   statement {
+#     sid = "AllowDynamoDB"
+#     effect = "Allow"
+#     actions = [
+#       "dynamodb:GetItem"
+#     ]
+#     resources = [
+#       "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}",
+#       "arn:aws:dynamodb:${var.region}:${var.account_number}:table/${var.company_prefix}-dydb-connect-config-use1-${var.env}/*"
+#     ]
+#   }
+#   statement {
+#     sid     = "AllowKMS"
+#     effect  = "Allow"
+#     actions = ["kms:Decrypt"]
+#     resources = [
+#       "arn:aws:kms:${var.region}:${var.account_number}:key/*"
+#     ]
+#   }
+# }
 
 data "aws_iam_policy_document" "lead_generation_lambda_policy" {
   version = "2012-10-17"
@@ -309,6 +399,17 @@ data "aws_iam_policy_document" "campaign_attribution_lambda_policy" {
   }
 }
 
+# data "aws_iam_policy_document" "sms_optout_sync_lambda_policy" {
+#   version = "2012-10-17"
+#   statement {
+#     sid     = "AllowSecretsManager"
+#     effect  = "Allow"
+#     actions = ["secretsmanager:GetSecretValue"]
+#     resources = [
+#       module.connect_sms_optout_sync_secret.secret_arn[0]
+#     ]
+#   }
+# }
 data "aws_iam_policy_document" "slack_notifier_lambda_policy" {
   version = "2012-10-17"
   statement {
@@ -321,152 +422,149 @@ data "aws_iam_policy_document" "slack_notifier_lambda_policy" {
   }
 }
 
-data "aws_dynamodb_table" "customer_outbound_callerid_mapping_table" {
-  name = "${var.company_prefix}-dydb-customer-outbound-callerid-mapping-${var.env}"
-}
 
 data "aws_connect_queue" "ihc_pcc_vm" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "ch_ihc_pcc_vm"
 }
 
 data "aws_connect_queue" "ihc_admin_coordinators_vm" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "ch_ihc_admin_coordinators_vm"
 }
 
 data "aws_connect_quick_connect" "jilliann_perez" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Jilliann Perez"
 }
 
 data "aws_connect_quick_connect" "janine_gutierrez" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Janine Gutierrez"
 }
 
 data "aws_connect_quick_connect" "vanessa_osorio" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Vanessa Osorio"
 }
 
 data "aws_connect_quick_connect" "christina_feindt" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Christina Feindt"
 }
 
 data "aws_connect_quick_connect" "melissa_jevic" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Melissa Jevic"
 }
 
 data "aws_connect_quick_connect" "cathy_wallin" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Cathy Wallin"
 }
 
 data "aws_connect_quick_connect" "avital_rosenberg" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Avital Rosenberg"
 }
 
 data "aws_connect_quick_connect" "adria_french" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Adria French"
 }
 
 data "aws_connect_quick_connect" "denise_lopez" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Denise Lopez"
 }
 
 data "aws_connect_quick_connect" "eileen_ball" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Eileen Ball"
 }
 
 data "aws_connect_quick_connect" "inessa_tsygan" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Inessa Tsygan"
 }
 
 data "aws_connect_quick_connect" "jacqueline_alvarez" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Jacqueline Alvarez"
 }
 
 data "aws_connect_quick_connect" "janet_jones" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Janet Jones"
 }
 
 data "aws_connect_quick_connect" "jean_kaplan" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Jean Kaplan"
 }
 
 data "aws_connect_quick_connect" "jennifer_quittley" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Jennifer Quittley"
 }
 
 data "aws_connect_quick_connect" "jennifer_sullivan" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Jennifer Sullivan"
 }
 
 data "aws_connect_quick_connect" "madeline_dipietro" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Madeline DiPietro"
 }
 
 data "aws_connect_quick_connect" "maria_lent" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Maria Lent"
 }
 
 data "aws_connect_quick_connect" "maria_vallejos" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Maria Vallejos"
 }
 
 data "aws_connect_quick_connect" "marie_cadestin" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Marie Cadestin"
 }
 
 data "aws_connect_quick_connect" "mary_zebrowski_vuolo" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Mary Zebrowski-Vuolo"
 }
 
 data "aws_connect_quick_connect" "mily_febus" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Mily Febus"
 }
 
 data "aws_connect_quick_connect" "molly_desarme" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Molly Desarme"
 }
 
 data "aws_connect_quick_connect" "nancy_nunez" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Nancy Nunez"
 }
 
 data "aws_connect_quick_connect" "tara_elzey" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Tara Elzey"
 }
 
 data "aws_connect_quick_connect" "tia_thomas" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Tia Thomas"
 }
 
 data "aws_connect_quick_connect" "wendy_valencia" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Wendy Valencia"
 }
 
@@ -961,22 +1059,22 @@ data "aws_connect_quick_connect" "ihc_pcc_spanish" {
 }
 
 data "aws_connect_quick_connect" "ihc_enrollment_welcome_team_spanish" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "IHC Enrollment Welcome Team Spanish"
 }
 
 data "aws_connect_quick_connect" "ihc_enrollment_welcome_team_english" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "IHC Enrollment Welcome Team English"
 }
 
 data "aws_connect_quick_connect" "clinical_care_management_english" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Clinical Care Management English"
 }
 
 data "aws_connect_quick_connect" "clinical_care_management_spanish" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "Clinical Care Management Spanish"
 }
 
@@ -1006,7 +1104,7 @@ data "aws_connect_quick_connect" "whv_scheduling_english" {
 }
 
 data "aws_connect_quick_connect" "whv_scheduling_spanish" {
-  instance_id = module.amazon_connect.instance_id
+  instance_id = local.connect_instance_id
   name        = "WHV Scheduling Spanish"
 }
 
@@ -1016,7 +1114,6 @@ data "aws_connect_quick_connect" "laquila_williams" {
   name        = "Laquila Williams"
 }
 
-
 data "aws_connect_quick_connect" "esrd_english" {
   instance_id = module.amazon_connect.instance_id
   name        = "ESRD English"
@@ -1025,4 +1122,19 @@ data "aws_connect_quick_connect" "esrd_english" {
 data "aws_connect_quick_connect" "esrd_spanish" {
   instance_id = module.amazon_connect.instance_id
   name        = "ESRD Spanish"
+}
+
+data "aws_connect_hours_of_operation" "dnis_error_hours" {
+  instance_id = local.connect_instance_id
+  name        = "dnis_error_hours"
+}
+
+data "aws_connect_hours_of_operation" "ch_24x7_hours" {
+  instance_id = local.connect_instance_id
+  name        = "ch_24x7_hours"
+}
+
+data "aws_connect_queue" "ch_quick_connect_queue" {
+  instance_id = local.connect_instance_id
+  name        = "ch_quick_connect_queue"
 }

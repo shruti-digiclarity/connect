@@ -1,14 +1,24 @@
 locals {
-  queues = {
+  empty_queue = {
+    description           = null
+    hours_of_operation_id = null
+    status                = null
+    quick_connect_ids     = []
+    tags                  = {}
+  }
+
+  # Build as a map to keep conditional typing consistent when returning {} on secondary regions.
+  primary_queues = {
     ch_dnis_error = {
       description           = "Error Queue for DNIS."
-      hours_of_operation_id = module.amazon_connect.hours_of_operations["dnis_error_hours"].hours_of_operation_id
+      hours_of_operation_id = try(module.amazon_connect.hours_of_operations["dnis_error_hours"].hours_of_operation_id, data.aws_connect_hours_of_operation.dnis_error_hours.hours_of_operation_id)
       status                = "ENABLED"
+      quick_connect_ids     = []
       tags                  = local.tags
     }
     ch_quick_connect_queue = {
       description           = "Quick Connect Queue"
-      hours_of_operation_id = module.amazon_connect.hours_of_operations["ch_24x7_hours"].hours_of_operation_id
+      hours_of_operation_id = try(module.amazon_connect.hours_of_operations["ch_24x7_hours"].hours_of_operation_id, data.aws_connect_hours_of_operation.ch_24x7_hours.hours_of_operation_id)
       status                = "ENABLED"
       quick_connect_ids = [
         data.aws_connect_quick_connect.jilliann_perez.quick_connect_id,
@@ -153,4 +163,6 @@ locals {
       tags = local.tags
     }
   }
+
+  queues = var.is_primary ? local.primary_queues : { for k in keys(local.primary_queues) : k => local.empty_queue }
 }
