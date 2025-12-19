@@ -47,7 +47,7 @@ jobs:
                 exit 1
               fi
               ;;
-            "prd")
+            "uat")
               if [[ "$BRANCH" != "master" ]]; then
                 echo "Error: Only 'master' branch can deploy to production. Current: '$BRANCH'"
                 exit 1
