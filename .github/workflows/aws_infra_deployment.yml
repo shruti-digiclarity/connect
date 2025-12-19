@@ -20,44 +20,26 @@ permissions:
 
 jobs:
   # ------------------------------------------------------------------
-  # 1. Validate branch + checkout code (shared across regions)
+  # 1. Prepare environment and checkout code (no branch validation)
   # ------------------------------------------------------------------
-  prepare-and-validate:
-    name: Prepare and Validate Branch
+  prepare:
+    name: Prepare Environment
     runs-on: ubuntu-22.04
     outputs:
       env: ${{ steps.set-env.outputs.env }}
     steps:
-      - name: Validate Branch and Environment
+      - name: Set Environment
         id: set-env
         run: |
-          BRANCH="${{ github.ref_name }}"
           ENVIRONMENT="${{ github.event.inputs.environment }}"
 
-          echo "Branch: $BRANCH"
-          echo "Environment: $ENVIRONMENT"
+          echo "Deploying to environment: $ENVIRONMENT"
 
-          case "$ENVIRONMENT" in
-            "dev")
-              echo "Any branch can deploy to dev"
-              ;;
-            "uat")
-              if [[ "$BRANCH" != "develop" ]]; then
-                echo "Error: Only 'develop' branch can deploy to UAT. Current: '$BRANCH'"
-                exit 1
-              fi
-              ;;
-            "uat")
-              if [[ "$BRANCH" != "master" ]]; then
-                echo "Error: Only 'master' branch can deploy to production. Current: '$BRANCH'"
-                exit 1
-              fi
-              ;;
-            *)
-              echo "Error: Unknown environment '$ENVIRONMENT'"
-              exit 1
-              ;;
-          esac
+          # Basic validation of the input (in case choice is bypassed)
+          if [[ ! "$ENVIRONMENT" =~ ^(dev|uat|prd)$ ]]; then
+            echo "Error: Invalid environment '$ENVIRONMENT'"
+            exit 1
+          fi
 
           echo "env=$ENVIRONMENT" >> $GITHUB_OUTPUT
 
@@ -71,13 +53,13 @@ jobs:
   # ------------------------------------------------------------------
   deploy-use1:
     name: Deploy Infrastructure to us-east-1 (${{ github.event.inputs.environment }})
-    needs: prepare-and-validate
+    needs: prepare
     uses: CloverHealth/ccaas-shared-pipelines/.github/workflows/aws_infrastructure_deploy.yml@master
     with:
       WORKING_DIRECTORY: resources
       ENVIRONMENTS_CONFIG_DIR: environments
       AWS_REGION: us-east-1
-      CI_ENVIRONMENT_NAME: ${{ needs.prepare-and-validate.outputs.env }}
+      CI_ENVIRONMENT_NAME: ${{ needs.prepare.outputs.env }}
     secrets:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
@@ -86,12 +68,12 @@ jobs:
   # ------------------------------------------------------------------
   deploy-usw2:
     name: Deploy Infrastructure to us-west-2 (${{ github.event.inputs.environment }})
-    needs: [prepare-and-validate, deploy-use1]
+    needs: [prepare, deploy-use1]
     uses: CloverHealth/ccaas-shared-pipelines/.github/workflows/aws_infrastructure_deploy.yml@master
     with:
       WORKING_DIRECTORY: resources
       ENVIRONMENTS_CONFIG_DIR: environments
       AWS_REGION: us-west-2
-      CI_ENVIRONMENT_NAME: ${{ needs.prepare-and-validate.outputs.env }}
+      CI_ENVIRONMENT_NAME: ${{ needs.prepare.outputs.env }}
     secrets:
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
