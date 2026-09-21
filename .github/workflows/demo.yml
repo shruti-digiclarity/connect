@@ -1,0 +1,50 @@
+name: CCaaS Demo
+
+on:
+  push:
+    paths:
+      - "demo/**"
+      - ".github/workflows/demo.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: us-east-1
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+
+      - uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform init
+        working-directory: demo
+        run: terraform init
+
+      - name: Terraform apply
+        working-directory: demo
+        run: terraform apply -auto-approve
+
+      - name: Get Lambda ARN
+        id: terraform-output
+        working-directory: demo
+        run: echo "lambda_arn=$(terraform output -raw lambda_arn)" >> "$GITHUB_OUTPUT"
+
+      - name: Trigger Lambda
+        run: |
+          aws lambda invoke \
+            --function-name "${{ steps.terraform-output.outputs.lambda_arn }}" \
+            --payload '{"source":"github-actions","message":"CCaaS demo deployment completed"}' \
+            --cli-binary-format raw-in-base64-out \
+            lambda-response.json
+          cat lambda-response.json
