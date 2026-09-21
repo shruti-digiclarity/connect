@@ -1,0 +1,97 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "invoke_lambda",
+  "Metadata": {
+    "entryPointPosition": { "x": 0, "y": 0 },
+    "ActionMetadata": {
+      "invoke_lambda": {
+        "position": { "x": -300, "y": 0 },
+        "isFriendlyName": true
+      },
+      "set_queue": {
+        "position": { "x": 0, "y": 0 },
+        "isFriendlyName": true
+      },
+      "transfer_queue": {
+        "position": { "x": 300, "y": 0 },
+        "isFriendlyName": true
+      },
+      "disconnect": {
+        "position": { "x": 600, "y": 0 },
+        "isFriendlyName": true
+      }
+    },
+    "Annotations": [],
+    "name": "Demo inbound flow",
+    "description": "Demo contact flow.",
+    "type": "contactFlow",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "LambdaFunctionARN": "${lambda_arn}",
+        "InvocationTimeLimitSeconds": "8",
+        "InvocationType": "SYNCHRONOUS",
+        "LambdaInvocationAttributes": {
+          "source": "ccaas-demo"
+        },
+        "ResponseValidation": {
+          "ResponseType": "STRING_MAP"
+        }
+      },
+      "Identifier": "invoke_lambda",
+      "Type": "InvokeLambdaFunction",
+      "Transitions": {
+        "NextAction": "set_queue",
+        "Errors": [
+          {
+            "NextAction": "set_queue",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "${queue_arn}"
+      },
+      "Identifier": "set_queue",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "transfer_queue",
+        "Errors": [
+          {
+            "NextAction": "disconnect",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "transfer_queue",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "disconnect",
+        "Errors": [
+          {
+            "NextAction": "disconnect",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "disconnect",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "disconnect",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    }
+  ]
+}
