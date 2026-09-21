@@ -20,10 +20,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set AWS deployment configuration
+        id: cfg
+        run: |
+          echo "ACCOUNT=501046919017" >> "$GITHUB_OUTPUT"
+          echo "ROLE=github-actions-terraform-role" >> "$GITHUB_OUTPUT"
+          echo "REGION=us-east-1" >> "$GITHUB_OUTPUT"
+
       - uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: us-east-1
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-to-assume: arn:aws:iam::${{ steps.cfg.outputs.ACCOUNT }}:role/${{ steps.cfg.outputs.ROLE }}
+          role-session-name: GitHubActions-CCaaS-Demo-${{ github.run_id }}
+          aws-region: ${{ steps.cfg.outputs.REGION }}
+
+      - name: Verify AWS identity
+        run: aws sts get-caller-identity --region "${{ steps.cfg.outputs.REGION }}"
 
       - uses: hashicorp/setup-terraform@v3
 
@@ -43,6 +54,7 @@ jobs:
       - name: Trigger Lambda
         run: |
           aws lambda invoke \
+            --region "${{ steps.cfg.outputs.REGION }}" \
             --function-name "${{ steps.terraform-output.outputs.lambda_arn }}" \
             --payload '{"source":"github-actions","message":"CCaaS demo deployment completed"}' \
             --cli-binary-format raw-in-base64-out \
